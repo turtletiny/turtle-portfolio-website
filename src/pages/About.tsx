@@ -40,7 +40,7 @@ export default function About() {
           </div>
           <h1 className="text-3xl font-bold">Hi, I'm Daniel.</h1>
           <p className="text-muted-foreground leading-relaxed">
-            I'm a 19 year old CS student from Sydney, Australia. I have alot of hobbies I'm passionate about (infact I tend to obsess over my interests, which has its pros and cons), which I wanted to share through this site!
+            I'm a 19 year old CS student from Sydney, Australia. I made this website as a means to express a bit of my personality and share some of my interests I'm very passionate (obssessive at times even) about!
           </p>
         </div>
 
@@ -50,9 +50,7 @@ export default function About() {
             <CardSectionIcon darkIcon={Gamepad2} pastelEmoji="🎮" /> FAVOURITE GAME
           </div>
           <h2 className="text-xl font-bold mb-1">ULTRAKILL</h2>
-          <p className="text-muted-foreground leading-relaxed mb-2">
-            ULTRAKILL is a super fast-paced retro FPS inspired by classic games such as Quake, Doom and Devil May Cry. What do I love about this game? Everything. The insanely high skill gap, the lore, the fast paced gameplay, the smooth movement mechanics, the legendary music, the level designs, the hell theme, the secrets; Its genuinely a work of art.
-          </p>
+          
           <div className="w-full aspect-video bg-secondary rounded-lg overflow-hidden relative group border border-border">
             <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
               [Ultrakill Animation Placeholder]
@@ -222,29 +220,116 @@ export default function About() {
           </div>
         </div>
 
-        {/* Coding Card */}
+       {/* Coding Card */}
         <div className="card-base flex flex-col gap-4">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
             <CardSectionIcon darkIcon={Code2} pastelEmoji="💻" /> STACK
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+          <h2 className="text-xl font-bold mb-1">Programming</h2>
+          <p className="text-muted-foreground leading-relaxed mb-2">
+            I love the problem solving aspect of programming. But the main part I love about programming is being able to build your own apps and looking at the finished product - I find it incredibly rewarding and satisfying
+          </p>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {[
-              { name: "React", desc: "" },
-              { name: "TypeScript", desc: "" },
-              { name: "Tailwind", desc: "" },
-              { name: "Python", desc: "" },
-              { name: "Pygame", desc: "" },
-              { name: "Java", desc: "" }
+              { 
+                name: "React", 
+                img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
+                url: "https://react.dev/"
+              },
+              { 
+                name: "TypeScript", 
+                img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
+                url: "https://www.typescriptlang.org/"
+              },
+              { 
+                name: "JavaScript", 
+                img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+                url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+              },
+              { 
+                name: "Tailwind", 
+                img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
+                url: "https://tailwindcss.com/"
+              },
+              { 
+                name: "Python", 
+                img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
+                url: "https://www.python.org/"
+              },
+              { 
+                name: "Pygame", 
+                img: "pygame_ce_tiny.png",
+                url: "https://pyga.me/" 
+              },
+              { 
+                name: "Java", 
+                img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",
+                url: "https://dev.java/"
+              }
             ].map(tech => (
-              <div key={tech.name} className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-1 hover:border-primary transition-colors cursor-default">
+              <a 
+                key={tech.name} 
+                href={tech.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-2 hover:border-primary transition-all hover:scale-105 group"
+              >
+                <img 
+                  src={tech.img} 
+                  alt={tech.name} 
+                  className="w-8 h-8 opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm object-contain" 
+                />
                 <span className="font-bold text-sm">{tech.name}</span>
-                <span className="text-[10px] text-muted-foreground uppercase tracking-wider">{tech.desc}</span>
-              </div>
+              </a>
             ))}
           </div>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-            I like problem solving and the design aspect too lol gamedev is fun being able to build ur own apps is fun yes yes yes i love learning
-          </p>
+        </div>
+
+
+        {/* Anime Card */}
+        <div className="card-base flex flex-col gap-4">
+          <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
+            <CardSectionIcon darkIcon={Tv} pastelEmoji="📺" /> ANIME
+          </div>
+          
+          <div className="flex flex-col gap-2">
+            <h3 className="text-sm font-medium text-muted-foreground mb-1">Currently Watching</h3>
+            <div className="flex items-start gap-4 p-4 bg-secondary rounded-lg border border-border">
+              <div className="w-16 h-24 bg-card rounded flex-shrink-0 shadow-sm border border-border flex items-center justify-center overflow-hidden">
+                <img src="pochitagif.gif" alt="None currently" className="w-full h-full object-cover" />
+              </div>
+              <div className="flex flex-col justify-center h-24">
+                <h3 className="font-bold text-lg">None Currently </h3>
+                <p className="text-sm text-muted-foreground">Would like watch JJK Season 3 and CSM when they release if I have time :D </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-2 mt-2">
+            <h3 className="text-sm font-medium text-muted-foreground mb-1">All-time Favourites</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {[
+                { title: "Death Note", image: "deathnote.jpg", url: "https://anilist.co/anime/1535/Death-Note/" },
+                { title: "Odd Taxi", image: "oddtaxi.png", url: "https://anilist.co/anime/125967/ODDTAXI/" },
+                { title: "Cyberpunk: Edgerunners", image: "cyberpunk.jpg", url: "https://anilist.co/anime/120377/Cyberpunk-Edgerunners/" },
+                { title: "Spirited Away", image: "spiritedaway.jpg", url: "https://anilist.co/anime/199/Spirited-Away/" }
+              ].map((anime, i) => (
+                <a 
+                  key={i} 
+                  href={anime.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex flex-col gap-2 group transition-transform duration-300 hover:scale-105"
+                >
+                  <div className="aspect-[2/3] rounded-lg overflow-hidden bg-secondary border border-border transition-all group-hover:shadow-xl group-hover:border-primary/20">
+                    <img src={anime.image} alt={anime.title} className="w-full h-full object-cover" />
+                  </div>
+                  <span className="text-sm font-medium truncate text-center group-hover:text-primary transition-colors">{anime.title}</span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Reading Card */}
@@ -277,9 +362,9 @@ export default function About() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {[
                 { title: "The Giver", author: "Lois Lowry", image: "/thegiver.png", url: "https://www.goodreads.com/book/show/3636.The_Giver" },
-                { title: "title2", author: "author 2", image: "bookcover2", url: "#" },
-                { title: "book3", author: "author3", image: "bookcover3", url: "#" },
-                { title: "book4", author: "author5", image: "bookcover4", url: "#" }
+                { title: "Harry Potter and the Prisoner of Azkaban", author: "J.K. Rowling", image: "bookcover2", url: "#" },
+                { title: "The Silent Patient", author: "Alex Michaelides", image: "bookcover3", url: "#" },
+                { title: "The Stranger", author: "Albert Camus", image: "bookcover4", url: "#" }
               ].map((book, i) => (
                 <a 
                   key={i} 
@@ -301,50 +386,7 @@ export default function About() {
           </div>
         </div>
 
-        {/* Anime Card */}
-        <div className="card-base flex flex-col gap-4">
-          <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
-            <CardSectionIcon darkIcon={Tv} pastelEmoji="📺" /> ANIME
-          </div>
-          
-          <div className="flex flex-col gap-2">
-            <h3 className="text-sm font-medium text-muted-foreground mb-1">Currently Watching</h3>
-            <div className="flex items-start gap-4 p-4 bg-secondary rounded-lg border border-border">
-              <div className="w-16 h-24 bg-card rounded flex-shrink-0 shadow-sm border border-border flex items-center justify-center overflow-hidden">
-                <img src="public/pochitagif.gif" alt="None currently" className="w-full h-full object-cover" />
-              </div>
-              <div className="flex flex-col justify-center h-24">
-                <h3 className="font-bold text-lg">None Currently </h3>
-                <p className="text-sm text-muted-foreground">Would like watch JJK Season 3 and CSM when they release if I have time :D </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-2 mt-2">
-            <h3 className="text-sm font-medium text-muted-foreground mb-1">All-time Favourites</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {[
-                { title: "Death Note", image: "public/deathnote.jpg", url: "https://anilist.co/anime/1535/Death-Note/" },
-                { title: "Odd Taxi", image: "public/oddtaxi.png", url: "https://anilist.co/anime/125967/ODDTAXI/" },
-                { title: "Cyberpunk: Edgerunners", image: "public/cyberpunk.jpg", url: "https://anilist.co/anime/120377/Cyberpunk-Edgerunners/" },
-                { title: "Spirited Away", image: "public/spiritedaway.jpg", url: "https://anilist.co/anime/199/Spirited-Away/" }
-              ].map((anime, i) => (
-                <a 
-                  key={i} 
-                  href={anime.url} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="flex flex-col gap-2 group transition-transform duration-300 hover:scale-105"
-                >
-                  <div className="aspect-[2/3] rounded-lg overflow-hidden bg-secondary border border-border transition-all group-hover:shadow-xl group-hover:border-primary/20">
-                    <img src={anime.image} alt={anime.title} className="w-full h-full object-cover" />
-                  </div>
-                  <span className="text-sm font-medium truncate text-center group-hover:text-primary transition-colors">{anime.title}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
+        
 
         {/* Hobbies Card */}
         <div className="card-base flex flex-col gap-4">
@@ -355,6 +397,13 @@ export default function About() {
           <div className="flex flex-wrap gap-3">
             <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium hover:border-primary hover:text-primary transition-colors cursor-default">
               ✏️ Drawing
+            </div>
+            
+            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium hover:border-primary hover:text-primary transition-colors cursor-default">
+              ✏️ Animation
+            </div>
+            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium hover:border-primary hover:text-primary transition-colors cursor-default">
+              ✏️ Blender
             </div>
             <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium hover:border-primary hover:text-primary transition-colors cursor-default">
               💿 Collecting... something, idk yet

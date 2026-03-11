@@ -40,26 +40,70 @@ export default function About() {
           </div>
           <h1 className="text-3xl font-bold">Hi, I'm Daniel.</h1>
           <p className="text-muted-foreground leading-relaxed">
-            I'm a 19 year old CS student from Sydney, Australia. I made this website as a means to express a bit of my personality and share some of my interests I'm very passionate (obssessive at times even) about!
+            I'm a 19 year old CS student from Sydney, Australia. I made this website as a means to express a bit of my personality and share some of my interests that I'm very passionate (obssessive at times even) about!
           </p>
         </div>
 
-        {/* Ultrakill Card */}
+       {/* Games Card */}
         <div className="card-base flex flex-col gap-4">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
-            <CardSectionIcon darkIcon={Gamepad2} pastelEmoji="🎮" /> FAVOURITE GAME
+            <CardSectionIcon darkIcon={Gamepad2} pastelEmoji="🎮" /> GAMES
           </div>
-          <h2 className="text-xl font-bold mb-1">ULTRAKILL</h2>
           
-          <div className="w-full aspect-video bg-secondary rounded-lg overflow-hidden relative group border border-border">
-            <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
-              [Ultrakill Animation Placeholder]
+          {/* Featured Game */}
+          <div className="flex flex-col gap-2">
+            <h3 className="text-sm font-medium text-muted-foreground mb-1">Favourite Game</h3>
+            <div className="flex flex-col sm:flex-row items-start gap-4 p-4 bg-secondary rounded-lg border border-border">
+              {/* Featured Game Cover */}
+              <a 
+                href="https://store.steampowered.com/app/1229490/ULTRAKILL/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-24 h-36 sm:w-28 sm:h-40 bg-card rounded flex-shrink-0 shadow-sm border border-border flex items-center justify-center overflow-hidden hover:scale-105 transition-transform duration-300 group"
+              >
+                <img src="ultrakillcover.jpg" alt="Ultrakill" className="w-full h-full object-cover group-hover:opacity-90 transition-opacity" />
+              </a>
+              
+              <div className="flex flex-col justify-start">
+                <a 
+                  href="https://store.steampowered.com/app/1229490/ULTRAKILL/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="font-bold text-xl mb-2 hover:text-primary transition-colors"
+                >
+                  ULTRAKILL
+                </a>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  peak
+                </p>
+              </div>
             </div>
-            <img 
-              src="https://media.tenor.com/images/13c32a7fae51b32daffbf8709e9db6eb/tenor.gif" 
-              alt="Ultrakill gameplay" 
-              className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-300"
-            />
+          </div>
+
+          {/* 4 Games Grid */}
+          <div className="flex flex-col gap-2 mt-2">
+            <h3 className="text-sm font-medium text-muted-foreground mb-1"> Games I Like</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {[
+                { title: "Valorant", image: "val.jpg", url: "https://playvalorant.com/en-us/" },
+                { title: "Pokemon Platinum", image: "platinum.jpg", url: "https://www.pokemon.com/us/pokemon-video-games/pokemon-platinum-version" },
+                { title: "Portal", image: "portal.jpg", url: "https://store.steampowered.com/app/400/Portal/" },
+                { title: "Pokemon Omega Ruby", image: "omegaruby.jpg", url: "https://www.pokemon.com/us/pokemon-video-games/pokemon-omega-ruby-and-pokemon-alpha-sapphire" }
+              ].map((game, i) => (
+                <a 
+                  key={i} 
+                  href={game.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="flex flex-col gap-2 group transition-transform duration-300 hover:scale-105"
+                >
+                  <div className="aspect-[2/3] rounded-lg overflow-hidden bg-secondary border border-border transition-all group-hover:shadow-xl group-hover:border-primary/20">
+                    <img src={game.image} alt={game.title} className="w-full h-full object-cover" />
+                  </div>
+                  <span className="text-sm font-medium truncate text-center group-hover:text-primary transition-colors">{game.title}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -214,7 +258,7 @@ export default function About() {
             <div className="flex flex-col gap-3">
               <h3 className="font-bold text-lg">Favorite Opening: Smith-Morra Gambit</h3>
               <div className="w-full h-full min-h-[160px] bg-secondary rounded-lg border border-border flex items-center justify-center text-muted-foreground text-sm">
-                [Opening Video Placeholder]
+                [image: morra.gif]
               </div>
             </div>
           </div>
@@ -227,7 +271,7 @@ export default function About() {
           </div>
           <h2 className="text-xl font-bold mb-1">Programming</h2>
           <p className="text-muted-foreground leading-relaxed mb-2">
-            I love the problem solving aspect of programming. But the main part I love about programming is being able to build your own apps and looking at the finished product - I find it incredibly rewarding and satisfying
+            I love the problem solving aspect of programming. But the main part I love about programming is being able to build your own apps and looking at the finished product - I find it incredibly rewarding and satisfying.
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
@@ -287,10 +331,27 @@ export default function About() {
         </div>
 
 
-        {/* Anime Card */}
+{/* Anime Card */}
         <div className="card-base flex flex-col gap-4">
-          <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
-            <CardSectionIcon darkIcon={Tv} pastelEmoji="📺" /> ANIME
+          <div className="flex items-center justify-between mb-2">
+            <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
+              <CardSectionIcon darkIcon={Tv} pastelEmoji="📺" /> ANIME
+            </div>
+            
+            {/* Clickable AniList Image + Text with Smooth Grow */}
+            <a
+              href="https://anilist.co/user/turtletiny/" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-[10px] uppercase tracking-wider font-bold text-muted-foreground hover:text-primary hover:scale-110 transition-all duration-300 origin-right"
+            >
+              <img 
+                src="anilist.png" 
+                alt="AniList Logo" 
+                className="w-4 h-4 sm:w-5 sm:h-5 object-contain" 
+              />
+              <span>My AniList Profile</span>
+            </a>
           </div>
           
           <div className="flex flex-col gap-2">
@@ -311,7 +372,7 @@ export default function About() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {[
                 { title: "Death Note", image: "deathnote.jpg", url: "https://anilist.co/anime/1535/Death-Note/" },
-                { title: "Odd Taxi", image: "oddtaxi.png", url: "https://anilist.co/anime/125967/ODDTAXI/" },
+                { title: "Odd Taxi", image: "oddtaxi.png", url: "https://anilist.co/anime/128547/ODDTAXI/" },
                 { title: "Cyberpunk: Edgerunners", image: "cyberpunk.jpg", url: "https://anilist.co/anime/120377/Cyberpunk-Edgerunners/" },
                 { title: "Spirited Away", image: "spiritedaway.jpg", url: "https://anilist.co/anime/199/Spirited-Away/" }
               ].map((anime, i) => (
@@ -325,7 +386,9 @@ export default function About() {
                   <div className="aspect-[2/3] rounded-lg overflow-hidden bg-secondary border border-border transition-all group-hover:shadow-xl group-hover:border-primary/20">
                     <img src={anime.image} alt={anime.title} className="w-full h-full object-cover" />
                   </div>
-                  <span className="text-sm font-medium truncate text-center group-hover:text-primary transition-colors">{anime.title}</span>
+                  <span className="text-sm font-medium truncate text-center group-hover:text-primary transition-colors" title={anime.title}>
+                    {anime.title}
+                  </span>
                 </a>
               ))}
             </div>
@@ -342,7 +405,7 @@ export default function About() {
             <h3 className="text-sm font-medium text-muted-foreground mb-1">Currently Reading</h3>
             
             <a 
-              href="https://www.goodreads.com/book/show/35031085-frankenstein" 
+              href="https://www.goodreads.com/book/show/18490.Frankenstein" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-start gap-4 p-4 bg-secondary rounded-lg border border-border transition-all duration-300 hover:scale-[1.02] hover:shadow-md group"
@@ -361,10 +424,10 @@ export default function About() {
             <h3 className="text-sm font-medium text-muted-foreground mb-1">All-time Favourites</h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {[
-                { title: "The Giver", author: "Lois Lowry", image: "/thegiver.png", url: "https://www.goodreads.com/book/show/3636.The_Giver" },
-                { title: "Harry Potter and the Prisoner of Azkaban", author: "J.K. Rowling", image: "bookcover2", url: "#" },
-                { title: "The Silent Patient", author: "Alex Michaelides", image: "bookcover3", url: "#" },
-                { title: "The Stranger", author: "Albert Camus", image: "bookcover4", url: "#" }
+                { title: "The Giver", author: "Lois Lowry", image: "thegiver.png", url: "https://www.goodreads.com/book/show/3636.The_Giver" },
+                { title: "Harry Potter and the Prisoner of Azkaban", author: "J.K. Rowling", image: "harrypotter.jpg", url: "https://www.goodreads.com/book/show/49116.Harry_Potter_and_the_Prisoner_of_Azkaban" },
+                { title: "The Silent Patient", author: "Alex Michaelides", image: "silentpatient.jpg", url: "https://www.goodreads.com/book/show/40097951-the-silent-patient" },
+                { title: "The Stranger", author: "Albert Camus", image: "stranger.png", url: "https://www.goodreads.com/book/show/49552.The_Stranger" }
               ].map((book, i) => (
                 <a 
                   key={i} 
@@ -376,9 +439,15 @@ export default function About() {
                   <div className="aspect-[2/3] rounded-lg overflow-hidden bg-secondary border border-border transition-all group-hover:shadow-xl group-hover:border-primary/20">
                     <img src={book.image} alt={book.title} className="w-full h-full object-cover" />
                   </div>
-                  <div className="flex flex-col text-center">
-                    <span className="text-sm font-medium truncate group-hover:text-primary transition-colors">{book.title}</span>
-                    <span className="text-[10px] text-muted-foreground truncate">{book.author}</span>
+                  <div className="flex flex-col text-center px-1">
+                    
+                    <span 
+                      className="text-sm font-medium line-clamp-2 leading-tight group-hover:text-primary transition-colors"
+                      title={book.title}
+                    >
+                      {book.title}
+                    </span>
+                    <span className="text-[10px] text-muted-foreground truncate mt-0.5">{book.author}</span>
                   </div>
                 </a>
               ))}
@@ -395,18 +464,18 @@ export default function About() {
           </div>
           <p className="text-muted-foreground mb-4">Things I would like to get into eventually: </p>
           <div className="flex flex-wrap gap-3">
-            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium hover:border-primary hover:text-primary transition-colors cursor-default">
+            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium ">
               ✏️ Drawing
             </div>
             
-            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium hover:border-primary hover:text-primary transition-colors cursor-default">
-              ✏️ Animation
+            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium ">
+              📽️Animation
             </div>
-            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium hover:border-primary hover:text-primary transition-colors cursor-default">
-              ✏️ Blender
+            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium ">
+              🧊Blender
             </div>
-            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium hover:border-primary hover:text-primary transition-colors cursor-default">
-              💿 Collecting... something, idk yet
+            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium ">
+              💿 Collecting... something, idk yet... probably plushies since I have alot already
             </div>
           </div>
         </div>

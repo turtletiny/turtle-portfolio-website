@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 6% 4%;
+    --foreground: 0 0% 93%;
+
+    --card: 240 5% 7%;
+    --card-foreground: 0 0% 93%;
+
+    --popover: 240 5% 7%;
+    --popover-foreground: 0 0% 93%;
+
+    --primary: 145 63% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 4% 16%;
+    --secondary-foreground: 0 0% 93%;
+
+    --muted: 240 4% 16%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 145 63% 42%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 4% 16%;
+    --input: 240 4% 16%;
+    --ring: 145 63% 42%;
+
+    --radius: 1rem;
+
+    --font-main: 'Space Grotesk', sans-serif;
+    --bg-secondary: 240 4% 16%;
+    --card-hover-border: 0 0% 100% / 0.5;
+    --card-hover-shadow: 0 0 15px hsl(0 0% 100% / 0.1), inset 0 0 5px hsl(0 0% 100% / 0.05);
+
+    /* Status colors */
+    --status-online: 145 48% 40%;
+    --status-idle: 38 86% 57%;
+    --status-dnd: 0 89% 60%;
+    --status-offline: 228 6% 53%;
+
+    /* Brand accents */
+    --brand-tiktok-red: 347 98% 58%;
+    --brand-tiktok-cyan: 178 91% 55%;
+
+    /* Spotify controls  */
+    --spotify-bar: 0 0% 100%;
+    --spotify-bar-glow: 0 0 6px hsl(0 0% 100% / 0.8), 0 0 12px hsl(0 0% 100% / 0.4);
+    --spotify-btn-bg: transparent;
+    --spotify-btn-border: 0 0% 100%;
+    --spotify-btn-text: 0 0% 100%;
+    --spotify-btn-hover-bg: 0 0% 100% / 0.1;
+  }
+
+  .pastel {
+    --background: 213 100% 90%;
+    --foreground: 215 28% 17%;
+
+    --card: 350 100% 94%;
+    --card-foreground: 215 28% 17%;
+
+    --popover: 350 100% 94%;
+    --popover-foreground: 215 28% 17%;
+
+    --primary: 213 100% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 330 100% 90%;
+    --secondary-foreground: 215 28% 17%;
+
+    --muted: 330 100% 90%;
+    --muted-foreground: 210 18% 25%;
+
+    --accent: 213 100% 65%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 340 100% 85%;
+    --input: 340 100% 85%;
+    --ring: 213 100% 65%;
+
+    --font-main: 'Varela Round', sans-serif;
+    --bg-secondary: 330 100% 87%;
+    --card-hover-border: 274 66% 40% / 1;
+    --card-hover-shadow: 0 0 15px hsl(274 66% 40% / 0.3), inset 0 0 5px hsl(274 66% 40% / 0.1);
+
+    /* Spotify controls */
+    --spotify-bar: 213 100% 65%;
+    --spotify-bar-glow: 0 0 6px hsl(213 100% 65% / 0.6), 0 0 12px hsl(213 100% 65% / 0.3);
+    --spotify-btn-bg: 213 100% 65%;
+    --spotify-btn-border: 213 100% 65%;
+    --spotify-btn-text: 0 0% 100%;
+    --spotify-btn-hover-bg: 213 100% 55% / 1;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-main);
+  }
+}
+
+@layer utilities {
+  .card-base {
+    @apply bg-card border border-border rounded-2xl p-6 transition-all duration-300;
+  }
+  .card-base:hover {
+    border-color: hsl(var(--card-hover-border));
+    box-shadow: var(--card-hover-shadow);
+  }
+}
+
+/* YouTube: */
+.group\/yt:hover svg {
+  color: #ff0000;
+}
+
+/* TikTok */
+.tiktok-layer {
+  opacity: 0;
+  transform: translate(0, 0);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.group\/tt .tiktok-main {
+  transition: fill 0.2s ease;
+}
+
+.group\/tt:hover .tiktok-main {
+  fill: hsl(var(--foreground));
+}
+
+.group\/tt:hover .tiktok-red {
+  fill: hsl(var(--brand-tiktok-red));
+  opacity: 1;
+  transform: translate(1.8px, -0.9px);
+}
+
+.group\/tt:hover .tiktok-cyan {
+  fill: hsl(var(--brand-tiktok-cyan));
+  opacity: 1;
+  transform: translate(-1.8px, 0.9px);
+}
+
+.group\/tt:hover svg {
+  filter: drop-shadow(0 0 1px hsl(var(--foreground) / 0.45));
+}
+
+
+
+.spotify-progress {
+
+  background-color: hsl(var(--spotify-bar)) !important;
+  box-shadow: var(--spotify-bar-glow) !important;
+}
+
+
+.pastel .spotify-progress {
+  background-color: hsl(var(--spotify-bar)) !important;
+
+  box-shadow: 0 0 10px 2px hsl(213 100% 65% / 0.3) !important;
+}
+
+
+:root {
+  --spotify-title-hover: hsl(145 63% 42%); 
+}
+
+.pastel {
+  --spotify-title-hover: hsl(213 100% 65%);
+}
+
+
+.spotify-title:hover {
+  color: hsl(var(--spotify-title-hover)) !important;
+}
+

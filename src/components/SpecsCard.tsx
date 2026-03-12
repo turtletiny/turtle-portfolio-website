@@ -1,9 +1,22 @@
 import { useState } from "react";
 import { Monitor, Cpu, MemoryStick, Mouse, Headphones, Square } from "lucide-react";
 import GpuIcon from "@/components/icons/GpuIcon";
-import EarphonesIcon from "@/components/icons/EarphonesIcon";
 import KeyboardIcon from "@/components/icons/KeyboardIcon";
 import CardSectionIcon from "@/components/CardSectionIcon";
+
+// --- Custom Icons ---
+
+const EarbudsIcon = ({ size = 18, className = "" }) => (
+  <img 
+    src="earphones2.svg" 
+    alt="Earbuds" 
+    width={size} 
+    height={size} 
+    className={`object-contain opacity-70 ${className}`} 
+  />
+);
+
+// --- Data ---
 
 const pcSpecs = [
   { icon: Cpu, label: "CPU", value: "Ryzen 5 5600" },
@@ -17,8 +30,10 @@ const peripherals = [
   { icon: Mouse, label: "Mouse", value: "VXE Dragonfly R1 SE+" },
   { icon: Square, label: "Mousepad", value: "Aqua Control II" },
   { icon: Headphones, label: "Headphones", value: "HyperX Cloud II" },
-  { icon: EarphonesIcon, label: "IEMs", value: "Aoshida E20" },
+  { icon: EarbudsIcon, label: "IEMs", value: "Aoshida E20" },
 ];
+
+// --- Main Component ---
 
 export default function SpecsCard() {
   const [tab, setTab] = useState<"pc" | "peripherals">("pc");
@@ -54,7 +69,7 @@ export default function SpecsCard() {
               i < specs.length - 1 ? "border-b border-secondary/50" : ""
             }`}
           >
-            <span className="text-muted-foreground w-6 text-center">
+            <span className="text-muted-foreground w-6 text-center flex justify-center">
               <s.icon size={18} />
             </span>
             <span className="font-semibold text-foreground text-right">{s.value}</span>

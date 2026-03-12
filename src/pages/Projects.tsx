@@ -18,7 +18,7 @@ export default function Projects() {
           </div>
           <h1 className="text-3xl font-bold">Projects.</h1>
           <p className="text-muted-foreground leading-relaxed">
-            A collection of things I've built, what I'm currently hacking away at, and where I'm headed next. I'm currently pivoting to focus more on Python and Game Development.
+            A collection of things I've built, what I'm currently working on future plans. currently focused on learning java for school
           </p>
         </div>
 
@@ -96,13 +96,7 @@ export default function Projects() {
               <p className="text-muted-foreground leading-relaxed text-sm">
                 A small 2D Pokemon Clone with a short custom storyline and classic pokemon battle mechanics.
               </p>
-              <div className="w-full aspect-video bg-secondary rounded-lg border border-border overflow-hidden mt-auto">
-                <img 
-                  src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2000&auto=format&fit=crop" 
-                  alt="Retro gaming" 
-                  className="w-full h-full object-cover opacity-60"
-                />
-              </div>
+              
               <div className="flex flex-wrap gap-2">
                 <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">Python</span>
                 <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">Pygame</span>
@@ -137,10 +131,13 @@ export default function Projects() {
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
-              { title: "Gamedev in Godot", desc: "Moving from Pygame to a dedicated engine for more complex 2D projects." },
-              { title: "Advanced Python Automation", desc: "Building scripts to automate my university workflow and data management." },
-              { title: "Chess Engine", desc: "A simple chess AI using Python to deepen my understanding of algorithms." },
-              { title: "Mobile App Portfolio", desc: "Exploring React Native to bring my web projects to iOS/Android." }
+              { title: "explore other game engines", desc: "unity, unreal, godot, gamemaker, etc" },
+              { title: "personal organisation app", desc: "notes, calendar, etc" },
+              { title: "Chess Engine", desc: "chess engine to learn algorithms " },
+              { title: "improved anki clone", desc: "anki is not user friendly lol weird ui " },
+              { title: "my own mini operating syustem", desc: "yes"},
+              {title: "spotify clone / music player", desc: "additional functionality like annotating songs/lyrics + cool music visualiser graphics etc"},
+              {title: "fps in ursina (3d python engine)", desc: ""}
             ].map((idea, i) => (
               <div key={i} className="p-4 bg-secondary/40 rounded-xl border border-border border-dashed flex flex-col gap-2 transition-all">
                 <h3 className="font-bold text-sm">{idea.title}</h3>

@@ -5,3 +5,5 @@ stack:
 - shadcn-ui
 - Tailwind CSS
 
+run:
+npm run dev

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Send, User, MessageSquare } from "lucide-react";
+import { Send, MessageSquare, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function GuestbookCard() {
@@ -38,64 +38,101 @@ export default function GuestbookCard() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name || !message) return;
-    mutation.mutate({ name, message });
+    if (!message.trim()) return;
+    
+    // Default to "Anonymous" if they leave the name blank
+    const finalName = name.trim() === "" ? "Anonymous" : name;
+    mutation.mutate({ name: finalName, message });
   };
 
   return (
-    <div className="card-base flex flex-col gap-4">
-      <h2 className="text-xl font-bold flex items-center gap-2">
-        <MessageSquare className="text-primary" size={20} /> Guestbook
-      </h2>
+    <div className="card-base flex flex-col gap-6">
+      
+      {/* Header */}
+      <div className="flex items-center gap-2 text-muted-foreground uppercase font-semibold text-[11px] tracking-widest">
+        <MessageSquare size={16} /> GUESTBOOK
+      </div>
       
       {/* Input Form */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        
         <input 
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
-          className="bg-secondary/50 p-2 rounded border border-border text-sm"
+          placeholder="Name (optional)"
+          className="w-full bg-secondary text-foreground text-sm p-4 rounded-xl border border-transparent focus:outline-none focus:border-primary transition-colors"
+          maxLength={40}
         />
         
+        <div className="flex gap-3 items-center">
+          <div className="flex-1 flex flex-col gap-1">
+            <textarea 
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Leave a comment..."
+              className="w-full bg-secondary text-foreground text-sm p-4 rounded-xl border border-transparent resize-none focus:outline-none focus:border-primary transition-colors min-h-[90px]"
+              maxLength={300}
+            />
+            <div className="flex justify-end pr-1">
+              <span className={`text-[10px] font-medium transition-colors ${message.length >= 300 ? 'text-destructive' : 'text-muted-foreground'}`}>
+                {message.length}/300
+              </span>
+            </div>
+          </div>
 
-<div className="flex flex-col gap-1">
-  <textarea 
-    value={message}
-    onChange={(e) => setMessage(e.target.value)}
-    placeholder="Leave a note..."
-    className="bg-secondary/50 p-2 rounded border border-border text-sm resize-none"
-    maxLength={200} // This stops them from typing more
-  />
-  <div className="flex justify-end">
-    <span className={`text-[10px] ${message.length >= 200 ? 'text-red-500' : 'text-muted-foreground'}`}>
-      {message.length}/200
-    </span>
-  </div>
-</div>
-        <button 
-          disabled={mutation.isPending}
-          className="bg-primary text-primary-foreground text-sm font-bold py-2 rounded flex items-center justify-center gap-2"
-        >
-          <Send size={14} /> {mutation.isPending ? "Sending..." : "Sign"}
-        </button>
+          {/* send Button */}
+          {/* Send Button */}
+          <button 
+            type="submit"
+            disabled={mutation.isPending || !message.trim()}
+            className="w-12 h-12 shrink-0 rounded-full border-2 flex items-center justify-center transition-all duration-200 hover:scale-110 disabled:opacity-40 disabled:hover:scale-100 disabled:cursor-not-allowed"
+            title="Sign Guestbook"
+            style={{
+              backgroundColor: "hsl(var(--spotify-btn-bg))",
+              borderColor: "hsl(var(--spotify-btn-border))",
+              color: "hsl(var(--spotify-btn-text))",
+            }}
+            onMouseEnter={(e) => {
+              if (!mutation.isPending && message.trim()) {
+                e.currentTarget.style.backgroundColor = "hsl(var(--spotify-btn-hover-bg))";
+                e.currentTarget.style.boxShadow = "var(--spotify-bar-glow)";
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "hsl(var(--spotify-btn-bg))";
+              e.currentTarget.style.boxShadow = "none";
+            }}
+          >
+            {mutation.isPending ? (
+              <Loader2 size={18} className="animate-spin" /> 
+            ) : (
+              <Send size={18} className="mr-0.5 mt-0.5" /> 
+            )}
+          </button>
+        </div>
       </form>
 
-      <hr className="border-border" />
-
-      {/* Display Messages */}
-      <div className="flex flex-col gap-3 max-h-[300px] overflow-y-auto pr-2">
+      {/* Messages List */}
+      <div className="flex flex-col gap-5 pt-3 max-h-[350px] overflow-y-auto pr-2">
         {isLoading ? (
-          <p className="text-xs text-muted-foreground">Loading...</p>
+          <div className="text-center py-6 text-sm text-muted-foreground/80">
+            <Loader2 className="animate-spin mx-auto mb-2" />
+            Loading messages...
+          </div>
         ) : (
           messages?.map((msg: any) => (
-            <div key={msg.id} className="text-sm p-2 bg-secondary/30 rounded border border-border/50">
-              <div className="flex justify-between font-bold text-[12px] mb-1">
-                <span>{msg.name}</span>
-                <span className="text-muted-foreground font-normal">
+            <div key={msg.id} className="text-sm p-1 animate-in fade-in slide-in-from-bottom-1 duration-300">
+              <div className="flex justify-between items-center text-muted-foreground text-[12px] mb-2 pr-1">
+
+                <span className="font-semibold text-foreground">{msg.name}</span>
+                
+                <span className="font-medium tracking-tight">
                   {new Date(msg.created_at).toLocaleDateString()}
                 </span>
               </div>
-              <p className="text-muted-foreground italic">"{msg.message}"</p>
+              <p className="text-muted-foreground leading-relaxed italic pr-1">
+                {msg.message}
+              </p>
             </div>
           ))
         )}
@@ -103,3 +140,8 @@ export default function GuestbookCard() {
     </div>
   );
 }
+
+
+
+
+

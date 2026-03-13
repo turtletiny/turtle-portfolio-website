@@ -14,7 +14,7 @@ import Gallery from "./pages/Gallery";
 import Credits from "./pages/Credits";
 import Callback from "./pages/Callback";
 import NotFound from "./pages/NotFound";
-import GuestbookPage from "./pages/GuestbookPage";
+import GuestbookPage from "./pages/GuestBookPage";
 
 const queryClient = new QueryClient();
 

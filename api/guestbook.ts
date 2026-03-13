@@ -18,22 +18,26 @@ export default async function handler(
       `;
       return response.status(200).json(rows);
     }
-
-    // 2. POST: Add a new message
+    // POST
     if (request.method === 'POST') {
-      const { name, message } = request.body;
+  const { name, message } = request.body;
 
-      if (!name || !message) {
-        return response.status(400).json({ error: 'Name and message are required' });
-      }
+  // Check for existence and also length
+  if (!name || !message) {
+    return response.status(400).json({ error: 'Name and message are required' });
+  }
 
-      await client.sql`
-        INSERT INTO guestbook (name, message)
-        VALUES (${name}, ${message});
-      `;
-      return response.status(201).json({ success: true });
-    }
+  if (name.length > 40 || message.length > 200) {
+    return response.status(400).json({ error: 'Input too long' });
+  }
 
+  await client.sql`
+    INSERT INTO guestbook (name, message)
+    VALUES (${name.slice(0, 40)}, ${message.slice(0, 200)});
+  `;
+  
+  return response.status(201).json({ success: true });
+}
     return response.status(405).json({ error: 'Method not allowed' });
   } catch (error: unknown) {
     console.error('Database Error:', error);

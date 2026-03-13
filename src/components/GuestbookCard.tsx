@@ -56,12 +56,22 @@ export default function GuestbookCard() {
           placeholder="Name"
           className="bg-secondary/50 p-2 rounded border border-border text-sm"
         />
-        <textarea 
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Leave a note..."
-          className="bg-secondary/50 p-2 rounded border border-border text-sm resize-none"
-        />
+        
+
+<div className="flex flex-col gap-1">
+  <textarea 
+    value={message}
+    onChange={(e) => setMessage(e.target.value)}
+    placeholder="Leave a note..."
+    className="bg-secondary/50 p-2 rounded border border-border text-sm resize-none"
+    maxLength={200} // This stops them from typing more
+  />
+  <div className="flex justify-end">
+    <span className={`text-[10px] ${message.length >= 200 ? 'text-red-500' : 'text-muted-foreground'}`}>
+      {message.length}/200
+    </span>
+  </div>
+</div>
         <button 
           disabled={mutation.isPending}
           className="bg-primary text-primary-foreground text-sm font-bold py-2 rounded flex items-center justify-center gap-2"

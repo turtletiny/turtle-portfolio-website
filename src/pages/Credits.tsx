@@ -30,11 +30,11 @@ const inspirationLinks = [
 ];
 
 const otherLinks = [
-  { title: "Coolors", url: "https://coolors.co/", desc: "cool colour palette site can be useful"},
+  { title: "Coolors", url: "https://coolors.co/", desc: "Cool colour palette site can be useful"},
   { title: "Protocol Cards", url: "https://protocolcards.com/", desc: "Cool little protocols for calming anxiety"},
   { title: "forgoodcode", url: "https://www.instagram.com/forgoodcode", desc: "Useful Instagram page on using AI effectively, learning resources, etc"},
-  { title: "bigpro427", url: "https://www.tiktok.com/@bigpro427", desc: "Goldmine of science based lifting clearly presented"},
-  { title: "Erin Meryl", url: "https://www.youtube.com/@erinmerylstudy/videos", desc: "Pretty entertaining and useful study content"}
+  { title: "bigpro427", url: "https://www.tiktok.com/@bigpro427", desc: "Goldmine of informational science based lifting content"},
+  { title: "Erin Meryl", url: "https://www.youtube.com/@erinmerylstudy/videos", desc: "Pretty entertaining and inspiring study content"}
 
 ];
 
@@ -70,7 +70,7 @@ export default function Credits() {
           </div>
           <h1 className="text-3xl font-bold">Credits & Links.</h1>
           <p className="text-muted-foreground leading-relaxed">
-            Credits, inspirations, other links, and the core tech stack powering this site.
+            Tech stack, inspirations and other cool and useful sites
           </p>
         </div>
 

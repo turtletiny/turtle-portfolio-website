@@ -358,7 +358,7 @@ export default function About() {
             <h3 className="text-sm font-medium text-muted-foreground mb-1">Currently Watching</h3>
             <div className="flex items-start gap-4 p-4 bg-secondary rounded-lg border border-border">
               <div className="w-16 h-24 bg-card rounded flex-shrink-0 shadow-sm border border-border flex items-center justify-center overflow-hidden">
-                <img src="pochitagif.gif" alt="None currently" className="w-full h-full object-cover" />
+                <img src="pochitavibe.gif" alt="None currently" className="w-full h-full object-cover" />
               </div>
               <div className="flex flex-col justify-center h-24">
                 <h3 className="font-bold text-lg">None Currently </h3>

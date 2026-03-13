@@ -40,7 +40,7 @@ export default function About() {
           </div>
           <h1 className="text-3xl font-bold">Hi, I'm Daniel.</h1>
           <p className="text-muted-foreground leading-relaxed">
-            I'm a 19 year old CS student from Sydney, Australia. I made this website as a means to express a bit of my personality and share some of my interests that I'm very passionate (obssessive at times even) about!
+            I'm a 19 year old CS student from Sydney, Australia. I made this website to gain experience with web development and a  means to express a bit of my personality through some of my interests that I'm passionate about ❤️
           </p>
         </div>
 

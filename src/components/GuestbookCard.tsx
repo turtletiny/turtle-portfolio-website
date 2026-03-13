@@ -66,7 +66,7 @@ export default function GuestbookCard() {
   return (
     <div className="card-base flex flex-col">
       <div className="text-xs font-bold tracking-wider text-muted-foreground mb-6 flex items-center gap-2">
-        <CardSectionIcon darkIcon={MessageSquare} pastelEmoji="📝" /> GUESTBOOK
+        <CardSectionIcon darkIcon={MessageSquare} pastelEmoji="📝" /> GUESTBOOK (NOT FUNCTIONING ATM, COMING SOON...)
       </div>
 
       {/* Form */}

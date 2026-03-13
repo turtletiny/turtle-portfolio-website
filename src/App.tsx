@@ -14,6 +14,7 @@ import Gallery from "./pages/Gallery";
 import Credits from "./pages/Credits";
 import Callback from "./pages/Callback";
 import NotFound from "./pages/NotFound";
+import GuestbookPage from "./pages/GuestbookPage";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/projects" element={<Projects />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/credits" element={<Credits />} />
+          <Route path="/guestbook" element={<GuestbookPage />} />
           <Route path="/callback" element={<Callback />} />
           
           {/* Catch-all route for 404 errors */}

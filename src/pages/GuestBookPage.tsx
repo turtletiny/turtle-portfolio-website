@@ -111,7 +111,7 @@ export default function Guestbook() {
         {/* Messages List */}
         <div className="flex flex-col gap-4">
           {isLoading ? (
-             <div className="text-center py-10 text-muted-foreground">Loading messages...</div>
+            <div className="text-center py-10 text-muted-foreground">Loading messages...</div>
           ) : (
             messages?.map((msg: any) => (
               <div key={msg.id} className="card-base flex flex-col gap-2 animate-in fade-in slide-in-from-bottom-2 duration-500">

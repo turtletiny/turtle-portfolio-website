@@ -5,6 +5,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
+
 @layer base {
   :root {
     --background: 240 6% 4%;
@@ -186,3 +190,12 @@
   color: hsl(var(--spotify-title-hover)) !important;
 }
 
+
+html, body, #root {
+  cursor: none !important;
+}
+
+/* Ensure interactive elements hide the default pointer */
+a, button, [role="button"], input {
+  cursor: none !important;
+}

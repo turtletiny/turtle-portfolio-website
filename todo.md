@@ -1,9 +1,15 @@
+priority:
+projects page
+custom cursor
+
+
+
+
 short term:
 chess.com lichess icons
 fix gallery hover colours
 fix spotify light mode hover
 chess video
-finish projects page
 finish links page
 
 

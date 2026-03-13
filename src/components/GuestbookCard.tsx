@@ -151,7 +151,7 @@ export default function GuestbookCard() {
           }`}
         >
           <img 
-            src="https://media1.tenor.com/m/Zp9T6D32_e0AAAAC/chiikawa.gif" 
+            src="chiikawaly-removebg-preview.png" 
             alt="Chiikawa Heart" 
             className="w-32 h-32 object-contain"
           />

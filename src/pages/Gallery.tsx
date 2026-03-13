@@ -25,7 +25,7 @@ const GalleryItems = [
     id: 2, 
     title: "", 
     description: "", 
-    image: "", 
+    image: "no1.mp4", 
     tags: [] 
   },
   { 
@@ -82,9 +82,9 @@ export default function Gallery() {
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
             <CardSectionIcon darkIcon={Camera} pastelEmoji="🐰" /> GALLERY
           </div>
-          <h1 className="text-3xl font-bold">Gallery</h1>
+          <h1 className="text-3xl font-bold">Gallery UNDER CONSTRUCTION COMING SOON</h1>
           <p className="text-muted-foreground leading-relaxed">
-            Will probably use this for photos of my pet bunny, Miffy
+            wait
           </p>
         </div>
 
@@ -92,7 +92,22 @@ export default function Gallery() {
           {GalleryItems.map((item) => (
             <div 
               key={item.id} 
-              className="aspect-square rounded-lg overflow-hidden border border-border bg-secondary cursor-pointer hover:border-primary transition-colors duration-300"
+              className="aspect-square rounded-lg overflow-hidden border-2 bg-secondary cursor-pointer transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+              style={{ borderColor: "transparent" }} 
+              onMouseEnter={(e) => {
+                
+                const isDarkMode = document.documentElement.classList.contains('dark');
+                
+                if (isDarkMode) {
+                  e.currentTarget.style.borderColor = "white";
+                } else {
+                  
+                  e.currentTarget.style.borderColor = "hsl(var(--primary))";
+                }
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "transparent";
+              }}
               onClick={() => handleItemClick(item)}
             >
               {isVideo(item.image) ? (

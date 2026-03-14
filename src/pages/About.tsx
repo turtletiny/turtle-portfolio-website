@@ -40,7 +40,7 @@ export default function About() {
           </div>
           <h1 className="text-3xl font-bold">Hi, I'm Daniel.</h1>
           <p className="text-muted-foreground leading-relaxed">
-            I'm a 19 year old CS student from Sydney, Australia. I made this website to gain experience with web development and a  means to express a bit of my personality through some of my interests that I'm passionate about ❤️
+            I'm a 19 year old CS student from Sydney, Australia. I made this website to gain experience with web development and as a medium to express a bit of my personality through some of my interests that I'm passionate about!
           </p>
         </div>
 
@@ -279,7 +279,7 @@ export default function About() {
           </div>
           <h2 className="text-xl font-bold mb-1">Programming</h2>
           <p className="text-muted-foreground leading-relaxed mb-2">
-            I love the problem solving aspect of programming. But the main part I love about programming is being able to build your own apps and looking at the finished product - I find it incredibly rewarding and satisfying.
+            I love both the problem solving aspect of programming and as a creative outlet in designing and planning. Being able to build things I actually want to use and looking at the final product is very rewarding
           </p>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">

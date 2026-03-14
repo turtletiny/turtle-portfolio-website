@@ -130,17 +130,19 @@ export default function About() {
               <p className="text-destructive">Failed to load Chess.com stats</p>
             ) : (
               <>
-                <div className="flex items-center gap-3">
-                  <a 
-                    href={profile?.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-lg font-bold hover:text-primary transition-colors"
-                  >
+                <a 
+                  href={profile?.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 w-fit p-2 pr-3 bg-secondary border border-border rounded-lg hover:border-primary hover:scale-[1.05] active:scale-[0.97] transition-all duration-300 group shadow-sm"
+                >
+                  <span className="text-lg font-bold pl-1 group-hover:text-primary transition-colors">
                     {profile?.username}
-                  </a>
-                  <span className="text-xs text-muted-foreground bg-secondary px-2 py-1 rounded">Chess.com</span>
-                </div>
+                  </span>
+                  <span className="text-xs font-medium text-muted-foreground bg-background px-2 py-1 rounded shadow-sm">
+                    Chess.com
+                  </span>
+                </a>
                 
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
                   {rapid && (
@@ -188,9 +190,10 @@ export default function About() {
           </div>
 
           {/* Row 2: Lichess and Video */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
             {/* Lichess */}
             <div className="flex flex-col gap-3">
+              {/* ... existing lichessLoading logic ... */}
               {lichessLoading ? (
                 <div className="space-y-4">
                   <Skeleton className="h-6 w-48" />
@@ -203,19 +206,22 @@ export default function About() {
                 <p className="text-destructive">Failed to load Lichess stats</p>
               ) : (
                 <>
-                  <div className="flex items-center gap-3">
-                    <a 
-                      href={lichessProfile?.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-lg font-bold hover:text-primary transition-colors"
-                    >
+                  <a 
+                    href={lichessProfile?.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 w-fit p-2 pr-3 bg-secondary border border-border rounded-lg hover:border-primary hover:scale-[1.05] active:scale-[0.97] transition-all duration-300 group shadow-sm"
+                  >
+                    <span className="text-lg font-bold pl-1 group-hover:text-primary transition-colors">
                       {lichessProfile?.username}
-                    </a>
-                    <span className="text-xs text-muted-foreground bg-secondary px-2 py-1 rounded">Lichess</span>
-                  </div>
+                    </span>
+                    <span className="text-xs font-medium text-muted-foreground bg-background px-2 py-1 rounded shadow-sm">
+                      Lichess
+                    </span>
+                  </a>
                   
                   <div className="grid grid-cols-2 gap-3">
+                    {/* ... existing perfs mapping ... */}
                     {lichessProfile?.perfs?.rapid && (
                       <div className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-1 text-center">
                         <Timer size={24} className="text-green-500 mb-1" strokeWidth={2.5} />
@@ -226,7 +232,6 @@ export default function About() {
                     )}
                     {lichessProfile?.perfs?.blitz && (
                       <div className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-1 text-center">
-                        
                         <Zap size={24} className="text-blue-500 dark:text-yellow-400 mb-1" fill="currentColor" />
                         <span className="text-xl font-bold text-primary">{lichessProfile.perfs.blitz.rating}</span>
                         <span className="text-xs font-medium">Blitz</span>
@@ -253,12 +258,15 @@ export default function About() {
                 </>
               )}
             </div>
-
             {/* Video  */}
             <div className="flex flex-col gap-3">
               <h3 className="font-bold text-lg">Favorite Opening: Smith-Morra Gambit</h3>
-              <div className="w-full h-full min-h-[160px] bg-secondary rounded-lg border border-border flex items-center justify-center text-muted-foreground text-sm">
-                [image: morra.gif]
+              <div className="w-full aspect-square sm:aspect-[4/3] bg-secondary rounded-lg border border-border flex items-center justify-center overflow-hidden">
+                <img 
+                  src="/morra.gif" 
+                  alt="Smith-Morra Gambit" 
+                  className="w-full h-full object-cover sm:object-contain"
+                />
               </div>
             </div>
           </div>

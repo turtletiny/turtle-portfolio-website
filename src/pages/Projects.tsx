@@ -18,7 +18,7 @@ export default function Projects() {
           </div>
           <h1 className="text-3xl font-bold">Projects.</h1>
           <p className="text-muted-foreground leading-relaxed">
-            A very empty collection (for now) of things I've built, what I'm currently working on, and future ideas/plans. 
+            A very empty collection (for now) of things I've built, what I'm currently working on, and future ideas/plans + other non coding related side projects
           </p>
         </div>
 
@@ -41,7 +41,6 @@ export default function Projects() {
                   <h2 className="text-xl font-bold">Personal Portfolio Website</h2>
                 </div>
                 <div className="flex gap-2">
-                  {/* ADDED target="_blank" and rel="noopener noreferrer" */}
                   <a href="https://github.com/turtletiny/turtle-portfolio-website" target="_blank" rel="noopener noreferrer" className="p-2 bg-secondary rounded hover:text-primary transition-all hover:scale-110">
                     <Github size={18} />
                   </a>
@@ -91,7 +90,6 @@ export default function Projects() {
             <div className="card-base flex flex-col gap-4 group transition-all duration-300">
               <div className="flex justify-between items-start">
                 <h2 className="text-lg font-bold">Spaceshooter</h2>
-                {/* ADDED target="_blank" and rel="noopener noreferrer" */}
                 <a href="#" target="_blank" rel="noopener noreferrer" className="p-2 bg-secondary rounded hover:text-primary transition-all hover:scale-110">
                   <Github size={18} />
                 </a>

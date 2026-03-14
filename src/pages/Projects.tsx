@@ -18,7 +18,7 @@ export default function Projects() {
           </div>
           <h1 className="text-3xl font-bold">Projects.</h1>
           <p className="text-muted-foreground leading-relaxed">
-            A collection of things I've built, what I'm currently working on future plans. currently focused on learning java for school
+            A very empty collection (for now) of things I've built, what I'm currently working on, and future ideas/plans. 
           </p>
         </div>
 
@@ -34,24 +34,25 @@ export default function Projects() {
             <div className="card-base flex flex-col gap-4 group transition-all duration-300">
               <div className="flex justify-between items-start">
                 <div className="flex items-center gap-3">
-                   <div className="p-2 bg-secondary rounded-lg">
+                  <div className="p-2 bg-secondary rounded-lg">
                     
                     <Globe size={20} className="text-foreground pastel:text-primary" />
-                   </div>
-                   <h2 className="text-xl font-bold">Personal Portfolio</h2>
+                  </div>
+                  <h2 className="text-xl font-bold">Personal Portfolio Website</h2>
                 </div>
                 <div className="flex gap-2">
-                  <a href="#" className="p-2 bg-secondary rounded hover:text-primary transition-all hover:scale-110">
+                  {/* ADDED target="_blank" and rel="noopener noreferrer" */}
+                  <a href="https://github.com/turtletiny/turtle-portfolio-website" target="_blank" rel="noopener noreferrer" className="p-2 bg-secondary rounded hover:text-primary transition-all hover:scale-110">
                     <Github size={18} />
                   </a>
-                  <a href="#" className="p-2 bg-secondary rounded hover:text-primary transition-all hover:scale-110">
+                  <a href="https://turtletinyportfolio.vercel.app/" target="_blank" rel="noopener noreferrer" className="p-2 bg-secondary rounded hover:text-primary transition-all hover:scale-110">
                     <ExternalLink size={18} />
                   </a>
                 </div>
               </div>
               
               <div className="text-muted-foreground leading-relaxed text-sm">
-                <p>The website you are looking at right now! My first project using React and Tailwind. I plan to slowly implement the following features:</p>
+                <p>The website you are looking at right now! My first large personal project and first website using React. I plan to slowly implement the following features:</p>
                 <ul className="mt-3 space-y-2 list-none">
                   <li className="flex items-start gap-2">
                     <span className="mt-1.5 h-1.5 w-1.5 rounded-full shrink-0 bg-foreground pastel:bg-primary" />
@@ -59,7 +60,7 @@ export default function Projects() {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="mt-1.5 h-1.5 w-1.5 rounded-full shrink-0 bg-foreground pastel:bg-primary" />
-                    <span>Add a 3rd gothic/demonic/emo/edgy/religious theme.</span>
+                    <span>Turn current favourite song card into a mini music player to store multiple favourite songs </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="mt-1.5 h-1.5 w-1.5 rounded-full shrink-0 bg-foreground pastel:bg-primary" />
@@ -77,42 +78,26 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* --- SECTION: COMPLETED PROJECTS --- */}
+        {/* --- SECTION: PAST PROJECTS --- */}
         <div className="flex flex-col gap-4">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 px-1">
             
-            <CheckCircle2 size={14} className="text-foreground pastel:text-green-500" /> COMPLETED
+            <CheckCircle2 size={14} className="text-foreground pastel:text-green-500" /> PAST PROJECTS
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Pokemon Game  */}
-            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <h2 className="text-lg font-bold">Custom Pokemon Game</h2>
-                <a href="#" className="p-2 bg-secondary rounded hover:text-primary transition-all hover:scale-110">
-                  <Github size={18} />
-                </a>
-              </div>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                A small 2D Pokemon Clone with a short custom storyline and classic pokemon battle mechanics.
-              </p>
-              
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">Python</span>
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">Pygame</span>
-              </div>
-            </div>
-
+            
             {/* Spaceshooter  */}
             <div className="card-base flex flex-col gap-4 group transition-all duration-300">
               <div className="flex justify-between items-start">
                 <h2 className="text-lg font-bold">Spaceshooter</h2>
-                <a href="#" className="p-2 bg-secondary rounded hover:text-primary transition-all hover:scale-110">
+                {/* ADDED target="_blank" and rel="noopener noreferrer" */}
+                <a href="#" target="_blank" rel="noopener noreferrer" className="p-2 bg-secondary rounded hover:text-primary transition-all hover:scale-110">
                   <Github size={18} />
                 </a>
               </div>
               <p className="text-muted-foreground leading-relaxed text-sm">
-                My very first personal project. A classic 2D arcade shooter that taught me the fundamentals of game loops.
+                My very first personal project. A simple 2D arcade spaceshooter game that taught me the fundamentals of Pygame and game loops.
               </p>
               <div className="flex flex-wrap gap-2 mt-auto">
                 <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">Python</span>
@@ -122,32 +107,132 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* --- SECTION: FUTURE PLANS --- */}
-        <div className="flex flex-col gap-4">
+        {/* --- Project Ideas/Plans --- */}
+        
+          <div className="flex flex-col gap-4">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 px-1">
     
-            <Lightbulb size={14} className="text-foreground pastel:text-yellow-500" /> FUTURE IDEAS & PLANS
+            <Lightbulb size={14} className="text-foreground pastel:text-yellow-500" /> FUTURE IDEAS & PLANS 
           </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {[
-              { title: "explore other game engines", desc: "unity, unreal, godot, gamemaker, etc" },
-              { title: "personal organisation app", desc: "notes, calendar, etc" },
-              { title: "Chess Engine", desc: "chess engine to learn algorithms " },
-              { title: "improved anki clone", desc: "anki is not user friendly lol weird ui " },
-              { title: "my own mini operating syustem", desc: "yes"},
-              {title: "spotify clone / music player", desc: "additional functionality like annotating songs/lyrics + cool music visualiser graphics etc"},
-              {title: "fps in ursina (3d python engine)", desc: ""}
-            ].map((idea, i) => (
-              <div key={i} className="p-4 bg-secondary/40 rounded-xl border border-border border-dashed flex flex-col gap-2 transition-all">
-                <h3 className="font-bold text-sm">{idea.title}</h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">{idea.desc}</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Pokemon Game  */}
+            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
+              <div className="flex justify-between items-start">
+                <h2 className="text-lg font-bold">Pokemon Game Clone</h2>
               </div>
-            ))}
+              <p className="text-muted-foreground leading-relaxed text-sm">
+                A 2D Pokemon Clone with  with a short custom storyline and classic Pokemon battle mechanics, probably will be the next project I tackle.
+              </p>
+              
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">Game</span>
+                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">Python</span>
+                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">Pygame</span>
+              </div>
+            </div>
+
+            {/* Improved Anki   */}
+            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
+              <div className="flex justify-between items-start">
+                <h2 className="text-lg font-bold">Improved Anki Clone</h2>
+              </div>
+              <p className="text-muted-foreground leading-relaxed text-sm">
+                I love Anki, but even with plugins its has a very unintuitive and outdated user interface which I would like to fix.
+              </p>
+              <div className="flex flex-wrap gap-2 mt-auto">
+                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">App</span>
+                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">Python</span>
+              </div>
+            </div>
+
+            {/* Personal Organisation App  */}
+                        <div className="card-base flex flex-col gap-4 group transition-all duration-300">
+                          <div className="flex justify-between items-start">
+                            <h2 className="text-lg font-bold">Personal Organisation App</h2>
+                          </div>
+                          <p className="text-muted-foreground leading-relaxed text-sm">
+                            A personal organisation app with features such as To-Do list, calendar, notes organisation, etc
+                          </p>
+                          
+                          <div className="flex flex-wrap gap-2">
+                            <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">App</span>
+                          </div>
+                        </div>
+
+
+            {/* Spotify Clone/Music Player */}
+            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
+              <div className="flex justify-between items-start">
+                <h2 className="text-lg font-bold">Spotify Clone / Music Player</h2>
+              </div>
+              <p className="text-muted-foreground leading-relaxed text-sm">
+                A Spotify clone with more features such as song annotations, frequency visualisers
+              </p>
+              
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">App</span>
+              </div>
+            </div>
+
+            {/* 3d FPS Game in Python  */}
+            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
+              <div className="flex justify-between items-start">
+                <h2 className="text-lg font-bold">FPS Game</h2>
+              </div>
+              <p className="text-muted-foreground leading-relaxed text-sm">
+                An FPS game with Ursina, a 3D game engine in Python
+              </p>
+              
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">Game</span>
+                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">Python</span>
+                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">Ursina Engine</span>
+              </div>
+            </div>
+
+
+              {/* Chess Engine  */}
+            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
+              <div className="flex justify-between items-start">
+                <h2 className="text-lg font-bold">Chess Engine</h2>
+              </div>
+              <p className="text-muted-foreground leading-relaxed text-sm">
+                A Chess Engine to display the best move to learn more about algorithms
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">App</span>
+              </div>
+              
+            </div>
+
+
+            {/* Mini Operating System  */}
+            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
+              <div className="flex justify-between items-start">
+                <h2 className="text-lg font-bold">Mini Operating System</h2>
+              </div>
+              <p className="text-muted-foreground leading-relaxed text-sm">
+                This seems very complex, so probably something in the far future, but seems like an interesting way to learn about operating systems
+              </p>
+              
+              <div className="flex flex-wrap gap-2">
+                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">OS</span>
+              </div>
+            </div>
+
+
+
+
+
           </div>
         </div>
 
+        
+
+        
+        </div>
+
       </div>
-    </div>
   );
 }

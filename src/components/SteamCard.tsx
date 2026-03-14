@@ -19,7 +19,7 @@ interface SteamData {
   gameid?: string;
   recentGames?: RecentlyPlayedGame[];
 }
-
+//s
 export default function SteamCard() {
   const [steamData, setSteamData] = useState<SteamData | null>(null);
   const [loading, setLoading] = useState(true);

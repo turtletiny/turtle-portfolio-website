@@ -7,3 +7,4 @@ stack:
 
 run:
 npm run dev
+bun run dev

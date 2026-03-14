@@ -36,13 +36,15 @@ export default function CustomCursor() {
     >
       <div className="relative -translate-x-1/2 -translate-y-1/2">
         {isDark ? (
-          // dark mode cursor: crosshiar
-          <div className="relative w-6 h-6 flex items-center justify-center">
-            <div className="absolute w-5 h-[1.5px] bg-white shadow-[0_0_10px_white]" />
-            <div className="absolute h-5 w-[1.5px] bg-white shadow-[0_0_10px_white]" />
+          // dark mode cursor: crosshair
+          <div className="relative w-8 h-8 flex items-center justify-center">
+            
+            <div className="absolute w-7 h-[3px] bg-white shadow-[0_0_10px_white]" />
+            
+            <div className="absolute h-7 w-[3px] bg-white shadow-[0_0_10px_white]" />
           </div>
         ) : (
-          // pasel mode cursor: pixel kirby
+          // pastel mode cursor: pixel kirby
           <div className="relative w-10 h-10 drop-shadow-md">
             <img
               src="/kirbysword.png"

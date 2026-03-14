@@ -9,16 +9,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-
     const summaryPromise = fetch(
       `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${STEAM_API_KEY}&steamids=${STEAM_ID}`
     );
 
-
     const recentPromise = fetch(
       `http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${STEAM_API_KEY}&steamid=${STEAM_ID}&count=3`
     );
-
 
     const [summaryResponse, recentResponse] = await Promise.all([summaryPromise, recentPromise]);
     
@@ -28,6 +25,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const player = summaryData.response.players[0];
     const recentGames = recentData.response?.games || [];
 
+
+    res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=300');
 
     return res.status(200).json({
       personaname: player.personaname,

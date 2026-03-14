@@ -32,7 +32,7 @@ const techStack = [
     desc: "Component Architecture",
     url: "https://ui.shadcn.com/",
   },
-  { title: "Lucide React", desc: "Iconography", url: "https://lucide.dev/" },
+  { title: "Lucide React", desc: "Icons", url: "https://lucide.dev/" },
   { title: "Vercel", desc: "Hosting & Analytics", url: "https://vercel.com/" },
 ];
 
@@ -46,8 +46,7 @@ const learningLinks = [
     title: "The Odin Project",
     url: "https://www.theodinproject.com/",
     desc: "Project-Based Web Dev Course",
-  },
-  { title: "Lucide Icons", url: "https://lucide.dev/", desc: "icons" },
+  }
 ];
 
 const inspirationLinks = [

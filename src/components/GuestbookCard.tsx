@@ -32,7 +32,7 @@ export default function GuestbookCard() {
       queryClient.invalidateQueries({ queryKey: ["guestbook"] });
       setName("");
       setMessage("");
-      
+
       // Show the popup, then hide it smoothly after 3 seconds
       setShowPopup(true);
       setTimeout(() => {
@@ -44,7 +44,7 @@ export default function GuestbookCard() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim()) return;
-    
+
     const finalName = name.trim() === "" ? "Anonymous" : name;
     mutation.mutate({ name: finalName, message });
   };
@@ -56,20 +56,20 @@ export default function GuestbookCard() {
         <div className="flex items-center gap-2 text-muted-foreground uppercase font-semibold text-[11px] tracking-widest">
           <MessageSquare size={16} /> GUESTBOOK
         </div>
-        
+
         {/* Input Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-          <input 
+          <input
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Name (optional)"
             className="w-full bg-secondary text-foreground text-sm p-4 rounded-xl border border-transparent focus:outline-none focus:border-primary transition-colors"
             maxLength={40}
           />
-          
+
           <div className="flex gap-3 items-center">
             <div className="flex-1 flex flex-col gap-1">
-              <textarea 
+              <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Leave a comment..."
@@ -77,14 +77,16 @@ export default function GuestbookCard() {
                 maxLength={300}
               />
               <div className="flex justify-end pr-1">
-                <span className={`text-[10px] font-medium transition-colors ${message.length >= 300 ? 'text-destructive' : 'text-muted-foreground'}`}>
+                <span
+                  className={`text-[10px] font-medium transition-colors ${message.length >= 300 ? "text-destructive" : "text-muted-foreground"}`}
+                >
                   {message.length}/300
                 </span>
               </div>
             </div>
 
             {/* Send Button */}
-            <button 
+            <button
               type="submit"
               disabled={mutation.isPending || !message.trim()}
               className="w-12 h-12 shrink-0 rounded-full border-2 flex items-center justify-center transition-all duration-200 hover:scale-110 disabled:opacity-40 disabled:hover:scale-100 disabled:cursor-not-allowed"
@@ -96,19 +98,21 @@ export default function GuestbookCard() {
               }}
               onMouseEnter={(e) => {
                 if (!mutation.isPending && message.trim()) {
-                  e.currentTarget.style.backgroundColor = "hsl(var(--spotify-btn-hover-bg))";
+                  e.currentTarget.style.backgroundColor =
+                    "hsl(var(--spotify-btn-hover-bg))";
                   e.currentTarget.style.boxShadow = "var(--spotify-bar-glow)";
                 }
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = "hsl(var(--spotify-btn-bg))";
+                e.currentTarget.style.backgroundColor =
+                  "hsl(var(--spotify-btn-bg))";
                 e.currentTarget.style.boxShadow = "none";
               }}
             >
               {mutation.isPending ? (
-                <Loader2 size={18} className="animate-spin" /> 
+                <Loader2 size={18} className="animate-spin" />
               ) : (
-                <Send size={18} className="mr-0.5 mt-0.5" /> 
+                <Send size={18} className="mr-0.5 mt-0.5" />
               )}
             </button>
           </div>
@@ -123,9 +127,14 @@ export default function GuestbookCard() {
             </div>
           ) : (
             messages?.map((msg: any) => (
-              <div key={msg.id} className="text-sm p-1 animate-in fade-in slide-in-from-bottom-1 duration-300">
+              <div
+                key={msg.id}
+                className="text-sm p-1 animate-in fade-in slide-in-from-bottom-1 duration-300"
+              >
                 <div className="flex justify-between items-center text-muted-foreground text-[12px] mb-2 pr-1">
-                  <span className="font-semibold text-foreground">{msg.name}</span>
+                  <span className="font-semibold text-foreground">
+                    {msg.name}
+                  </span>
                   <span className="font-medium tracking-tight">
                     {new Date(msg.created_at).toLocaleDateString()}
                   </span>
@@ -140,19 +149,21 @@ export default function GuestbookCard() {
       </div>
 
       {/* THE NEW SUCCESS POP-UP */}
-      <div 
+      <div
         className={`fixed inset-0 z-50 flex items-center justify-center bg-background/60 backdrop-blur-sm transition-all duration-500 ease-out ${
-          showPopup ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          showPopup
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
       >
-        <div 
+        <div
           className={`bg-secondary p-8 rounded-[30px] shadow-2xl flex flex-col items-center gap-5 border border-border transition-all duration-500 ease-out transform ${
             showPopup ? "scale-100 translate-y-0" : "scale-90 translate-y-8"
           }`}
         >
-          <img 
-            src="chiikawaly-removebg-preview.png" 
-            alt="Chiikawa Heart" 
+          <img
+            src="chiikawaly-removebg-preview.png"
+            alt="Chiikawa Heart"
             className="w-32 h-32 object-contain"
           />
           <h2 className="text-lg md:text-xl font-bold text-foreground tracking-tight">

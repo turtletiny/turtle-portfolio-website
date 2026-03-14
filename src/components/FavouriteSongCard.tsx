@@ -26,13 +26,27 @@ export default function FavouriteSongCard() {
 
       <div className="flex items-center gap-6 flex-grow">
         {/* Album Art */}
-        <a href="https://open.spotify.com/album/0cT1SQDE7wSh1eUJkGFXse" target="_blank" rel="noopener noreferrer" className="w-[110px] h-[110px] rounded-xl flex-shrink-0 border border-border shadow-lg overflow-hidden hover:scale-105 transition-transform">
-          <img src={albumArt} alt="Icedancer" className="w-full h-full object-cover" />
+        <a
+          href="https://open.spotify.com/album/0cT1SQDE7wSh1eUJkGFXse"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-[110px] h-[110px] rounded-xl flex-shrink-0 border border-border shadow-lg overflow-hidden hover:scale-105 transition-transform"
+        >
+          <img
+            src={albumArt}
+            alt="Icedancer"
+            className="w-full h-full object-cover"
+          />
         </a>
 
         <div className="flex items-center justify-between w-full">
           <div className="flex flex-col justify-center">
-            <a href="https://open.spotify.com/track/6yaYV3wo595zZWFwhC8s5T" target="_blank" rel="noopener noreferrer" className="font-bold text-xl text-foreground hover:text-primary transition-colors cursor-pointer">
+            <a
+              href="https://open.spotify.com/track/6yaYV3wo595zZWFwhC8s5T"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-xl text-foreground hover:text-primary transition-colors cursor-pointer"
+            >
               Special Place
             </a>
             <p className="text-muted-foreground text-sm">Bladee ♡</p>
@@ -47,20 +61,30 @@ export default function FavouriteSongCard() {
               color: "hsl(var(--spotify-btn-text))",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "hsl(var(--spotify-btn-hover-bg))";
+              e.currentTarget.style.backgroundColor =
+                "hsl(var(--spotify-btn-hover-bg))";
               e.currentTarget.style.boxShadow = "var(--spotify-bar-glow)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "hsl(var(--spotify-btn-bg))";
+              e.currentTarget.style.backgroundColor =
+                "hsl(var(--spotify-btn-bg))";
               e.currentTarget.style.boxShadow = "none";
             }}
           >
-            {playing ? <Pause size={24} /> : <Play size={24} className="ml-1" />}
+            {playing ? (
+              <Pause size={24} />
+            ) : (
+              <Play size={24} className="ml-1" />
+            )}
           </button>
         </div>
       </div>
 
-      <audio ref={audioRef} src="/audio/special-place.mp3" onEnded={() => setPlaying(false)} />
+      <audio
+        ref={audioRef}
+        src="/audio/special-place.mp3"
+        onEnded={() => setPlaying(false)}
+      />
     </div>
   );
 }

@@ -7,7 +7,11 @@ interface CardSectionIconProps {
   size?: number;
 }
 
-export default function CardSectionIcon({ darkIcon: Icon, pastelEmoji, size = 14 }: CardSectionIconProps) {
+export default function CardSectionIcon({
+  darkIcon: Icon,
+  pastelEmoji,
+  size = 14,
+}: CardSectionIconProps) {
   const { isPastel } = useTheme();
 
   if (isPastel) {

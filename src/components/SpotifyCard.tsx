@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import CardSectionIcon from "./CardSectionIcon";
 import { Music } from "lucide-react";
 
-
 export default function SpotifyCard() {
   const [song, setSong] = useState<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -17,22 +16,23 @@ export default function SpotifyCard() {
 
   const fetchPlayingSong = async () => {
     try {
-      
       const response = await fetch("/api/spotify");
-      
+
       if (response.status === 204 || response.status > 400) {
         setIsPlaying(false);
         return;
       }
-      
+
       const songData = await response.json();
-      
+
       if (songData.item) {
         setIsPlaying(songData.is_playing);
         setProgress(songData.progress_ms);
         setSong({
           title: songData.item.name,
-          artist: songData.item.artists.map((_artist: any) => _artist.name).join(", "),
+          artist: songData.item.artists
+            .map((_artist: any) => _artist.name)
+            .join(", "),
           albumArt: songData.item.album.images[0].url,
           songUrl: songData.item.external_urls.spotify,
           albumUrl: songData.item.album.external_urls.spotify,
@@ -74,10 +74,9 @@ export default function SpotifyCard() {
         <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
           <CardSectionIcon darkIcon={Music} pastelEmoji="🎵" /> NOW PLAYING
         </div>
-        
+
         {isPlaying && (
           <div className="flex items-end gap-[2px] h-3">
-            
             <span className="w-1 bg-[hsl(var(--spotify-bar))] rounded-sm animate-[bounce_1s_infinite] origin-bottom h-full" />
             <span className="w-1 bg-[hsl(var(--spotify-bar))] rounded-sm animate-[bounce_1.2s_infinite_0.2s] origin-bottom h-2/3" />
             <span className="w-1 bg-[hsl(var(--spotify-bar))] rounded-sm animate-[bounce_0.8s_infinite_0.4s] origin-bottom h-full" />
@@ -88,30 +87,31 @@ export default function SpotifyCard() {
       {isPlaying && song ? (
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-4">
-            <a 
-              href={song.albumUrl} 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href={song.albumUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg border border-border overflow-hidden flex-shrink-0 block shadow-sm hover:scale-110 transition-transform duration-300"
             >
-              <img 
-                src={song.albumArt} 
-                alt="Album Art" 
-                className="w-full h-full object-cover" 
+              <img
+                src={song.albumArt}
+                alt="Album Art"
+                className="w-full h-full object-cover"
               />
             </a>
-            
+
             <div className="flex flex-col justify-center overflow-hidden w-full">
-              
-              <a 
-                href={song.songUrl} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href={song.songUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-bold text-base truncate transition-colors w-fit max-w-full hover:text-green-500 pastel:hover:text-[hsl(var(--spotify-bar))]"
               >
                 {song.title}
               </a>
-              <p className="text-sm text-muted-foreground truncate">{song.artist}</p>
+              <p className="text-sm text-muted-foreground truncate">
+                {song.artist}
+              </p>
             </div>
           </div>
 
@@ -121,7 +121,7 @@ export default function SpotifyCard() {
               <span>{formatTime(song.duration)}</span>
             </div>
             <div className="w-full h-1.5 bg-background/50 rounded-full overflow-hidden border border-border/50">
-              <div 
+              <div
                 className="h-full rounded-full transition-all duration-1000 ease-linear spotify-progress"
                 style={{ width: `${progressPercent}%` }}
               />
@@ -134,8 +134,12 @@ export default function SpotifyCard() {
             <Music size={20} />
           </div>
           <div className="flex flex-col">
-            <h3 className="font-medium text-muted-foreground">Not playing anything</h3>
-            <p className="text-xs text-muted-foreground/70">Spotify is currently paused.</p>
+            <h3 className="font-medium text-muted-foreground">
+              Not playing anything
+            </h3>
+            <p className="text-xs text-muted-foreground/70">
+              Spotify is currently paused.
+            </p>
           </div>
         </div>
       )}

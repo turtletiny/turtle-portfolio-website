@@ -5,7 +5,7 @@ const links = [
   { label: "About", to: "/about" },
   { label: "Projects", to: "/projects" },
   { label: "Gallery", to: "/gallery" },
-  { label: "Credits", to: "/credits" }, 
+  { label: "Credits", to: "/credits" },
 ];
 
 export default function DashboardNavbar() {

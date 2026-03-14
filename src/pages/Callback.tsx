@@ -7,7 +7,6 @@ export default function Callback() {
   const [tokenData, setTokenData] = useState<any>(null);
 
   useEffect(() => {
-    
     if (code) {
       console.log("SUCCESS! We got the code from Spotify:", code);
     }
@@ -19,7 +18,10 @@ export default function Callback() {
         <h1 className="text-2xl font-bold text-green-500">Spotify Handshake</h1>
         {code ? (
           <>
-            <p className="text-muted-foreground">We successfully got the authorization code! Check your VS Code or Browser console.</p>
+            <p className="text-muted-foreground">
+              We successfully got the authorization code! Check your VS Code or
+              Browser console.
+            </p>
             <div className="p-4 bg-secondary rounded text-xs break-all text-left font-mono">
               {code}
             </div>

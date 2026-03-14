@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { Sparkles, Moon } from "lucide-react";
 
 export default function ThemeToggle() {
-  const [isPastel, setIsPastel] = useState(() => localStorage.getItem("theme") === "pastel");
+  const [isPastel, setIsPastel] = useState(
+    () => localStorage.getItem("theme") === "pastel",
+  );
 
   useEffect(() => {
     if (isPastel) {

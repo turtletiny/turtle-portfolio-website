@@ -10,11 +10,15 @@ export default function CustomCursor() {
       setPosition({ x: e.clientX, y: e.clientY });
 
       // 2. Real-Time Detection
-      const hasDarkClass = document.documentElement.classList.contains('dark') || 
-                           document.body.classList.contains('dark');
-      
+      const hasDarkClass =
+        document.documentElement.classList.contains("dark") ||
+        document.body.classList.contains("dark");
+
       const bgColor = window.getComputedStyle(document.body).backgroundColor;
-      const isActuallyDark = hasDarkClass || bgColor.includes('rgb(0,') || bgColor.includes('rgb(10,');
+      const isActuallyDark =
+        hasDarkClass ||
+        bgColor.includes("rgb(0,") ||
+        bgColor.includes("rgb(10,");
 
       setIsDark(isActuallyDark);
     };
@@ -39,10 +43,10 @@ export default function CustomCursor() {
           </div>
         ) : (
           // pasel mode cursor: pixel kirby
-          <div className="relative w-10 h-10 drop-shadow-md"> 
-            <img 
-              src="/kirbysword.png" 
-              alt="Kirby Cursor" 
+          <div className="relative w-10 h-10 drop-shadow-md">
+            <img
+              src="/kirbysword.png"
+              alt="Kirby Cursor"
               className="w-full h-full object-contain"
             />
           </div>

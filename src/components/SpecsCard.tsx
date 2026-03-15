@@ -15,6 +15,8 @@ import KeyboardIcon from "@/components/icons/KeyboardIcon";
 
 import CardSectionIcon from "@/components/CardSectionIcon";
 
+import EarphonesIcon from "@/components/icons/EarphonesIcon";
+
 // --- Custom Icons ---
 
 const EarbudsIcon = ({ size = 18, className = "" }) => (
@@ -48,7 +50,7 @@ const peripherals = [
 
   { icon: Headphones, label: "Headphones", value: "HyperX Cloud II" },
 
-  { icon: EarbudsIcon, label: "IEMs", value: "Aoshida E20" },
+  { icon: EarphonesIcon, label: "IEMs", value: "Aoshida E20" },
 ];
 
 // --- Main Component ---

@@ -403,8 +403,8 @@ export default function About() {
           <h2 className="text-xl font-bold mb-1">Programming</h2>
           <p className="text-muted-foreground leading-relaxed mb-2">
             I love both the problem solving aspect of programming and as a
-            creative outlet in designing and planning. Being able to build
-            things I actually want to use and looking at the final product is
+            creative outlet in designing and planning. I find being able to build
+            things I actually want to use and looking at the final product
             very rewarding
           </p>
 

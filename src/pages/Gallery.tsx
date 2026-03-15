@@ -14,14 +14,14 @@ const GalleryItems = [
     id: 1,
     title: "Chiikawa",
     description: "asd",
-    image: "chiikawa.mp4",
-    tags: ["cute"],
+    image: "",
+    tags: [""],
   },
   {
     id: 2,
     title: "",
     description: "",
-    image: "no1.mp4",
+    image: "",
     tags: [],
   },
   {
@@ -35,7 +35,7 @@ const GalleryItems = [
     id: 4,
     title: "",
     description: "",
-    image: "",
+    image: "banana.mp4",
     tags: [],
   },
   {

@@ -18,10 +18,11 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setIsPastel(!isPastel)}
-      className="fixed top-6 left-6 z-[1001] bg-transparent border-none text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-110 hover:rotate-12"
+      // Tucked into top-4/left-4 on mobile, goes back to top-6/left-6 on desktop
+      className="fixed top-4 left-4 md:top-6 md:left-6 z-[1001] bg-transparent border-none text-muted-foreground hover:text-foreground transition-all duration-200 hover:scale-110 hover:rotate-12"
       title="Change Theme"
     >
-      {isPastel ? <Moon size={28} /> : <Sparkles size={28} />}
+      {isPastel ? <Moon size={26} /> : <Sparkles size={26} />}
     </button>
   );
 }

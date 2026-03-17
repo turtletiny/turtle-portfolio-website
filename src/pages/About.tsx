@@ -385,14 +385,7 @@ export default function About() {
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
             <CardSectionIcon darkIcon={Code2} pastelEmoji="💻" /> STACK
           </div>
-          <h2 className="text-xl font-bold mb-1">Programming</h2>
-          <p className="text-muted-foreground leading-relaxed mb-2">
-            I love both the problem solving aspect of programming and as a
-            creative outlet in designing and planning. I find being able to build
-            things I actually want to use and looking at the final product
-            very rewarding
-          </p>
-
+          
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {[
               {

@@ -5,7 +5,10 @@ import { Music } from "lucide-react";
 export default function SpotifyCard() {
   const [song, setSong] = useState<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  // Progress Bar States
   const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(180000); // Default fallback
 
   const formatTime = (ms: number) => {
     const totalSeconds = Math.floor(ms / 1000);
@@ -17,56 +20,67 @@ export default function SpotifyCard() {
   const fetchPlayingSong = async () => {
     try {
       const response = await fetch("/api/spotify");
-
-      if (response.status === 204 || response.status > 400) {
-        setIsPlaying(false);
-        return;
-      }
-
       const songData = await response.json();
 
-      if (songData.item) {
-        setIsPlaying(songData.is_playing);
-        setProgress(songData.progress_ms);
-        setSong({
-          title: songData.item.name,
-          artist: songData.item.artists
+      if (songData.is_playing && songData.item) {
+        setIsPlaying(true);
+        const newTitle = songData.item.name;
+
+        const realDuration = songData.item.duration_ms || 180000;
+
+        setSong((prevSong: any) => {
+          if (!prevSong || prevSong.title !== newTitle) {
+            const randomStart = Math.floor(Math.random() * 15000);
+            setProgress(randomStart);
+
+            setDuration(realDuration);
+          }
+
+          const artistString = songData.item.artists
             .map((_artist: any) => _artist.name)
-            .join(", "),
-          albumArt: songData.item.album.images[0].url,
-          songUrl: songData.item.external_urls.spotify,
-          albumUrl: songData.item.album.external_urls.spotify,
-          duration: songData.item.duration_ms,
+            .join(", ");
+
+          return {
+            title: newTitle,
+            artist: artistString,
+            albumArt: songData.item.album.images[0].url,
+
+            songUrl: `https://open.spotify.com/search/${encodeURIComponent(`${newTitle} ${artistString}`)}`,
+
+            albumUrl: `https://open.spotify.com/search/${encodeURIComponent(`${songData.item.album?.name || newTitle} ${artistString}`)}`,
+          };
         });
       } else {
         setIsPlaying(false);
       }
     } catch (error) {
-      console.error("Error fetching Spotify data:", error);
+      console.error("Error fetching audio data:", error);
       setIsPlaying(false);
     }
   };
 
+  // Poll Last.fm API
   useEffect(() => {
     fetchPlayingSong();
     const interval = setInterval(fetchPlayingSong, 15000);
     return () => clearInterval(interval);
   }, []);
 
+  // Tick the progress bar up every second
   useEffect(() => {
     let ticker: NodeJS.Timeout;
     if (isPlaying && song) {
       ticker = setInterval(() => {
         setProgress((prev) => {
-          if (prev >= song.duration) return song.duration;
+          if (prev >= duration) return duration;
           return prev + 1000;
         });
       }, 1000);
     }
     return () => clearInterval(ticker);
-  }, [isPlaying, song]);
+  }, [isPlaying, song, duration]);
 
-  const progressPercent = song ? (progress / song.duration) * 100 : 0;
+  const progressPercent = (progress / duration) * 100;
 
   return (
     <div className="card-base flex flex-col gap-4">
@@ -91,7 +105,7 @@ export default function SpotifyCard() {
               href={song.albumUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg border border-border overflow-hidden flex-shrink-0 block shadow-sm hover:scale-110 transition-transform duration-300"
+              className="w-14 h-14 sm:w-16 sm:h-16 rounded-md border border-border overflow-hidden flex-shrink-0 block shadow-sm hover:scale-110 transition-transform duration-300"
             >
               <img
                 src={song.albumArt}
@@ -115,10 +129,11 @@ export default function SpotifyCard() {
             </div>
           </div>
 
+          {/* Progress Bar */}
           <div className="flex flex-col gap-1.5 w-full px-1">
             <div className="flex justify-between text-[10px] text-muted-foreground font-medium">
               <span>{formatTime(progress)}</span>
-              <span>{formatTime(song.duration)}</span>
+              <span>{formatTime(duration)}</span>
             </div>
             <div className="w-full h-1.5 bg-background/50 rounded-full overflow-hidden border border-border/50">
               <div
@@ -138,7 +153,7 @@ export default function SpotifyCard() {
               Not playing anything
             </h3>
             <p className="text-xs text-muted-foreground/70">
-              Spotify is currently paused.
+              Activity is currently paused.
             </p>
           </div>
         </div>

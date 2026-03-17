@@ -2,7 +2,6 @@ import DashboardNavbar from "@/components/DashboardNavbar";
 import ThemeToggle from "@/components/ThemeToggle";
 import CardSectionIcon from "@/components/CardSectionIcon";
 import {
-  User,
   Gamepad2,
   ScrollText,
   Code2,
@@ -53,20 +52,6 @@ export default function About() {
       <DashboardNavbar />
 
       <div className="w-full max-w-[900px] flex flex-col gap-6 px-4 pb-12">
-        {/* Intro Card */}
-        <div className="card-base flex flex-col gap-4">
-          <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
-            <CardSectionIcon darkIcon={User} pastelEmoji="👋" /> ABOUT ME
-          </div>
-          <h1 className="text-3xl font-bold">Hi, I'm Daniel.</h1>
-          <p className="text-muted-foreground leading-relaxed">
-            I'm a 19 year old CS student from Sydney, Australia. I made this
-            website to gain experience with web development and as a medium to
-            express a bit of my personality through some of my interests that
-            I'm passionate about!
-          </p>
-        </div>
-
         {/* Games Card */}
         <div className="card-base flex flex-col gap-4">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
@@ -167,7 +152,7 @@ export default function About() {
             <CardSectionIcon darkIcon={ScrollText} pastelEmoji="♟️" /> CHESS
           </div>
 
-          {/*  Chess.com */}
+          {/* Chess.com */}
           <div className="flex flex-col gap-3">
             {loading ? (
               <div className="space-y-4">

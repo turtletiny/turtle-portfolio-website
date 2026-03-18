@@ -68,7 +68,7 @@ export default function Projects() {
                     <Github size={18} />
                   </a>
                   <a
-                    href="https://turtletinyportfolio.vercel.app/"
+                    href="https://turtletiny.vercel.app/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 bg-secondary rounded hover:text-primary transition-all hover:scale-110"

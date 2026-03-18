@@ -13,10 +13,12 @@ import {
   Rocket,
   Puzzle,
   Flame,
+  Headphones,
 } from "lucide-react";
 import { useChessStats } from "@/hooks/useChessStats";
 import { useLichessStats } from "@/hooks/useLichessStats";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useLastfmStats } from "@/hooks/useLastfmStats";
 
 const CHESS_USERNAME = "turtletinys";
 const LICHESS_USERNAME = "Zappyy";
@@ -28,6 +30,9 @@ export default function About() {
     loading: lichessLoading,
     error: lichessError,
   } = useLichessStats(LICHESS_USERNAME);
+  
+  // Last.fm stats hook
+  const { data: lastfmData, loading: lastfmLoading, error: lastfmError } = useLastfmStats();
 
   const getRatingDisplay = (rating?: {
     last: { rating: number };
@@ -267,7 +272,6 @@ export default function About() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
             {/* Lichess */}
             <div className="flex flex-col gap-3">
-              {/* ... existing lichessLoading logic ... */}
               {lichessLoading ? (
                 <div className="space-y-4">
                   <Skeleton className="h-6 w-48" />
@@ -295,7 +299,6 @@ export default function About() {
                   </a>
 
                   <div className="grid grid-cols-2 gap-3">
-                    {/* ... existing perfs mapping ... */}
                     {lichessProfile?.perfs?.rapid && (
                       <div className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-1 text-center">
                         <Timer
@@ -385,7 +388,14 @@ export default function About() {
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
             <CardSectionIcon darkIcon={Code2} pastelEmoji="💻" /> STACK
           </div>
-          
+          <h2 className="text-xl font-bold mb-1">Programming</h2>
+          <p className="text-muted-foreground leading-relaxed mb-2">
+            I love both the problem solving aspect of programming and as a
+            creative outlet in designing and planning. I find being able to build
+            things I actually want to use and looking at the final product
+            very rewarding
+          </p>
+
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {[
               {
@@ -540,6 +550,103 @@ export default function About() {
           </div>
         </div>
 
+
+
+        {/* Listening Stats Card */}
+        <div className="card-base flex flex-col gap-6">
+          <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
+            <CardSectionIcon darkIcon={Headphones} pastelEmoji="🎧" /> LISTENING STATS
+          </div>
+
+          {lastfmLoading ? (
+            <div className="space-y-4">
+              <Skeleton className="h-32 w-full rounded-lg" />
+              <Skeleton className="h-48 w-full rounded-lg" />
+            </div>
+          ) : lastfmError ? (
+            <p className="text-destructive">Failed to load Last.fm stats</p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+              
+              {/* Recently Played List */}
+              <div className="flex flex-col gap-3">
+                <h3 className="text-sm font-medium text-muted-foreground">Recently Played</h3>
+                <div className="flex flex-col gap-3">
+                  {/* Updated to show 5 songs */}
+                  {lastfmData?.recentTracks.slice(0, 5).map((track, i) => (
+                    <a
+                      key={i}
+                      href={track.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-4 p-3 bg-secondary rounded-lg border border-border hover:border-primary transition-all hover:scale-[1.02] group shadow-sm"
+                    >
+                      <div className="w-12 h-12 rounded bg-card flex-shrink-0 overflow-hidden shadow-sm relative border border-border">
+                        <img 
+                          src={track.image || '/blackearphones2.svg'} 
+                          alt={track.name} 
+                          className="w-full h-full object-cover" 
+                        />
+                      </div>
+                      <div className="flex flex-col justify-center overflow-hidden w-full">
+                        <span className="font-bold text-sm truncate group-hover:text-primary transition-colors">
+                          {track.name}
+                        </span>
+                        <span className="text-xs text-muted-foreground truncate">
+                          {track.artist}
+                        </span>
+                      </div>
+                      {track.nowPlaying && (
+                        <div className="ml-auto flex items-center gap-2 px-2 py-1 bg-green-500/10 text-green-500 text-[10px] font-bold uppercase rounded-full">
+                          <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                          </span>
+                          Live
+                        </div>
+                      )}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Top Artists Grid (2x2) */}
+              <div className="flex flex-col gap-3">
+                <h3 className="text-sm font-medium text-muted-foreground">Top Artists (This Month)</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  {lastfmData?.topArtists.slice(0, 4).map((artist, i) => (
+                    <a
+                      key={i}
+                      href={artist.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative aspect-square rounded-lg overflow-hidden group transition-all duration-300 hover:scale-105 border border-border shadow-sm"
+                    >
+                      <img 
+                        src={artist.image} 
+                        alt={artist.name} 
+                        className="absolute inset-0 w-full h-full object-cover" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80" />
+                      
+                      <div className="absolute bottom-0 left-0 p-3 flex flex-col w-full">
+                        <span className="font-bold text-sm text-white truncate">
+                          {artist.name}
+                        </span>
+                        <span className="text-[10px] text-gray-300 uppercase tracking-tight font-medium">
+                          {artist.plays} Plays
+                        </span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+
+
         {/* Reading Card */}
         <div className="card-base flex flex-col gap-4">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
@@ -634,6 +741,8 @@ export default function About() {
             </div>
           </div>
         </div>
+
+
 
         {/* Hobbies Card */}
         <div className="card-base flex flex-col gap-4">

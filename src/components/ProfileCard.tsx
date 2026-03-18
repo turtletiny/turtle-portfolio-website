@@ -1,5 +1,5 @@
 import { useLanyard } from "@/hooks/useLanyard";
-import { Instagram, Twitter } from "lucide-react";
+import { Instagram, Twitter, Github } from "lucide-react"; 
 import TikTokIcon from "@/components/icons/TikTokIcon";
 import SpotifyIcon from "@/components/icons/SpotifyIcon";
 import YouTubeIcon from "@/components/icons/YouTubeIcon";
@@ -14,7 +14,6 @@ const socials = [
     hoverClass: "group/yt",
     iconSize: 18,
   },
-
   {
     icon: TikTokIcon,
     href: "https://www.tiktok.com/@turtletinys",
@@ -22,7 +21,6 @@ const socials = [
     hoverClass: "group/tt",
     iconSize: 22,
   },
-
   {
     icon: Instagram,
     href: "https://www.instagram.com/daniel.dwn.l/",
@@ -30,7 +28,6 @@ const socials = [
     hoverClass: "hover:text-pink-500",
     iconSize: 18,
   },
-
   {
     icon: SpotifyIcon,
     href: "https://open.spotify.com/user/cwisfzvgaytquodxoyz02b7l3",
@@ -38,7 +35,6 @@ const socials = [
     hoverClass: "hover:text-primary",
     iconSize: 18,
   },
-
   {
     icon: Twitter,
     href: "https://x.com/turtletiny_",
@@ -46,7 +42,17 @@ const socials = [
     hoverClass: "hover:text-foreground",
     iconSize: 18,
   },
+
+  {
+    icon: Github,
+    href: "https://github.com/turtletiny", 
+    label: "GitHub",
+    hoverClass: "hover:text-foreground",
+    iconSize: 18,
+  },
 ];
+
+
 
 const statusColors: Record<string, string> = {
   online: "bg-status-online",

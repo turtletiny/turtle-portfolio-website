@@ -1,316 +1,318 @@
+import { useState, useRef } from "react";
 import DashboardNavbar from "@/components/DashboardNavbar";
 import ThemeToggle from "@/components/ThemeToggle";
-import CardSectionIcon from "@/components/CardSectionIcon";
 import {
-  FolderGit2,
-  Terminal,
-  Gamepad2,
-  Globe,
+  Folder,
+  FolderOpen,
+  Clock,
+  CheckCircle2,
+  Sparkles,
   Github,
   ExternalLink,
-  Lightbulb,
-  CheckCircle2,
-  Construction,
+  Globe,
 } from "lucide-react";
 
 export default function Projects() {
+  const [isMainOpen, setIsMainOpen] = useState(false); 
+  const [activeFolder, setActiveFolder] = useState<string | null>(null); 
+  const [animStep, setAnimStep] = useState(0); 
+  
+  const timersRef = useRef<NodeJS.Timeout[]>([]);
+
+  const handleMainClick = () => {
+    timersRef.current.forEach(clearTimeout);
+    timersRef.current = [];
+
+    if (isMainOpen) {
+      setAnimStep(0);
+      setActiveFolder(null);
+      timersRef.current.push(setTimeout(() => setIsMainOpen(false), 500));
+    } else {
+      setIsMainOpen(true);
+      
+      timersRef.current.push(setTimeout(() => setAnimStep(1), 150)); 
+      timersRef.current.push(setTimeout(() => setAnimStep(2), 400)); 
+      timersRef.current.push(setTimeout(() => setAnimStep(3), 650)); 
+      timersRef.current.push(setTimeout(() => setAnimStep(4), 900)); 
+      
+      timersRef.current.push(setTimeout(() => setActiveFolder("current"), 1100)); 
+    }
+  };
+
+  const toggleSubFolder = (folderName: string) => {
+    setActiveFolder((prev) => (prev === folderName ? null : folderName));
+  };
+
   return (
-    <div className="min-h-screen flex flex-col items-center bg-background text-foreground font-main">
+    <div className="min-h-screen flex flex-col items-center bg-background text-foreground font-main relative z-10">
       <ThemeToggle />
       <DashboardNavbar />
 
-      <div className="w-full max-w-[900px] flex flex-col gap-10 px-4 pb-12">
-        {/* Header Card  */}
-        <div className="card-base flex flex-col gap-4">
-          <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
-            <CardSectionIcon darkIcon={FolderGit2} pastelEmoji="📁" /> MY WORK
-          </div>
-          <h1 className="text-3xl font-bold">Projects.</h1>
-          <p className="text-muted-foreground leading-relaxed">
-            A very empty collection (for now) of things I've built, what I'm
-            currently working on, and future ideas/plans + other non coding
-            related side projects
-          </p>
-        </div>
-
-        {/* --- SECTION: CURRENTLY WORKING ON --- */}
-        <div className="flex flex-col gap-4">
-          <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 px-1">
-            <Construction
-              size={14}
-              className="text-foreground pastel:text-orange-500"
-            />{" "}
-            CURRENTLY WORKING ON
-          </div>
-
-          <div className="grid grid-cols-1 gap-4">
-            {/* Personal Website  */}
-            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-secondary rounded-lg">
-                    <Globe
-                      size={20}
-                      className="text-foreground pastel:text-primary"
-                    />
-                  </div>
-                  <h2 className="text-xl font-bold">
-                    Personal Portfolio Website
-                  </h2>
-                </div>
-                <div className="flex gap-2">
-                  <a
-                    href="https://github.com/turtletiny/turtle-portfolio-website"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 bg-secondary rounded hover:text-primary transition-all hover:scale-110"
-                  >
-                    <Github size={18} />
-                  </a>
-                  <a
-                    href="https://turtletiny.vercel.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 bg-secondary rounded hover:text-primary transition-all hover:scale-110"
-                  >
-                    <ExternalLink size={18} />
-                  </a>
-                </div>
-              </div>
-
-              <div className="text-muted-foreground leading-relaxed text-sm">
-                <p>
-                  The website you are looking at right now! My first large
-                  personal project and first website using React. I plan to
-                  slowly implement the following features:
-                </p>
-                <ul className="mt-3 space-y-2 list-none">
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full shrink-0 bg-foreground pastel:bg-primary" />
-                    <span>
-                      Further tweak and polish the pastel theme + add more
-                      custom icons for weather status, etc.
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full shrink-0 bg-foreground pastel:bg-primary" />
-                    <span>
-                      Turn current favourite song card into a mini music player
-                      to store multiple favourite songs{" "}
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full shrink-0 bg-foreground pastel:bg-primary" />
-                    <span>
-                      Add more interactive elements like desktop pets in the
-                      corner.
-                    </span>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="flex flex-wrap gap-2 mt-2">
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border">
-                  REACT
-                </span>
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border">
-                  TYPESCRIPT
-                </span>
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border">
-                  TAILWIND CSS
-                </span>
-              </div>
+      <div className="w-full max-w-[900px] flex flex-col items-center px-4 pb-20">
+        
+        {/* =========================================
+            ROOT FOLDER NODE
+            ========================================= */}
+        <div className="z-10 bg-background pt-8">
+          <button
+            onClick={handleMainClick}
+            className={`flex flex-col items-center justify-center gap-3 p-8 rounded-3xl transform transition-all duration-500 ease-in-out cursor-pointer w-48 bg-card border-2 ${
+              isMainOpen 
+                ? "border-yellow-500/50 pastel:border-red-500/50 scale-[1.02] hover:scale-105 shadow-lg shadow-yellow-500/10 pastel:shadow-red-500/10 bg-yellow-500/5 pastel:bg-red-500/5" 
+                : "border-border/50 scale-100 hover:scale-[1.02] hover:bg-secondary/40 shadow-sm"
+            }`}
+          >
+            <div className="relative w-20 h-20 flex items-center justify-center">
+              <Folder
+                size={70}
+                strokeWidth={1.5}
+                className={`text-yellow-500 pastel:text-red-500 transition-all duration-300 absolute ${
+                  isMainOpen ? "opacity-0 scale-90" : "opacity-100 scale-100"
+                }`}
+              />
+              <FolderOpen
+                size={70}
+                strokeWidth={1.5}
+                className={`text-yellow-500 pastel:text-red-500 transition-all duration-300 absolute ${
+                  isMainOpen ? "opacity-100 scale-100" : "opacity-0 scale-110"
+                }`}
+              />
             </div>
-          </div>
+            <span className="font-bold text-sm tracking-wide">
+              {isMainOpen ? "Close Projects" : "Open Projects"}
+            </span>
+          </button>
         </div>
 
-        {/* --- SECTION: PAST PROJECTS --- */}
-        <div className="flex flex-col gap-4">
-          <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 px-1">
-            <CheckCircle2
-              size={14}
-              className="text-foreground pastel:text-green-500"
-            />{" "}
-            PAST PROJECTS
-          </div>
+        {/* =========================================
+            BRANCHING TREE & SUBFOLDERS
+            ========================================= */}
+        <div
+          className={`grid transition-all duration-500 ease-in-out w-full ${
+            isMainOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+          }`}
+        >
+          <div className="overflow-hidden w-full flex flex-col items-center px-4 pb-6">
+            
+            <div className={`w-[2px] h-10 bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-top transition-transform duration-150 ease-linear ${
+              animStep >= 1 ? "scale-y-100" : "scale-y-0"
+            }`}></div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Spaceshooter  */}
-            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <h2 className="text-lg font-bold">Spaceshooter</h2>
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2 bg-secondary rounded hover:text-primary transition-all hover:scale-110"
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full pt-4 md:pt-0">
+              
+              {/* --- SUBFOLDER 1: CURRENT --- */}
+              <div className="relative pt-0 md:pt-8">
+                <div className={`absolute top-0 right-0 w-1/2 h-[2px] bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-right transition-transform duration-150 ease-linear ${
+                  animStep >= 2 ? "scale-x-100" : "scale-x-0"
+                }`}></div>
+                <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-8 bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-top transition-transform duration-150 ease-linear ${
+                  animStep >= 3 ? "scale-y-100" : "scale-y-0"
+                }`}></div>
+                
+                <button
+                  onClick={() => toggleSubFolder("current")}
+                  className={`w-full flex flex-col items-center text-center p-6 transform transition-all duration-500 ease-in-out group bg-card border-2 rounded-2xl ${
+                    animStep < 4 
+                      ? "opacity-0 translate-y-4 scale-95 border-border/50" 
+                      : activeFolder === "current" 
+                        ? "opacity-100 translate-y-0 scale-[1.02] hover:scale-105 border-blue-500 shadow-lg shadow-blue-500/10" 
+                        : "opacity-100 translate-y-0 scale-100 border-border/50 hover:scale-[1.02] hover:bg-secondary/40 shadow-sm"
+                  }`}
                 >
-                  <Github size={18} />
-                </a>
+                  <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-blue-500/10 text-blue-500 group-hover:scale-110 transition-transform duration-300 mb-4">
+                    <Folder size={32} strokeWidth={1.5} className={`absolute transition-all duration-300 ${activeFolder === "current" ? "opacity-0 scale-90" : "opacity-100 scale-100"}`} />
+                    <FolderOpen size={32} strokeWidth={1.5} className={`absolute transition-all duration-300 ${activeFolder === "current" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`} />
+                  </div>
+                  <h2 className="text-base font-bold">Current Projects</h2>
+                  <p className="text-xs text-muted-foreground mt-1">1 project</p>
+                </button>
               </div>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                My very first personal project. A simple 2D arcade spaceshooter
-                game that taught me the fundamentals of Pygame and game loops.
-              </p>
-              <div className="flex flex-wrap gap-2 mt-auto">
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  Python
-                </span>
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  Pygame
-                </span>
+
+              {/* --- SUBFOLDER 2: PAST --- */}
+              <div className="relative pt-0 md:pt-8">
+                <div className={`absolute top-0 left-0 w-full h-[2px] bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-center transition-transform duration-150 ease-linear ${
+                  animStep >= 2 ? "scale-x-100" : "scale-x-0"
+                }`}></div>
+                <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-8 bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-top transition-transform duration-150 ease-linear ${
+                  animStep >= 3 ? "scale-y-100" : "scale-y-0"
+                }`}></div>
+                
+                <button
+                  onClick={() => toggleSubFolder("past")}
+                  className={`w-full flex flex-col items-center text-center p-6 transform transition-all duration-500 ease-in-out group bg-card border-2 rounded-2xl ${
+                    animStep < 4 
+                      ? "opacity-0 translate-y-4 scale-95 border-border/50" 
+                      : activeFolder === "past" 
+                        ? "opacity-100 translate-y-0 scale-[1.02] hover:scale-105 border-pink-500 shadow-lg shadow-pink-500/10" 
+                        : "opacity-100 translate-y-0 scale-100 border-border/50 hover:scale-[1.02] hover:bg-secondary/40 shadow-sm"
+                  }`}
+                >
+                  <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-pink-500/10 text-pink-500 group-hover:scale-110 transition-transform duration-300 mb-4">
+                    <Folder size={32} strokeWidth={1.5} className={`absolute transition-all duration-300 ${activeFolder === "past" ? "opacity-0 scale-90" : "opacity-100 scale-100"}`} />
+                    <FolderOpen size={32} strokeWidth={1.5} className={`absolute transition-all duration-300 ${activeFolder === "past" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`} />
+                  </div>
+                  <h2 className="text-base font-bold">Past Projects</h2>
+                  <p className="text-xs text-muted-foreground mt-1">1 project</p>
+                </button>
               </div>
+
+              {/* --- SUBFOLDER 3: FUTURE --- */}
+              <div className="relative pt-0 md:pt-8">
+                <div className={`absolute top-0 left-0 w-1/2 h-[2px] bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-left transition-transform duration-150 ease-linear ${
+                  animStep >= 2 ? "scale-x-100" : "scale-x-0"
+                }`}></div>
+                <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-8 bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-top transition-transform duration-150 ease-linear ${
+                  animStep >= 3 ? "scale-y-100" : "scale-y-0"
+                }`}></div>
+                
+                <button
+                  onClick={() => toggleSubFolder("future")}
+                  className={`w-full flex flex-col items-center text-center p-6 transform transition-all duration-500 ease-in-out group bg-card border-2 rounded-2xl ${
+                    animStep < 4 
+                      ? "opacity-0 translate-y-4 scale-95 border-border/50" 
+                      : activeFolder === "future" 
+                        ? "opacity-100 translate-y-0 scale-[1.02] hover:scale-105 border-green-500 shadow-lg shadow-green-500/10" 
+                        : "opacity-100 translate-y-0 scale-100 border-border/50 hover:scale-[1.02] hover:bg-secondary/40 shadow-sm"
+                  }`}
+                >
+                  <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-green-500/10 text-green-500 group-hover:scale-110 transition-transform duration-300 mb-4">
+                    <Folder size={32} strokeWidth={1.5} className={`absolute transition-all duration-300 ${activeFolder === "future" ? "opacity-0 scale-90" : "opacity-100 scale-100"}`} />
+                    <FolderOpen size={32} strokeWidth={1.5} className={`absolute transition-all duration-300 ${activeFolder === "future" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`} />
+                  </div>
+                  <h2 className="text-base font-bold">Future Projects</h2>
+                  <p className="text-xs text-muted-foreground mt-1">5 projects</p>
+                </button>
+              </div>
+
             </div>
           </div>
         </div>
 
-        {/* --- Project Ideas/Plans --- */}
-
-        <div className="flex flex-col gap-4">
-          <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 px-1">
-            <Lightbulb
-              size={14}
-              className="text-foreground pastel:text-yellow-500"
-            />{" "}
-            FUTURE IDEAS & PLANS
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Pokemon Game  */}
-            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <h2 className="text-lg font-bold">Pokemon Game Clone</h2>
+        {/* =========================================
+            CONNECTING BRANCH TO CONTENT 
+            ========================================= */}
+        <div className={`w-full transition-all duration-500 ease-in-out overflow-hidden hidden md:block ${
+          activeFolder && isMainOpen ? "h-24 opacity-100" : "h-0 opacity-0"
+        }`}>
+          <div className="relative w-full h-full px-4">
+            <div className="grid grid-cols-3 gap-6 w-full h-1/2">
+              <div className="flex justify-center">
+                <div className={`w-[2px] h-full bg-yellow-500/40 pastel:bg-red-500/40 transition-transform duration-150 ease-linear origin-top ${
+                  activeFolder === "current" ? "scale-y-100 delay-0" : "scale-y-0 delay-0"
+                }`}></div>
               </div>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                A 2D Pokemon Clone with with a short custom storyline and
-                classic Pokemon battle mechanics, probably will be the next
-                project I tackle.
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  Game
-                </span>
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  Python
-                </span>
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  Pygame
-                </span>
+              <div className="flex justify-center">
+                <div className={`w-[2px] h-full bg-yellow-500/40 pastel:bg-red-500/40 transition-transform duration-150 ease-linear origin-top ${
+                  activeFolder === "past" ? "scale-y-100 delay-0" : "scale-y-0 delay-0"
+                }`}></div>
+              </div>
+              <div className="flex justify-center">
+                <div className={`w-[2px] h-full bg-yellow-500/40 pastel:bg-red-500/40 transition-transform duration-150 ease-linear origin-top ${
+                  activeFolder === "future" ? "scale-y-100 delay-0" : "scale-y-0 delay-0"
+                }`}></div>
               </div>
             </div>
 
-            {/* Improved Anki   */}
-            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <h2 className="text-lg font-bold">Improved Anki Clone</h2>
-              </div>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                I love Anki, but even with plugins its has a very unintuitive
-                and outdated user interface which I would like to fix.
-              </p>
-              <div className="flex flex-wrap gap-2 mt-auto">
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  App
-                </span>
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  Python
-                </span>
+            <div className="absolute top-1/2 left-0 w-full h-[2px] px-4">
+              <div className="relative w-full h-full">
+                <div className={`absolute top-0 left-[16.66%] w-[33.33%] h-full bg-yellow-500/40 pastel:bg-red-500/40 transition-transform duration-150 ease-linear origin-left ${
+                  activeFolder === "current" ? "scale-x-100 delay-150" : "scale-x-0 delay-0"
+                }`}></div>
+                <div className={`absolute top-0 right-[16.66%] w-[33.33%] h-full bg-yellow-500/40 pastel:bg-red-500/40 transition-transform duration-150 ease-linear origin-right ${
+                  activeFolder === "future" ? "scale-x-100 delay-150" : "scale-x-0 delay-0"
+                }`}></div>
               </div>
             </div>
 
-            {/* Personal Organisation App  */}
-            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <h2 className="text-lg font-bold">Personal Organisation App</h2>
-              </div>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                A personal organisation app with features such as To-Do list,
-                calendar, notes organisation, etc
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  App
-                </span>
-              </div>
-            </div>
-
-            {/* Spotify Clone/Music Player */}
-            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <h2 className="text-lg font-bold">
-                  Spotify Clone / Music Player
-                </h2>
-              </div>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                A Spotify clone with more features such as song annotations,
-                frequency visualisers
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  App
-                </span>
-              </div>
-            </div>
-
-            {/* 3d FPS Game in Python  */}
-            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <h2 className="text-lg font-bold">FPS Game</h2>
-              </div>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                An FPS game with Ursina, a 3D game engine in Python
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  Game
-                </span>
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  Python
-                </span>
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  Ursina Engine
-                </span>
-              </div>
-            </div>
-
-            {/* Chess Engine  */}
-            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <h2 className="text-lg font-bold">Chess Engine</h2>
-              </div>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                A Chess Engine to display the best move to learn more about
-                algorithms
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  App
-                </span>
-              </div>
-            </div>
-
-            {/* Mini Operating System  */}
-            <div className="card-base flex flex-col gap-4 group transition-all duration-300">
-              <div className="flex justify-between items-start">
-                <h2 className="text-lg font-bold">Mini Operating System</h2>
-              </div>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                This seems very complex, so probably something in the far
-                future, but seems like an interesting way to learn about
-                operating systems
-              </p>
-
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-secondary rounded-full text-[10px] font-bold border border-border uppercase">
-                  OS
-                </span>
-              </div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[2px] h-1/2">
+               <div className={`w-full h-full bg-yellow-500/40 pastel:bg-red-500/40 transition-transform duration-150 ease-linear origin-top ${
+                 activeFolder === "current" || activeFolder === "future" ? "scale-y-100 delay-300" : 
+                 activeFolder === "past" ? "scale-y-100 delay-150" : "scale-y-0 delay-0"
+               }`}></div>
             </div>
           </div>
+        </div>
+
+        {/* =========================================
+            PROJECT CARDS CONTENT AREA
+            ========================================= */}
+        <div className="w-full mt-6 md:mt-0">
+          
+          {/* CURRENT PROJECTS */}
+          {activeFolder === "current" && (
+            <div className="animate-in fade-in slide-in-from-top-4 duration-500 delay-300 fill-mode-both flex flex-col gap-6 px-4">
+              <div className="card-base flex flex-col gap-4 group transition-all duration-300 relative overflow-hidden bg-card border-border/50">
+                <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                <div className="flex justify-between items-start relative z-10">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-secondary/50 rounded-lg border border-border">
+                      <Globe size={20} className="text-blue-500" />
+                    </div>
+                    <h3 className="text-xl font-bold">Personal Portfolio Website</h3>
+                  </div>
+                  <div className="flex gap-2">
+                    <a href="https://github.com/turtletiny/turtle-portfolio-website" target="_blank" rel="noopener noreferrer" className="p-2 bg-secondary/50 border border-border rounded hover:text-primary transition-all hover:scale-110"><Github size={18} /></a>
+                    <a href="https://turtletiny.vercel.app/" target="_blank" rel="noopener noreferrer" className="p-2 bg-secondary/50 border border-border rounded hover:text-primary transition-all hover:scale-110"><ExternalLink size={18} /></a>
+                  </div>
+                </div>
+                <div className="text-muted-foreground leading-relaxed text-sm relative z-10">
+                  <p>The website you are looking at right now! My first large personal project and first website using React.</p>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2 relative z-10">
+                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border">REACT</span>
+                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border">TYPESCRIPT</span>
+                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border">TAILWIND CSS</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* PAST PROJECTS */}
+          {activeFolder === "past" && (
+            <div className="animate-in fade-in slide-in-from-top-4 duration-500 delay-300 fill-mode-both flex flex-col gap-6 px-4">
+              <div className="card-base flex flex-col gap-4 group transition-all duration-300 relative overflow-hidden bg-card border-border/50">
+                <div className="absolute -top-24 -right-24 w-48 h-48 bg-pink-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                <div className="flex justify-between items-start relative z-10">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-secondary/50 rounded-lg border border-border">
+                      <CheckCircle2 size={20} className="text-pink-500" />
+                    </div>
+                    <h3 className="text-xl font-bold">Spaceshooter</h3>
+                  </div>
+                  <a href="#" target="_blank" rel="noopener noreferrer" className="p-2 bg-secondary/50 border border-border rounded hover:text-primary transition-all hover:scale-110"><Github size={18} /></a>
+                </div>
+                <p className="text-muted-foreground leading-relaxed text-sm relative z-10">My very first personal project. A simple 2D arcade spaceshooter game that taught me the fundamentals of Pygame and game loops.</p>
+                <div className="flex flex-wrap gap-2 mt-auto relative z-10">
+                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border uppercase">Python</span>
+                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border uppercase">Pygame</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* FUTURE PROJECTS */}
+          {activeFolder === "future" && (
+            <div className="animate-in fade-in slide-in-from-top-4 duration-500 delay-300 fill-mode-both grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
+              <div className="card-base flex flex-col gap-4 relative overflow-hidden bg-card border-border/50">
+                <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                <h3 className="text-lg font-bold relative z-10">Pokemon Game Clone</h3>
+                <p className="text-muted-foreground leading-relaxed text-sm relative z-10">A 2D Pokemon Clone with with a short custom storyline and classic Pokemon battle mechanics.</p>
+                <div className="flex flex-wrap gap-2 mt-auto relative z-10">
+                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border uppercase">Python</span>
+                </div>
+              </div>
+
+              <div className="card-base flex flex-col gap-4 relative overflow-hidden bg-card border-border/50">
+                <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                <h3 className="text-lg font-bold relative z-10">Improved Anki Clone</h3>
+                <p className="text-muted-foreground leading-relaxed text-sm relative z-10">A modern, intuitive redesign of Anki to fix its outdated user interface.</p>
+                <div className="flex flex-wrap gap-2 mt-auto relative z-10">
+                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border uppercase">App</span>
+                </div>
+              </div>
+            </div>
+          )}
+
         </div>
       </div>
     </div>

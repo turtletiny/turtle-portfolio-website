@@ -135,7 +135,6 @@ export default function ProfileCard() {
       </div>
 
       {/* Social Links */}
-
       <div className="flex gap-4 pt-6 border-t border-border">
         {socials.map((s) => (
           <a
@@ -144,7 +143,8 @@ export default function ProfileCard() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={s.label}
-            className={`flex items-center justify-center w-10 h-10 rounded-full border border-border text-muted-foreground transition-all duration-200 hover:bg-border hover:scale-110 ${s.hoverClass}`}
+            
+            className={`flex items-center justify-center w-10 h-10 rounded-lg border border-border text-muted-foreground transition-all duration-200 hover:bg-border hover:scale-110 ${s.hoverClass}`}
           >
             <s.icon size={s.iconSize} />
           </a>

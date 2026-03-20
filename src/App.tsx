@@ -50,7 +50,7 @@ const App = () => {
           
           <Particles
             key={isPastel ? "pastel-stars" : "dark-stars"}
-            particleColors={isPastel ? ["#ef4444", "#f97316"] : ["#ffffff"]}
+            particleColors={isPastel ? ["#ef4444"] : ["#ffffff"]}
             particleCount={700}
             particleSpread={10}
             speed={0.03}

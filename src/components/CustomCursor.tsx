@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 export default function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDark, setIsDark] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const updateCursor = (e: MouseEvent) => {
-      // 1. Update Position
+      // cursor positioning
+      setIsVisible(true);
       setPosition({ x: e.clientX, y: e.clientY });
 
       const hasDarkClass =
@@ -22,14 +24,31 @@ export default function CustomCursor() {
       setIsDark(isActuallyDark);
     };
 
+    const handleMouseLeave = () => {
+      setIsVisible(false);
+    };
+
+    const handleContextMenu = () => {
+      setIsVisible(false);
+    };
+
     window.addEventListener("mousemove", updateCursor);
-    return () => window.removeEventListener("mousemove", updateCursor);
+    document.addEventListener("mouseleave", handleMouseLeave);
+    window.addEventListener("contextmenu", handleContextMenu);
+
+    return () => {
+      window.removeEventListener("mousemove", updateCursor);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      window.removeEventListener("contextmenu", handleContextMenu);
+    };
   }, []);
 
   return (
     <div
       // hide cursor on mobile
-      className="hidden md:block fixed top-0 left-0 pointer-events-none z-[9999]"
+      className={`hidden md:block fixed top-0 left-0 pointer-events-none z-[9999] transition-opacity duration-150 ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
       style={{
         transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
       }}

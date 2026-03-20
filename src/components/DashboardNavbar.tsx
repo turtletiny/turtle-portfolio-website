@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const links = [
   { label: "Home", to: "/" },
@@ -7,20 +7,29 @@ const links = [
 ];
 
 export default function DashboardNavbar() {
+  const location = useLocation();
+
   return (
-    
     <nav className="w-full py-4 md:py-6 flex justify-center sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border mb-8 px-14 md:px-4">
-      
-      <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 md:gap-8">
-        {links.map((l) => (
-          <Link
-            key={l.to}
-            to={l.to}
-            className="text-muted-foreground text-sm font-medium hover:text-foreground transition-all duration-200 hover:scale-110"
-          >
-            {l.label}
-          </Link>
-        ))}
+      <div className="flex flex-wrap justify-center gap-x-1.5 gap-y-2 md:gap-4">
+        {links.map((l) => {
+          const isActive = location.pathname === l.to;
+
+          return (
+            <Link
+              key={l.to}
+              to={l.to}
+              
+              className={`text-sm font-medium px-4 py-1.5 rounded-lg border-2 transition-all duration-200 hover:scale-105 flex items-center justify-center h-9 ${
+                isActive
+                  ? "text-foreground border-foreground shadow-sm bg-secondary/20" 
+                  : "text-muted-foreground hover:text-foreground border-transparent hover:border-border/50" 
+              }`}
+            >
+              {l.label}
+            </Link>
+          );
+        })}
       </div>
     </nav>
   );

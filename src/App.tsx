@@ -47,9 +47,7 @@ const App = () => {
         
         {/* GLOBAL FIXED BACKGROUND */}
         <div className="fixed inset-0 z-0 pointer-events-none">
-          {/* THE FIX: Added the key prop.
-            When isPastel changes, React destroys the old canvas and builds a new one!
-          */}
+          
           <Particles
             key={isPastel ? "pastel-stars" : "dark-stars"}
             particleColors={isPastel ? ["#ef4444", "#f97316"] : ["#ffffff"]}

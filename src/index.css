@@ -195,7 +195,33 @@ html, body, #root {
   cursor: none !important;
 }
 
-/* Ensure interactive elements hide the default pointer */
+
 a, button, [role="button"], input {
   cursor: none !important;
+}
+
+
+
+/* TextType Component CSS */
+.text-type {
+  display: inline-block;
+  white-space: pre-wrap;
+}
+
+.text-type__cursor {
+  margin-left: 0.25rem;
+  display: inline-block;
+  opacity: 1;
+}
+
+.text-type__cursor--hidden {
+  display: none;
+}
+
+
+
+.particles-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }

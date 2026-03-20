@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import DashboardNavbar from "@/components/DashboardNavbar";
 import ThemeToggle from "@/components/ThemeToggle";
+import TextType from "@/components/TextType";
 import {
   Folder,
   FolderOpen,
@@ -46,7 +47,7 @@ export default function Projects() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-background text-foreground font-main relative z-10">
+    <div className="min-h-screen flex flex-col items-center text-foreground font-main relative z-10">
       <ThemeToggle />
       <DashboardNavbar />
 
@@ -79,9 +80,25 @@ export default function Projects() {
                 }`}
               />
             </div>
-            <span className="font-bold text-sm tracking-wide">
-              {isMainOpen ? "Close Projects" : "Open Projects"}
-            </span>
+            
+            {/* REACT BITS TEXT TYPE ANIMATION WITH CUSTOM SETTINGS */}
+            <div className="h-5 flex items-center justify-center">
+              <TextType
+                key={isMainOpen ? "close" : "open"}
+                text={[isMainOpen ? "Close Projects" : "Open Projects"]}
+                typingSpeed={75}
+                deletingSpeed={50}
+                pauseDuration={1500}
+                showCursor
+                cursorCharacter="|"
+                variableSpeedEnabled={false}
+                variableSpeedMin={60}
+                variableSpeedMax={120}
+                cursorBlinkDuration={0.5}
+                className="font-bold text-sm tracking-wide"
+              />
+            </div>
+
           </button>
         </div>
 
@@ -232,7 +249,7 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* connecting brnaches */}
+        {/* connecting branches */}
         <div
           className={`w-full transition-all duration-500 ease-in-out overflow-hidden hidden md:block ${
             activeFolder && isMainOpen ? "h-24 opacity-100" : "h-0 opacity-0"
@@ -398,7 +415,8 @@ export default function Projects() {
 
           {/* FUTURE PROJECTS */}
           {activeFolder === "future" && (
-            <div className="animate-in fade-in slide-in-from-top-4 duration-500 delay-300 fill-mode-both grid grid-cols-1 md:grid-cols-2 gap-6 px-4">
+            // Changed from grid layout to flex column
+            <div className="animate-in fade-in slide-in-from-top-4 duration-500 delay-300 fill-mode-both flex flex-col gap-6 px-4">
               <div className="card-base flex flex-col gap-4 relative overflow-hidden bg-card border-border/50">
                 <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
                 <h3 className="text-lg font-bold relative z-10">

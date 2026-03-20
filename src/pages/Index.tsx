@@ -10,7 +10,7 @@ import SpecsCard from "@/components/SpecsCard";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center bg-background text-foreground font-main">
+    <div className="min-h-screen flex flex-col items-center text-foreground font-main relative z-10">
       <ThemeToggle />
       <DashboardNavbar />
 

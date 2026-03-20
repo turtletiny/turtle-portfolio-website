@@ -56,7 +56,7 @@ export default function About() {
   const bullet = getRatingDisplay(stats?.chess_bullet);
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-background text-foreground font-main">
+    <div className="min-h-screen flex flex-col items-center text-foreground font-main relative z-10">
       <ThemeToggle />
       <DashboardNavbar />
 

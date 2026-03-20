@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,30 +15,76 @@ import Callback from "./pages/Callback";
 import NotFound from "./pages/NotFound";
 import GuestbookPage from "./pages/GuestBookPage";
 import CustomCursor from "@/components/CustomCursor";
+import Particles from "@/components/Particles";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <CustomCursor /> 
+const App = () => {
+  const [isPastel, setIsPastel] = useState(false);
+
+  useEffect(() => {
+    const checkTheme = () => {
+      // Checks both <html> and <body> tags to be 100% sure we catch the theme change
+      const isHtmlPastel = document.documentElement.classList.contains("pastel");
+      const isBodyPastel = document.body.classList.contains("pastel");
       
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/guestbook" element={<GuestbookPage />} />
-          <Route path="/callback" element={<Callback />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-      <Analytics />
-      <SpeedInsights />
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+      setIsPastel(isHtmlPastel || isBodyPastel);
+    };
+
+    checkTheme();
+
+    // Watch for class changes on both html and body
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        
+        {/* GLOBAL FIXED BACKGROUND */}
+        <div className="fixed inset-0 z-0 pointer-events-none">
+          {/* THE FIX: Added the key prop.
+            When isPastel changes, React destroys the old canvas and builds a new one!
+          */}
+          <Particles
+            key={isPastel ? "pastel-stars" : "dark-stars"}
+            particleColors={isPastel ? ["#ef4444", "#f97316"] : ["#ffffff"]}
+            particleCount={700}
+            particleSpread={10}
+            speed={0.03}
+            particleBaseSize={100}
+            moveParticlesOnHover={true}
+            alphaParticles={false}
+            disableRotation={false}
+          />
+        </div>
+
+        {/* WRAP CONTENT IN RELATIVE Z-10 */}
+        <div className="relative z-10 w-full min-h-screen">
+          <CustomCursor /> 
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/guestbook" element={<GuestbookPage />} />
+              <Route path="/callback" element={<Callback />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+          <Analytics />
+          <SpeedInsights />
+        </div>
+
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

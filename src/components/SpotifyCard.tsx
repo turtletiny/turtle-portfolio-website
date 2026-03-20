@@ -1,21 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import CardSectionIcon from "./CardSectionIcon";
 import { Music } from "lucide-react";
 
 export default function SpotifyCard() {
   const [song, setSong] = useState<any>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [duration, setDuration] = useState(180000);
 
-  // Progress Bar States
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(180000); // Default fallback
-
-  const formatTime = (ms: number) => {
-    const totalSeconds = Math.floor(ms / 1000);
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-  };
+  // Refs for smooth 60fps animation
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>();
+  const lastSyncTimeRef = useRef<number>(Date.now());
+  const baseProgressRef = useRef<number>(0);
 
   const fetchPlayingSong = async () => {
     try {
@@ -25,14 +21,20 @@ export default function SpotifyCard() {
       if (songData.is_playing && songData.item) {
         setIsPlaying(true);
         const newTitle = songData.item.name;
-
         const realDuration = songData.item.duration_ms || 180000;
 
         setSong((prevSong: any) => {
-          if (!prevSong || prevSong.title !== newTitle) {
-            const randomStart = Math.floor(Math.random() * 15000);
-            setProgress(randomStart);
+          const isNewSong = !prevSong || prevSong.title !== newTitle;
 
+          if (isNewSong) {
+            
+            baseProgressRef.current = songData.progress_ms !== undefined ? songData.progress_ms : Math.floor(Math.random() * 15000);
+            lastSyncTimeRef.current = Date.now();
+            setDuration(realDuration);
+          } else if (songData.progress_ms !== undefined) {
+            
+            baseProgressRef.current = songData.progress_ms;
+            lastSyncTimeRef.current = Date.now();
             setDuration(realDuration);
           }
 
@@ -44,10 +46,8 @@ export default function SpotifyCard() {
             title: newTitle,
             artist: artistString,
             albumArt: songData.item.album.images[0].url,
-
-            songUrl: `https://open.spotify.com/search/${encodeURIComponent(`${newTitle} ${artistString}`)}`,
-
-            albumUrl: `https://open.spotify.com/search/${encodeURIComponent(`${songData.item.album?.name || newTitle} ${artistString}`)}`,
+            songUrl: `https://open.spotify.com/search/$${encodeURIComponent(`${newTitle} ${artistString}`)}`,
+            albumUrl: `https://open.spotify.com/search/$${encodeURIComponent(`${songData.item.album?.name || newTitle} ${artistString}`)}`,
           };
         });
       } else {
@@ -59,28 +59,35 @@ export default function SpotifyCard() {
     }
   };
 
-  // Poll Last.fm API
+  // Poll Last.fm/Spotify API every 15s
   useEffect(() => {
     fetchPlayingSong();
     const interval = setInterval(fetchPlayingSong, 15000);
     return () => clearInterval(interval);
   }, []);
 
-  // Tick the progress bar up every second
+  
   useEffect(() => {
-    let ticker: NodeJS.Timeout;
-    if (isPlaying && song) {
-      ticker = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= duration) return duration;
-          return prev + 1000;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(ticker);
-  }, [isPlaying, song, duration]);
+    const updateProgress = () => {
+      if (isPlaying && duration > 0) {
+        const elapsed = Date.now() - lastSyncTimeRef.current;
+        const currentMs = Math.min(baseProgressRef.current + elapsed, duration);
 
-  const progressPercent = (progress / duration) * 100;
+        if (progressBarRef.current) {
+          progressBarRef.current.style.transform = `scaleX(${currentMs / duration})`;
+        }
+      }
+      rafRef.current = requestAnimationFrame(updateProgress);
+    };
+
+    if (isPlaying) {
+      rafRef.current = requestAnimationFrame(updateProgress);
+    }
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [isPlaying, duration]);
 
   return (
     <div className="card-base flex flex-col gap-4">
@@ -129,16 +136,13 @@ export default function SpotifyCard() {
             </div>
           </div>
 
-          {/* Progress Bar */}
+          {/* Progress Bar*/}
           <div className="flex flex-col gap-1.5 w-full px-1">
-            <div className="flex justify-between text-[10px] text-muted-foreground font-medium">
-              <span>{formatTime(progress)}</span>
-              <span>{formatTime(duration)}</span>
-            </div>
             <div className="w-full h-1.5 bg-background/50 rounded-full overflow-hidden border border-border/50">
               <div
-                className="h-full rounded-full transition-all duration-1000 ease-linear spotify-progress"
-                style={{ width: `${progressPercent}%` }}
+                ref={progressBarRef}
+                className="w-full h-full rounded-full origin-left spotify-progress"
+                style={{ transform: "scaleX(0)" }}
               />
             </div>
           </div>

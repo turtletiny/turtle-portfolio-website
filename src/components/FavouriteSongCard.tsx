@@ -1,89 +1,210 @@
-import { useState, useRef } from "react";
-import { Play, Pause, Star } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { Play, Pause, Star, SkipBack, SkipForward } from "lucide-react";
 import CardSectionIcon from "@/components/CardSectionIcon";
-import albumArt from "@/assets/icedancer.jpg";
+import icedancerArt from "@/assets/icedancer.jpg";
+
+const SONGS = [
+  {
+    title: "Ghosts",
+    artist: "Yung Lean, Bladee",
+    art: "/audio/ghosts.png",
+    src: "/audio/ghosts.mp3",
+    spotifyUrl: "https://open.spotify.com/track/7hwDYSEPIrr5GO9Loxuk7E?si=d370a74f4a204318",
+  },
+  {
+    title: "Special Place",
+    artist: "Bladee ♡",
+    art: icedancerArt,
+    src: "/audio/special-place.mp3",
+    spotifyUrl: "https://open.spotify.com/track/6yaYV3wo595zZWFwhC8s5T",
+  },
+];
 
 export default function FavouriteSongCard() {
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef<number>();
+
+  const currentSong = SONGS[currentIndex];
+
+  // 60FPS animation loop for the progress bar
+  const updateProgress = () => {
+    if (audioRef.current && duration > 0) {
+      const current = audioRef.current.currentTime;
+      
+      // 1. Smooth 60fps direct DOM update for the progress bar visual
+      if (progressBarRef.current) {
+        progressBarRef.current.style.transform = `scaleX(${current / duration})`;
+      }
+      
+      // 2. 1fps React state update to keep the component in sync when paused
+      setCurrentTime((prev) => {
+        if (Math.floor(prev) !== Math.floor(current)) {
+          return current;
+        }
+        return prev;
+      });
+    }
+    rafRef.current = requestAnimationFrame(updateProgress);
+  };
+
+  useEffect(() => {
+    if (playing) {
+      rafRef.current = requestAnimationFrame(updateProgress);
+      audioRef.current?.play().catch(() => setPlaying(false));
+    } else {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    }
+    
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [playing, duration]);
 
   const toggle = () => {
     if (!audioRef.current) return;
     if (playing) {
       audioRef.current.pause();
+      setPlaying(false);
     } else {
       audioRef.current.volume = 0.5;
-      audioRef.current.play();
+      setPlaying(true);
     }
-    setPlaying(!playing);
+  };
+
+  const nextSong = () => {
+    setCurrentIndex((prev) => (prev + 1) % SONGS.length);
+    setPlaying(false);
+    setCurrentTime(0);
+    if (progressBarRef.current) progressBarRef.current.style.transform = `scaleX(0)`;
+  };
+
+  const prevSong = () => {
+    setCurrentIndex((prev) => (prev - 1 + SONGS.length) % SONGS.length);
+    setPlaying(false);
+    setCurrentTime(0);
+    if (progressBarRef.current) progressBarRef.current.style.transform = `scaleX(0)`;
+  };
+
+  const handleLoadedMetadata = () => {
+    if (audioRef.current) {
+      setDuration(audioRef.current.duration);
+    }
   };
 
   return (
-    <div className="card-base flex flex-col">
+    <div className="card-base flex flex-col w-full h-full">
       <div className="text-xs font-bold tracking-wider text-muted-foreground mb-6 flex items-center gap-2">
-        <CardSectionIcon darkIcon={Star} pastelEmoji="⭐" /> CURRENT FAVOURITE
+        <CardSectionIcon darkIcon={Star} pastelEmoji="⭐" /> CURRENT FAVOURITES
       </div>
 
-      <div className="flex items-center gap-6 flex-grow">
+      <div className="flex items-center gap-6 flex-grow min-w-0">
         {/* Album Art */}
         <a
-          href="https://open.spotify.com/album/0cT1SQDE7wSh1eUJkGFXse"
+          href={currentSong.spotifyUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="w-[110px] h-[110px] rounded-xl flex-shrink-0 border border-border shadow-lg overflow-hidden hover:scale-105 transition-transform"
         >
           <img
-            src={albumArt}
-            alt="Icedancer"
+            src={currentSong.art}
+            alt={currentSong.title}
             className="w-full h-full object-cover"
           />
         </a>
 
-        <div className="flex items-center justify-between w-full">
-          <div className="flex flex-col justify-center">
-            <a
-              href="https://open.spotify.com/track/6yaYV3wo595zZWFwhC8s5T"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold text-xl text-foreground hover:text-primary transition-colors cursor-pointer"
-            >
-              Special Place
-            </a>
-            <p className="text-muted-foreground text-sm">Bladee ♡</p>
+        {/* Right Side: Info, Controls, and Progress Bar */}
+        <div className="flex flex-col justify-center w-full min-w-0 gap-4">
+          
+          {/* Top row: Text & Buttons */}
+          <div className="flex items-center justify-between w-full min-w-0">
+            {/* Song Info (Left) */}
+            <div className="flex flex-col justify-center flex-1 min-w-0 pr-4">
+              <a
+                href={currentSong.spotifyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-xl leading-tight text-foreground hover:text-primary transition-colors cursor-pointer break-words"
+              >
+                {currentSong.title}
+              </a>
+              <p className="text-muted-foreground text-sm mt-1 break-words">
+                {currentSong.artist}
+              </p>
+            </div>
+
+            {/* Controls (Right) */}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <button
+                onClick={prevSong}
+                className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                title="Previous"
+              >
+                <SkipBack size={16} />
+              </button>
+
+              <button
+                onClick={toggle}
+                className="w-14 h-14 rounded-full border-2 flex items-center justify-center transition-all duration-200 hover:scale-110 flex-shrink-0"
+                style={{
+                  backgroundColor: "hsl(var(--spotify-btn-bg))",
+                  borderColor: "hsl(var(--spotify-btn-border))",
+                  color: "hsl(var(--spotify-btn-text))",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = "hsl(var(--spotify-btn-hover-bg))";
+                  e.currentTarget.style.boxShadow = "var(--spotify-bar-glow)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = "hsl(var(--spotify-btn-bg))";
+                  e.currentTarget.style.boxShadow = "none";
+                }}
+              >
+                {playing ? <Pause size={24} /> : <Play size={24} className="ml-1" />}
+              </button>
+
+              <button
+                onClick={nextSong}
+                className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                title="Next"
+              >
+                <SkipForward size={16} />
+              </button>
+            </div>
           </div>
 
-          <button
-            onClick={toggle}
-            className="w-14 h-14 rounded-full border-2 flex items-center justify-center transition-all duration-200 hover:scale-110 flex-shrink-0 mr-6"
-            style={{
-              backgroundColor: "hsl(var(--spotify-btn-bg))",
-              borderColor: "hsl(var(--spotify-btn-border))",
-              color: "hsl(var(--spotify-btn-text))",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor =
-                "hsl(var(--spotify-btn-hover-bg))";
-              e.currentTarget.style.boxShadow = "var(--spotify-bar-glow)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor =
-                "hsl(var(--spotify-btn-bg))";
-              e.currentTarget.style.boxShadow = "none";
-            }}
-          >
-            {playing ? (
-              <Pause size={24} />
-            ) : (
-              <Play size={24} className="ml-1" />
-            )}
-          </button>
+          {/* Progress Bar Row */}
+          <div className="flex flex-col gap-1.5 w-full px-1">
+            {/* Themed Smooth Animated Progress Bar */}
+            <div className="w-full h-1.5 bg-background/50 rounded-full overflow-hidden border border-border/50">
+              <div
+                ref={progressBarRef}
+                className="w-full h-full rounded-full origin-left spotify-progress"
+                style={{ 
+                  transform: `scaleX(${duration ? currentTime / duration : 0})` 
+                }}
+              />
+            </div>
+          </div>
+          
         </div>
       </div>
 
       <audio
         ref={audioRef}
-        src="/audio/special-place.mp3"
-        onEnded={() => setPlaying(false)}
+        key={currentSong.src}
+        src={currentSong.src}
+        onLoadedMetadata={handleLoadedMetadata}
+        onEnded={() => {
+          setPlaying(false);
+          setCurrentTime(0);
+          if (progressBarRef.current) progressBarRef.current.style.transform = `scaleX(0)`;
+        }}
       />
     </div>
   );

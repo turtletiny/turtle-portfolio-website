@@ -239,7 +239,7 @@ export default function Projects() {
                       className={`absolute transition-all duration-300 ${activeFolder === "future" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`}
                     />
                   </div>
-                  <h2 className="text-base font-bold">Future Projects</h2>
+                  <h2 className="text-base font-bold">Future Projects Ideas</h2>
                   <p className="text-xs text-muted-foreground mt-1">
                     5 projects
                   </p>

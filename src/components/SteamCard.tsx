@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { Gamepad2, Clock } from "lucide-react";
-import CardSectionIcon from "@/components/CardSectionIcon";
 
 interface RecentlyPlayedGame {
   appid: number;
@@ -18,7 +16,22 @@ interface SteamData {
   gameid?: string;
   recentGames?: RecentlyPlayedGame[];
 }
-//s
+
+// Your custom SVG integrated as a React component!
+const SteamIcon = ({ size = 16, className = "" }: { size?: number, className?: string }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    fill="currentColor" 
+    className={`bi bi-steam ${className}`} 
+    viewBox="0 0 16 16"
+  >  
+    <path d="M.329 10.333A8.01 8.01 0 0 0 7.99 16C12.414 16 16 12.418 16 8s-3.586-8-8.009-8A8.006 8.006 0 0 0 0 7.468l.003.006 4.304 1.769A2.2 2.2 0 0 1 5.62 8.88l1.96-2.844-.001-.04a3.046 3.046 0 0 1 3.042-3.043 3.046 3.046 0 0 1 3.042 3.043 3.047 3.047 0 0 1-3.111 3.044l-2.804 2a2.223 2.223 0 0 1-3.075 2.11 2.22 2.22 0 0 1-1.312-1.568L.33 10.333Z"/>  
+    <path d="M4.868 12.683a1.715 1.715 0 0 0 1.318-3.165 1.7 1.7 0 0 0-1.263-.02l1.023.424a1.261 1.261 0 1 1-.97 2.33l-.99-.41a1.7 1.7 0 0 0 .882.84Zm3.726-6.687a2.03 2.03 0 0 0 2.027 2.029 2.03 2.03 0 0 0 2.027-2.029 2.03 2.03 0 0 0-2.027-2.027 2.03 2.03 0 0 0-2.027 2.027m2.03-1.527a1.524 1.524 0 1 1-.002 3.048 1.524 1.524 0 0 1 .002-3.048"/>
+  </svg>
+);
+
 export default function SteamCard() {
   const [steamData, setSteamData] = useState<SteamData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -63,21 +76,24 @@ export default function SteamCard() {
 
   return (
     <div className="card-base flex flex-col gap-4">
+      {/* Header section with your SVG */}
       <div className="text-xs font-bold tracking-wider text-muted-foreground mb-1 flex items-center gap-2">
-        <CardSectionIcon darkIcon={Gamepad2} pastelEmoji="🎮" /> STEAM ACTIVITY
+        <SteamIcon size={16} /> STEAM ACTIVITY
       </div>
 
       {loading ? (
         <div className="flex items-center justify-center py-8 animate-pulse">
           <div className="flex flex-col items-center gap-3 text-muted-foreground">
-            <Gamepad2 size={32} className="opacity-40" />
+            {/* Loading state with your SVG scaled up */}
+            <SteamIcon size={32} className="opacity-40" />
             <p className="text-sm">Connecting to Steam...</p>
           </div>
         </div>
       ) : !steamData ? (
         <div className="flex items-center justify-center py-8">
           <div className="flex flex-col items-center gap-3 text-muted-foreground">
-            <Gamepad2 size={32} className="opacity-40" />
+            {/* Error state with your SVG scaled up */}
+            <SteamIcon size={32} className="opacity-40" />
             <p className="text-sm">Steam data unavailable</p>
           </div>
         </div>
@@ -148,11 +164,11 @@ export default function SteamCard() {
             )}
           </div>
 
-          {/*  Recently Played */}
+          {/* Recently Played */}
           {steamData.recentGames && steamData.recentGames.length > 0 && (
             <div className="mt-5 pt-4 border-t border-border flex flex-col gap-3">
               <div className="text-[10px] font-bold tracking-wider text-muted-foreground flex items-center gap-1.5">
-                <Clock size={12} /> RECENTLY PLAYED
+                RECENTLY PLAYED
               </div>
               <div className="flex flex-col gap-2">
                 {steamData.recentGames.slice(0, 2).map((game) => (

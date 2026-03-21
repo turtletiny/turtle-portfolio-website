@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Play, Pause, Star, SkipBack, SkipForward } from "lucide-react";
-import CardSectionIcon from "@/components/CardSectionIcon";
+import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
 import icedancerArt from "@/assets/icedancer.jpg";
 
 const SONGS = [
@@ -99,8 +98,9 @@ export default function FavouriteSongCard() {
 
   return (
     <div className="card-base flex flex-col w-full h-full">
-      <div className="text-xs font-bold tracking-wider text-muted-foreground mb-6 flex items-center gap-2">
-        <CardSectionIcon darkIcon={Star} pastelEmoji="⭐" /> CURRENT FAVOURITES
+      {/* CHANGED: Removed the icon completely and cleaned up the classes */}
+      <div className="text-xs font-bold tracking-wider text-muted-foreground mb-6">
+        CURRENT FAVOURITES
       </div>
 
       <div className="flex items-center gap-6 flex-grow min-w-0">
@@ -178,9 +178,9 @@ export default function FavouriteSongCard() {
             </div>
           </div>
 
-          {/* Progress Bar Row */}
+          {/* Progress Bar  */}
           <div className="flex flex-col gap-1.5 w-full px-1">
-            {/* Themed Smooth Animated Progress Bar */}
+            
             <div className="w-full h-1.5 bg-background/50 rounded-full overflow-hidden border border-border/50">
               <div
                 ref={progressBarRef}

@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import {
   Monitor,
   Cpu,
@@ -8,13 +7,8 @@ import {
   Headphones,
   Square,
 } from "lucide-react";
-
 import GpuIcon from "@/components/icons/GpuIcon";
-
 import KeyboardIcon from "@/components/icons/KeyboardIcon";
-
-import CardSectionIcon from "@/components/CardSectionIcon";
-
 import EarphonesIcon from "@/components/icons/EarphonesIcon";
 
 // --- Custom Icons ---
@@ -33,23 +27,16 @@ const EarbudsIcon = ({ size = 18, className = "" }) => (
 
 const pcSpecs = [
   { icon: Cpu, label: "CPU", value: "Ryzen 5 5600" },
-
   { icon: GpuIcon, label: "GPU", value: "RX 6600" },
-
   { icon: MemoryStick, label: "RAM", value: "16GB 3600MHz CL18" },
-
   { icon: Monitor, label: "Monitor", value: "1440p 240Hz OLED" },
 ];
 
 const peripherals = [
   { icon: KeyboardIcon, label: "Keyboard", value: "Drunkdeer G65" },
-
   { icon: Mouse, label: "Mouse", value: "VXE Dragonfly R1 SE+" },
-
   { icon: Square, label: "Mousepad", value: "Aqua Control II" },
-
   { icon: Headphones, label: "Headphones", value: "HyperX Cloud II" },
-
   { icon: EarphonesIcon, label: "IEMs", value: "Aoshida E20" },
 ];
 
@@ -63,7 +50,17 @@ export default function SpecsCard() {
   return (
     <div className="card-base flex flex-col">
       <div className="text-xs font-bold tracking-wider text-muted-foreground mb-4 flex items-center gap-2">
-        <CardSectionIcon darkIcon={Monitor} pastelEmoji="🖥️" /> SPECS
+        {/* Dark Mode Icon */}
+        <Monitor size={16} className="block [.pastel_&]:hidden" />
+        
+        {/* Pastel Mode Custom Image (Size increased to w-5 h-5) */}
+        <img 
+          src="pcicon.png" 
+          alt="Specs" 
+          className="hidden [.pastel_&]:block w-5 h-5 object-contain" 
+        />
+        
+        SPECS
       </div>
 
       <div className="flex gap-2 bg-secondary/50 p-1 rounded-lg mb-4">

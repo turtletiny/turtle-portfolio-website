@@ -1,7 +1,6 @@
 import { useLocalTime } from "@/hooks/useLocalTime";
 import { useWeather, getWeatherIcon } from "@/hooks/useWeather";
 import { Clock } from "lucide-react";
-import CardSectionIcon from "@/components/CardSectionIcon";
 
 export default function TimeWeatherCard() {
   const time = useLocalTime();
@@ -11,7 +10,17 @@ export default function TimeWeatherCard() {
   return (
     <div className="card-base flex flex-col">
       <div className="text-xs font-bold tracking-wider text-muted-foreground mb-6 flex items-center gap-2">
-        <CardSectionIcon darkIcon={Clock} pastelEmoji="🕐" /> LOCAL TIME
+        {/* Dark Mode Icon */}
+        <Clock size={16} className="block [.pastel_&]:hidden" />
+        
+        {/* Pastel Mode Custom Image (Size increased to w-5 h-5) */}
+        <img 
+          src="pixelclock.png" 
+          alt="Time" 
+          className="hidden [.pastel_&]:block w-5 h-5 object-contain" 
+        />
+        
+        LOCAL TIME
       </div>
 
       <div className="flex items-center justify-between flex-grow pb-3">

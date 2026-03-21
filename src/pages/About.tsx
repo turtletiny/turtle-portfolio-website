@@ -1,6 +1,5 @@
 import DashboardNavbar from "@/components/DashboardNavbar";
 import ThemeToggle from "@/components/ThemeToggle";
-import CardSectionIcon from "@/components/CardSectionIcon";
 import {
   Gamepad2,
   ScrollText,
@@ -64,7 +63,13 @@ export default function About() {
         {/* Coding Card */}
         <div className="card-base flex flex-col gap-4">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
-            <CardSectionIcon darkIcon={Code2} pastelEmoji="💻" /> STACK
+            <Code2 size={16} className="block [.pastel_&]:hidden" />
+            <img 
+              src="/path/to/your/pastel-code.png" 
+              alt="Stack" 
+              className="hidden [.pastel_&]:block w-5 h-5 object-contain" 
+            />
+            STACK
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
@@ -126,7 +131,14 @@ export default function About() {
         {/* Games Card */}
         <div className="card-base flex flex-col gap-4">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
-            <CardSectionIcon darkIcon={Gamepad2} pastelEmoji="🎮" /> GAMES
+            <Gamepad2 size={16} className="block [.pastel_&]:hidden" />
+            <img 
+              src="pixelcontroller.png" 
+              alt="Games" 
+              // CHANGED: Increased from w-5 h-5 to w-7 h-7
+              className="hidden [.pastel_&]:block w-7 h-7 object-contain" 
+            />
+            GAMES
           </div>
 
           {/* Featured Game */}
@@ -168,7 +180,6 @@ export default function About() {
           {/* 4 Games Grid */}
           <div className="flex flex-col gap-2 mt-2">
             <h3 className="text-sm font-medium text-muted-foreground mb-1">
-              {" "}
               Games I Like
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -220,8 +231,13 @@ export default function About() {
         {/* Listening Stats Card */}
         <div className="card-base flex flex-col gap-6">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
-            <CardSectionIcon darkIcon={Headphones} pastelEmoji="🎧" /> LISTENING
-            STATS
+            <Headphones size={16} className="block [.pastel_&]:hidden" />
+            <img 
+              src="pixelheadphones.png" 
+              alt="Listening Stats" 
+              className="hidden [.pastel_&]:block w-5 h-5 object-contain" 
+            />
+            LISTENING STATS
           </div>
 
           {lastfmLoading ? (
@@ -239,7 +255,6 @@ export default function About() {
                   Recently Played
                 </h3>
                 <div className="flex flex-col gap-3">
-                  {/* Updated to show 5 songs */}
                   {lastfmData?.recentTracks.slice(0, 5).map((track, i) => (
                     <a
                       key={i}
@@ -317,7 +332,13 @@ export default function About() {
         {/* Chess Card */}
         <div className="card-base flex flex-col gap-6">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
-            <CardSectionIcon darkIcon={ScrollText} pastelEmoji="♟️" /> CHESS
+            <ScrollText size={16} className="block [.pastel_&]:hidden" />
+            <img 
+              src="pixelchess.png" 
+              alt="Chess" 
+              className="hidden [.pastel_&]:block w-5 h-5 object-contain" 
+            />
+            CHESS
           </div>
 
           {/* Chess.com */}
@@ -550,7 +571,14 @@ export default function About() {
         <div className="card-base flex flex-col gap-4">
           <div className="flex items-center justify-between mb-2">
             <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
-              <CardSectionIcon darkIcon={Tv} pastelEmoji="📺" /> ANIME
+              <Tv size={16} className="block [.pastel_&]:hidden" />
+              <img 
+                src="pixelgojo.png" 
+                alt="Anime" 
+                // CHANGED: Increased from w-5 h-5 to w-7 h-7
+                className="hidden [.pastel_&]:block w-7 h-7 object-contain" 
+              />
+              ANIME
             </div>
 
             {/* Clickable AniList Image + Text with Smooth Grow */}
@@ -647,7 +675,14 @@ export default function About() {
         {/* Reading Card */}
         <div className="card-base flex flex-col gap-4">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
-            <CardSectionIcon darkIcon={BookOpen} pastelEmoji="📚" /> READING
+            <BookOpen size={16} className="block [.pastel_&]:hidden" />
+            <img 
+              src="pixelbook.png" 
+              alt="Reading" 
+              // CHANGED: Increased from w-5 h-5 to w-7 h-7
+              className="hidden [.pastel_&]:block w-7 h-7 object-contain" 
+            />
+            READING
           </div>
 
           <div className="flex flex-col gap-2">
@@ -742,26 +777,29 @@ export default function About() {
         {/* Hobbies Card */}
         <div className="card-base flex flex-col gap-4">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
-            <CardSectionIcon darkIcon={Palette} pastelEmoji="🎨" /> FUTURE
-            HOBBIES
+            <Palette size={16} className="block [.pastel_&]:hidden" />
+            <img 
+              src="mario.png" 
+              alt="Hobbies" 
+              className="hidden [.pastel_&]:block w-5 h-5 object-contain" 
+            />
+            FUTURE HOBBIES
           </div>
           <p className="text-muted-foreground mb-4">
             Things I would like to get into eventually:{" "}
           </p>
           <div className="flex flex-wrap gap-3">
-            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium ">
-              ✏️ Drawing
+            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium">
+              Drawing
             </div>
-
-            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium ">
-              📽️Animation
+            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium">
+              Animation
             </div>
-            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium ">
-              🧊Blender
+            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium">
+              Blender
             </div>
-            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium ">
-              💿 Collecting... something, idk yet... probably plushies since I
-              have alot already
+            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium">
+              Collecting... something, idk yet... probably plushies since I have a lot already
             </div>
           </div>
         </div>

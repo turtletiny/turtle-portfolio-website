@@ -1,6 +1,18 @@
 import { useEffect, useState, useRef } from "react";
-import CardSectionIcon from "./CardSectionIcon";
-import { Music } from "lucide-react";
+
+// 1. Added a clean SVG component for the Spotify Logo
+const SpotifyIcon = ({ size = 24, className = "" }: { size?: number, className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 496 512"
+    width={size}
+    height={size}
+    fill="currentColor"
+    className={className}
+  >
+    <path d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8zm100.7 364.9c-4.2 0-6.8-1.3-10.7-3.6-62.4-37.6-135-39.2-206.7-24.5-3.9 1-9 2.6-11.9 2.6-9.7 0-15.8-7.7-15.8-15.8 0-10.3 6.1-15.2 13.6-16.8 81.9-18.1 165.6-16.5 237 26.2 6.1 3.9 9.7 7.4 9.7 16.5s-7.1 15.4-15.2 15.4zm26.9-65.6c-5.2 0-8.7-2.3-12.3-4.2-72.5-47-164.2-55.6-241.1-34.8-4.2 1.3-9.1 2.9-12.6 2.9-12.3 0-20.1-9.4-20.1-20.1 0-11.3 6.1-17.8 15.8-20.4 89.6-24.3 192.5-13.6 276.5 40.8 5.8 3.9 9.4 8.7 9.4 16.5 0 12.3-10.4 19.3-15.6 19.3zm32.7-72.6c-7.1 0-11-2.9-15.2-5.5-84.4-55.3-206.4-66.3-289.4-42.4-4.5 1.3-9.4 2.9-13.9 2.9-14.2 0-23.3-10.7-23.3-23.3 0-12.6 7.1-20.1 17.5-23.3 97.4-28.1 234.3-15.5 330.6 47.9 6.5 4.5 11 10.4 11 19.4.1 14.6-11.3 24.3-17.3 24.3z"/>
+  </svg>
+);
 
 export default function SpotifyCard() {
   const [song, setSong] = useState<any>(null);
@@ -46,8 +58,8 @@ export default function SpotifyCard() {
             title: newTitle,
             artist: artistString,
             albumArt: songData.item.album.images[0].url,
-            songUrl: `https://open.spotify.com/search/$${encodeURIComponent(`${newTitle} ${artistString}`)}`,
-            albumUrl: `https://open.spotify.com/search/$${encodeURIComponent(`${songData.item.album?.name || newTitle} ${artistString}`)}`,
+            songUrl: `https://open.spotify.com/search/${encodeURIComponent(`${newTitle} ${artistString}`)}`,
+            albumUrl: `https://open.spotify.com/search/${encodeURIComponent(`${songData.item.album?.name || newTitle} ${artistString}`)}`,
           };
         });
       } else {
@@ -93,7 +105,14 @@ export default function SpotifyCard() {
     <div className="card-base flex flex-col gap-4">
       <div className="flex items-center justify-between mb-2">
         <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
-          <CardSectionIcon darkIcon={Music} pastelEmoji="🎵" /> NOW PLAYING
+          {/* 2. Theme-swapping icons for the header */}
+          <SpotifyIcon size={16} className="block [.pastel_&]:hidden" />
+          <img 
+            src="pixelmusic.png" 
+            alt="Now Playing" 
+            className="hidden [.pastel_&]:block w-4 h-4 object-contain" 
+          />
+          NOW PLAYING
         </div>
 
         {isPlaying && (
@@ -150,7 +169,13 @@ export default function SpotifyCard() {
       ) : (
         <div className="flex items-center gap-4 p-4 bg-secondary/30 rounded-lg border border-border border-dashed">
           <div className="w-12 h-12 rounded-lg bg-card flex items-center justify-center text-muted-foreground shadow-inner">
-            <Music size={20} />
+            {/* 3. Theme-swapping icons for the empty state */}
+            <SpotifyIcon size={20} className="block [.pastel_&]:hidden" />
+            <img 
+              src="pixelmusic.png" 
+              alt="Not Playing" 
+              className="hidden [.pastel_&]:block w-5 h-5 object-contain opacity-70" 
+            />
           </div>
           <div className="flex flex-col">
             <h3 className="font-medium text-muted-foreground">

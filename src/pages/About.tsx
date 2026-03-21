@@ -63,12 +63,7 @@ export default function About() {
         {/* Coding Card */}
         <div className="card-base flex flex-col gap-4">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
-            <Code2 size={16} className="block [.pastel_&]:hidden" />
-            <img 
-              src="/path/to/your/pastel-code.png" 
-              alt="Stack" 
-              className="hidden [.pastel_&]:block w-5 h-5 object-contain" 
-            />
+            <Code2 size={16} />
             STACK
           </div>
 
@@ -135,8 +130,7 @@ export default function About() {
             <img 
               src="pixelcontroller.png" 
               alt="Games" 
-              // CHANGED: Increased from w-5 h-5 to w-7 h-7
-              className="hidden [.pastel_&]:block w-7 h-7 object-contain" 
+              className="hidden [.pastel_&]:block w-6 h-6 object-contain" 
             />
             GAMES
           </div>
@@ -332,11 +326,15 @@ export default function About() {
         {/* Chess Card */}
         <div className="card-base flex flex-col gap-6">
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
-            <ScrollText size={16} className="block [.pastel_&]:hidden" />
-            <img 
-              src="pixelchess.png" 
-              alt="Chess" 
-              className="hidden [.pastel_&]:block w-5 h-5 object-contain" 
+            <img
+              src="/chess-dark.svg"
+              alt="Chess"
+              className="block [.pastel_&]:hidden w-4 h-4 object-contain"
+            />
+            <img
+              src="pixelchess.png"
+              alt="Chess"
+              className="hidden [.pastel_&]:block w-5 h-5 object-contain"
             />
             CHESS
           </div>
@@ -575,13 +573,12 @@ export default function About() {
               <img 
                 src="pixelgojo.png" 
                 alt="Anime" 
-                // CHANGED: Increased from w-5 h-5 to w-7 h-7
-                className="hidden [.pastel_&]:block w-7 h-7 object-contain" 
+                className="hidden [.pastel_&]:block w-8 h-8 object-contain" 
               />
               ANIME
             </div>
 
-            {/* Clickable AniList Image + Text with Smooth Grow */}
+            {/* Anilist Link*/}
             <a
               href="https://anilist.co/user/turtletiny/"
               target="_blank"

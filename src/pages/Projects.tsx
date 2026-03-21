@@ -81,7 +81,7 @@ export default function Projects() {
               />
             </div>
             
-            {/* REACT BITS TEXT TYPE ANIMATION WITH CUSTOM SETTINGS */}
+            {/* REACT BITS TEXT TYPE ANIMATION  */}
             <div className="h-5 flex items-center justify-center">
               <TextType
                 key={isMainOpen ? "close" : "open"}

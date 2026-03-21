@@ -345,7 +345,7 @@ export default function Projects() {
                       <Github size={18} />
                     </a>
                     <a
-                      href="https://turtletiny.vercel.app/"
+                      href="https://turtletiny.lol/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="p-2 bg-secondary/50 border border-border rounded hover:text-primary transition-all hover:scale-110"

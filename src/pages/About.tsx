@@ -676,7 +676,6 @@ export default function About() {
             <img 
               src="pixelbook.png" 
               alt="Reading" 
-              // CHANGED: Increased from w-5 h-5 to w-7 h-7
               className="hidden [.pastel_&]:block w-7 h-7 object-contain" 
             />
             READING

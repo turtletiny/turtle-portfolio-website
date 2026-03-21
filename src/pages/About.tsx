@@ -213,7 +213,7 @@ export default function About() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <span className="text-sm font-medium truncate text-center group-hover:text-primary transition-colors">
+                  <span className="text-sm font-medium truncate text-center transition-colors">
                     {game.title}
                   </span>
                 </a>
@@ -265,7 +265,7 @@ export default function About() {
                         />
                       </div>
                       <div className="flex flex-col justify-center overflow-hidden w-full">
-                        <span className="font-bold text-sm truncate group-hover:text-primary transition-colors">
+                        <span className="font-bold text-sm truncate transition-colors">
                           {track.name}
                         </span>
                         <span className="text-xs text-muted-foreground truncate">
@@ -658,7 +658,7 @@ export default function About() {
                     />
                   </div>
                   <span
-                    className="text-sm font-medium truncate text-center group-hover:text-primary transition-colors"
+                    className="text-sm font-medium truncate text-center transition-colors"
                     title={anime.title}
                   >
                     {anime.title}
@@ -701,7 +701,7 @@ export default function About() {
                 />
               </div>
               <div className="flex flex-col justify-center h-24">
-                <h3 className="font-bold text-lg group-hover:text-primary transition-colors">
+                <h3 className="font-bold text-lg transition-colors">
                   Frankenstein
                 </h3>
                 <p className="text-sm text-muted-foreground">by Mary Shelley</p>
@@ -756,7 +756,7 @@ export default function About() {
                   </div>
                   <div className="flex flex-col text-center px-1">
                     <span
-                      className="text-sm font-medium line-clamp-2 leading-tight group-hover:text-primary transition-colors"
+                      className="text-sm font-medium line-clamp-2 leading-tight transition-colors"
                       title={book.title}
                     >
                       {book.title}

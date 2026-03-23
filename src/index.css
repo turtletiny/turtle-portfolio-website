@@ -163,6 +163,27 @@
   filter: drop-shadow(0 0 1px hsl(var(--foreground) / 0.45));
 }
 
+/* Instagram */
+.group\/ig:hover svg {
+  color: #ec4899;
+}
+
+.pastel .group\/ig:hover svg {
+  color: #c026d3;
+}
+
+/* GitHub */
+.group\/gh:hover svg {
+  color: #ffffff;
+  filter: drop-shadow(0 0 2px hsl(0 0% 100% / 0.75))
+    drop-shadow(0 0 5px hsl(0 0% 100% / 0.4));
+}
+
+.pastel .group\/gh:hover svg {
+  color: #000000;
+  filter: none;
+}
+
 .spotify-progress {
   background-color: hsl(var(--spotify-bar)) !important;
   box-shadow: var(--spotify-bar-glow) !important;

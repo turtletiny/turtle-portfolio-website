@@ -6,5 +6,5 @@ stack:
 - Tailwind CSS
 
 run:
-npm run dev
+npm run dev &
 bun run dev

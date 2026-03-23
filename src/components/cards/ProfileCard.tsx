@@ -25,7 +25,7 @@ const socials = [
     icon: Instagram,
     href: "https://www.instagram.com/daniel.dwn.l/",
     label: "Instagram",
-    hoverClass: "hover:text-pink-500",
+    hoverClass: "group/ig",
     iconSize: 18,
   },
   {
@@ -39,7 +39,7 @@ const socials = [
     icon: Twitter,
     href: "https://x.com/turtletiny_",
     label: "Twitter",
-    hoverClass: "hover:text-foreground",
+    hoverClass: "hover:text-sky-500",
     iconSize: 18,
   },
 
@@ -47,7 +47,7 @@ const socials = [
     icon: Github,
     href: "https://github.com/turtletiny", 
     label: "GitHub",
-    hoverClass: "hover:text-foreground",
+    hoverClass: "group/gh",
     iconSize: 18,
   },
 ];

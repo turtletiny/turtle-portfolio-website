@@ -1,12 +1,12 @@
 import DashboardNavbar from "@/components/DashboardNavbar";
 import ThemeToggle from "@/components/ThemeToggle";
-import ProfileCard from "@/components/ProfileCard";
-import FavouriteSongCard from "@/components/FavouriteSongCard";
-import SpotifyCard from "@/components/SpotifyCard";
-import TimeWeatherCard from "@/components/TimeWeatherCard";
-import SteamCard from "@/components/SteamCard";
-import GuestbookCard from "@/components/GuestbookCard";
-import SpecsCard from "@/components/SpecsCard";
+import ProfileCard from "@/components/cards/ProfileCard";
+import FavouriteSongCard from "@/components/cards/FavouriteSongCard";
+import SpotifyCard from "@/components/cards/SpotifyCard";
+import TimeWeatherCard from "@/components/cards/TimeWeatherCard";
+import SteamCard from "@/components/cards/SteamCard";
+import GuestbookCard from "@/components/cards/GuestbookCard";
+import SpecsCard from "@/components/cards/SpecsCard";
 
 const Index = () => {
   return (

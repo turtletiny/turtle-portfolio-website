@@ -76,7 +76,7 @@ const StyledWrapper = styled.div`
 
   .slider {
     position: absolute;
-    cursor: pointer;
+    cursor: inherit;
     top: 0;
     left: 0;
     right: 0;
@@ -149,5 +149,12 @@ const StyledWrapper = styled.div`
 
   .input:checked + .slider:before {
     transform: translateX(30px);
+  }
+
+  .switch,
+  .switch *,
+  .slider,
+  .slider:before {
+    cursor: inherit;
   }
 `;

@@ -198,6 +198,25 @@ input {
   cursor: crosshair;
 }
 
+/* Keep dark mode text-entry elements on crosshair instead of UA text cursor */
+input,
+textarea,
+select,
+[contenteditable="true"],
+[role="textbox"],
+input:hover,
+textarea:hover,
+select:hover,
+[contenteditable="true"]:hover,
+[role="textbox"]:hover,
+input:focus,
+textarea:focus,
+select:focus,
+[contenteditable="true"]:focus,
+[role="textbox"]:focus {
+  cursor: crosshair !important;
+}
+
 /* Pastel Mode Cursor (Kirby) */
 .pastel,
 .pastel body {

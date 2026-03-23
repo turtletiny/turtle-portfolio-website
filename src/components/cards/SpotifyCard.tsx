@@ -29,10 +29,14 @@ interface SongState {
   albumUrl: string;
 }
 
+const FALLBACK_ALBUM_ART =
+  "https://placehold.co/128x128/1f2937/e5e7eb?text=♪";
+
 export default function SpotifyCard() {
   const [song, setSong] = useState<SongState | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [duration, setDuration] = useState(180000);
+  const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
 
   // Refs for smooth 60fps animation
   const progressBarRef = useRef<HTMLDivElement>(null);
@@ -49,44 +53,47 @@ export default function SpotifyCard() {
 
       const songData: SpotifyApiNowPlaying = await response.json();
 
-      if (songData.is_playing && songData.item) {
-        setIsPlaying(true);
+      if (songData.item) {
         const newTitle = songData.item.name;
         const realDuration = songData.item.duration_ms || 180000;
+        const artistString = songData.item.artists.map((artist) => artist.name).join(", ");
 
         setSong((prevSong) => {
           const isNewSong = !prevSong || prevSong.title !== newTitle;
 
-          if (isNewSong) {
-            
-            baseProgressRef.current = songData.progress_ms !== undefined ? songData.progress_ms : Math.floor(Math.random() * 15000);
-            lastSyncTimeRef.current = Date.now();
-            setDuration(realDuration);
-          } else if (songData.progress_ms !== undefined) {
-            
-            baseProgressRef.current = songData.progress_ms;
-            lastSyncTimeRef.current = Date.now();
-            setDuration(realDuration);
+          if (songData.is_playing) {
+            if (isNewSong) {
+              baseProgressRef.current =
+                songData.progress_ms !== undefined
+                  ? songData.progress_ms
+                  : Math.floor(Math.random() * 15000);
+              lastSyncTimeRef.current = Date.now();
+              setDuration(realDuration);
+            } else if (songData.progress_ms !== undefined) {
+              baseProgressRef.current = songData.progress_ms;
+              lastSyncTimeRef.current = Date.now();
+              setDuration(realDuration);
+            }
           }
-
-          const artistString = songData.item.artists
-            .map((artist) => artist.name)
-            .join(", ");
 
           return {
             title: newTitle,
             artist: artistString,
-            albumArt: songData.item.album.images[0].url,
+            albumArt: songData.item?.album?.images?.[0]?.url || FALLBACK_ALBUM_ART,
             songUrl: `https://open.spotify.com/search/${encodeURIComponent(`${newTitle} ${artistString}`)}`,
             albumUrl: `https://open.spotify.com/search/${encodeURIComponent(`${songData.item.album?.name || newTitle} ${artistString}`)}`,
           };
         });
       } else {
-        setIsPlaying(false);
+        setSong(null);
       }
+
+      setIsPlaying(Boolean(songData.is_playing && songData.item));
     } catch (error) {
       console.error("Error fetching audio data:", error);
       setIsPlaying(false);
+    } finally {
+      setHasLoadedOnce(true);
     }
   };
 
@@ -131,7 +138,7 @@ export default function SpotifyCard() {
             alt="Now Playing" 
             className="hidden [.pastel_&]:block w-4 h-4 object-contain" 
           />
-          NOW PLAYING
+          {song && !isPlaying ? "LAST PLAYED" : "NOW PLAYING"}
         </div>
 
         {isPlaying && (
@@ -143,7 +150,7 @@ export default function SpotifyCard() {
         )}
       </div>
 
-      {isPlaying && song ? (
+      {song ? (
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-4">
             <a
@@ -174,16 +181,28 @@ export default function SpotifyCard() {
             </div>
           </div>
 
-          {/* Progress Bar*/}
-          <div className="flex flex-col gap-1.5 w-full px-1">
-            <div className="w-full h-1.5 bg-background/50 rounded-full overflow-hidden border border-border/50">
-              <div
-                ref={progressBarRef}
-                className="w-full h-full rounded-full origin-left spotify-progress"
-                style={{ transform: "scaleX(0)" }}
-              />
+          {isPlaying && (
+            /* Progress Bar */
+            <div className="flex flex-col gap-1.5 w-full px-1">
+              <div className="w-full h-1.5 bg-background/50 rounded-full overflow-hidden border border-border/50">
+                <div
+                  ref={progressBarRef}
+                  className="w-full h-full rounded-full origin-left spotify-progress"
+                  style={{ transform: "scaleX(0)" }}
+                />
+              </div>
             </div>
-          </div>
+          )}
+        </div>
+      ) : !hasLoadedOnce ? (
+        <div className="flex flex-1 items-center justify-center gap-3 text-sm text-muted-foreground animate-pulse">
+          <SpotifyIcon size={18} className="block [.pastel_&]:hidden" />
+          <img
+            src="pixelmusic.png"
+            alt="Spotify"
+            className="hidden [.pastel_&]:block w-[18px] h-[18px] object-contain"
+          />
+          <span>Connecting to Spotify...</span>
         </div>
       ) : (
         <div className="flex items-center gap-4 p-4 bg-secondary/30 rounded-lg border border-border border-dashed">

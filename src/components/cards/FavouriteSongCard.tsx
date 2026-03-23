@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
-import icedancerArt from "@/assets/icedancer.jpg";
 
 const SONGS = [
   {
@@ -13,10 +12,18 @@ const SONGS = [
   {
     title: "Special Place",
     artist: "Bladee ♡",
-    art: icedancerArt,
+    art: "/icedancer.jpg",
     src: "/audio/special-place.mp3",
     spotifyUrl: "https://open.spotify.com/track/6yaYV3wo595zZWFwhC8s5T",
   },
+  {
+    title: "Security!",
+    artist: "Ecco2k",
+    art: "/audio/E.svg",
+    src: "/audio/security.mp3",
+    spotifyUrl: "https://open.spotify.com/track/7s0Omwb4joRpfzAwuxZNtS?si=67100c81f43247af",
+  },
+  
 ];
 
 export default function FavouriteSongCard() {
@@ -31,6 +38,8 @@ export default function FavouriteSongCard() {
 
   const currentSong = SONGS[currentIndex];
   const songPositionLabel = `${currentIndex + 1}/${SONGS.length}`;
+  const prevPreviewSong = SONGS[(currentIndex - 1 + SONGS.length) % SONGS.length];
+  const nextPreviewSong = SONGS[(currentIndex + 1) % SONGS.length];
 
   // 60FPS animation loop for the progress bar
   const updateProgress = () => {
@@ -144,14 +153,36 @@ export default function FavouriteSongCard() {
             </div>
 
             {/* Controls (Right) */}
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <button
-                onClick={prevSong}
-                className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                title="Previous"
-              >
-                <SkipBack size={16} />
-              </button>
+            <div className="relative flex items-center gap-2 flex-shrink-0">
+              <div className="relative group/prev">
+                <div
+                  className="absolute left-1/2 top-0 z-20 min-w-[180px] max-w-[230px] -translate-x-1/2 -translate-y-full rounded-xl border bg-transparent px-3 py-2 opacity-0 pointer-events-none transition-all duration-300 group-hover/prev:-translate-y-[135%] group-hover/prev:opacity-100"
+                  style={{ borderColor: "hsl(var(--card-hover-border))" }}
+                >
+                  <p className="text-[11px] font-semibold tracking-wide text-muted-foreground uppercase">
+                    Previous in queue
+                  </p>
+                  <div className="mt-1.5 flex items-center gap-2.5 min-w-0">
+                    <img
+                      src={prevPreviewSong.art}
+                      alt={prevPreviewSong.title}
+                      className="h-10 w-10 rounded-md border border-border/70 object-cover flex-shrink-0"
+                    />
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold leading-tight truncate">{prevPreviewSong.title}</p>
+                      <p className="text-xs text-muted-foreground truncate">{prevPreviewSong.artist}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  onClick={prevSong}
+                  className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                  aria-label="Previous"
+                >
+                  <SkipBack size={16} />
+                </button>
+              </div>
 
               <button
                 onClick={toggle}
@@ -173,13 +204,35 @@ export default function FavouriteSongCard() {
                 {playing ? <Pause size={24} /> : <Play size={24} className="ml-1" />}
               </button>
 
-              <button
-                onClick={nextSong}
-                className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                title="Next"
-              >
-                <SkipForward size={16} />
-              </button>
+              <div className="relative group/next">
+                <div
+                  className="absolute left-1/2 top-0 z-20 min-w-[180px] max-w-[230px] -translate-x-1/2 -translate-y-full rounded-xl border bg-transparent px-3 py-2 opacity-0 pointer-events-none transition-all duration-300 group-hover/next:-translate-y-[135%] group-hover/next:opacity-100"
+                  style={{ borderColor: "hsl(var(--card-hover-border))" }}
+                >
+                  <p className="text-[11px] font-semibold tracking-wide text-muted-foreground uppercase">
+                    Next in queue
+                  </p>
+                  <div className="mt-1.5 flex items-center gap-2.5 min-w-0">
+                    <img
+                      src={nextPreviewSong.art}
+                      alt={nextPreviewSong.title}
+                      className="h-10 w-10 rounded-md border border-border/70 object-cover flex-shrink-0"
+                    />
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold leading-tight truncate">{nextPreviewSong.title}</p>
+                      <p className="text-xs text-muted-foreground truncate">{nextPreviewSong.artist}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  onClick={nextSong}
+                  className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                  aria-label="Next"
+                >
+                  <SkipForward size={16} />
+                </button>
+              </div>
             </div>
           </div>
 

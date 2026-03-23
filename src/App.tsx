@@ -14,7 +14,6 @@ import Projects from "./pages/Projects";
 import Callback from "./pages/Callback";
 import NotFound from "./pages/NotFound";
 import GuestbookPage from "./pages/GuestBookPage";
-import CustomCursor from "@/components/CustomCursor";
 import Particles from "@/components/Particles";
 
 const queryClient = new QueryClient();
@@ -63,7 +62,6 @@ const App = () => {
 
         {/* WRAP CONTENT IN RELATIVE Z-10 */}
         <div className="relative z-10 w-full min-h-screen">
-          <CustomCursor /> 
           <Toaster />
           <Sonner />
           <BrowserRouter>

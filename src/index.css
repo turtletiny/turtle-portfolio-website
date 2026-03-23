@@ -1,13 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
-
-
 
 @layer base {
   :root {
@@ -41,10 +37,11 @@
 
     --radius: 1rem;
 
-    --font-main: 'Space Grotesk', sans-serif;
+    --font-main: "Space Grotesk", sans-serif;
     --bg-secondary: 240 4% 16%;
     --card-hover-border: 0 0% 100% / 0.5;
-    --card-hover-shadow: 0 0 15px hsl(0 0% 100% / 0.1), inset 0 0 5px hsl(0 0% 100% / 0.05);
+    --card-hover-shadow:
+      0 0 15px hsl(0 0% 100% / 0.1), inset 0 0 5px hsl(0 0% 100% / 0.05);
 
     /* Status colors */
     --status-online: 145 48% 40%;
@@ -58,7 +55,8 @@
 
     /* Spotify controls  */
     --spotify-bar: 0 0% 100%;
-    --spotify-bar-glow: 0 0 6px hsl(0 0% 100% / 0.8), 0 0 12px hsl(0 0% 100% / 0.4);
+    --spotify-bar-glow:
+      0 0 6px hsl(0 0% 100% / 0.8), 0 0 12px hsl(0 0% 100% / 0.4);
     --spotify-btn-bg: transparent;
     --spotify-btn-border: 0 0% 100%;
     --spotify-btn-text: 0 0% 100%;
@@ -91,14 +89,16 @@
     --input: 340 100% 85%;
     --ring: 213 100% 65%;
 
-    --font-main: 'Varela Round', sans-serif;
+    --font-main: "Varela Round", sans-serif;
     --bg-secondary: 330 100% 87%;
     --card-hover-border: 274 66% 40% / 1;
-    --card-hover-shadow: 0 0 15px hsl(274 66% 40% / 0.3), inset 0 0 5px hsl(274 66% 40% / 0.1);
+    --card-hover-shadow:
+      0 0 15px hsl(274 66% 40% / 0.3), inset 0 0 5px hsl(274 66% 40% / 0.1);
 
     /* Spotify controls */
     --spotify-bar: 213 100% 65%;
-    --spotify-bar-glow: 0 0 6px hsl(213 100% 65% / 0.6), 0 0 12px hsl(213 100% 65% / 0.3);
+    --spotify-bar-glow:
+      0 0 6px hsl(213 100% 65% / 0.6), 0 0 12px hsl(213 100% 65% / 0.3);
     --spotify-btn-bg: 213 100% 65%;
     --spotify-btn-border: 213 100% 65%;
     --spotify-btn-text: 0 0% 100%;
@@ -134,7 +134,9 @@
 .tiktok-layer {
   opacity: 0;
   transform: translate(0, 0);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .group\/tt .tiktok-main {
@@ -161,14 +163,10 @@
   filter: drop-shadow(0 0 1px hsl(var(--foreground) / 0.45));
 }
 
-
-
 .spotify-progress {
-
   background-color: hsl(var(--spotify-bar)) !important;
   box-shadow: var(--spotify-bar-glow) !important;
 }
-
 
 .pastel .spotify-progress {
   background-color: hsl(var(--spotify-bar)) !important;
@@ -176,38 +174,52 @@
   box-shadow: 0 0 10px 2px hsl(213 100% 65% / 0.3) !important;
 }
 
-
 :root {
-  --spotify-title-hover: hsl(145 63% 42%); 
+  --spotify-title-hover: hsl(145 63% 42%);
 }
 
 .pastel {
   --spotify-title-hover: hsl(213 100% 65%);
 }
 
-
 .spotify-title:hover {
   color: hsl(var(--spotify-title-hover)) !important;
 }
-
 
 /* Dark Mode Cursor */
 body {
   cursor: crosshair;
 }
 
-
-a, button, [role="button"], input {
+a,
+button,
+[role="button"],
+input {
   cursor: crosshair;
 }
 
 /* Pastel Mode Cursor (Kirby) */
-.pastel, .pastel body {
-  cursor: url('/kirbyswordnew.png') 12 22 /* cursor hitbox at 12 22*/, auto; 
+.pastel,
+.pastel body {
+  cursor:
+    url("/kirbyswordnew.png") 12 22 /* cursor hitbox at 12 22*/,
+    auto;
 }
 
-.pastel a, .pastel button, .pastel [role="button"], .pastel input {
-  cursor: url('/kirbyswordnew.png') 12 22, pointer;
+.pastel a,
+.pastel button,
+.pastel [role="button"],
+.pastel input {
+  cursor:
+    url("/kirbyswordnew.png") 12 22,
+    pointer;
+}
+
+.pastel input,
+.pastel textarea,
+.pastel [contenteditable="true"],
+.pastel [role="textbox"] {
+  cursor: url("/kirbyswordnew.png") 12 22, text !important;
 }
 
 /* TextType Component CSS */
@@ -226,12 +238,8 @@ a, button, [role="button"], input {
   display: none;
 }
 
-
-
 .particles-container {
   position: relative;
   width: 100%;
   height: 100%;
 }
-
-

@@ -30,6 +30,7 @@ export default function FavouriteSongCard() {
   const rafRef = useRef<number>();
 
   const currentSong = SONGS[currentIndex];
+  const songPositionLabel = `${currentIndex + 1}/${SONGS.length}`;
 
   // 60FPS animation loop for the progress bar
   const updateProgress = () => {
@@ -98,9 +99,13 @@ export default function FavouriteSongCard() {
 
   return (
     <div className="card-base flex flex-col w-full h-full">
-      {/* CHANGED: Removed the icon completely and cleaned up the classes */}
-      <div className="text-xs font-bold tracking-wider text-muted-foreground mb-6">
-        CURRENT FAVOURITES
+      <div className="flex items-center justify-between mb-6">
+        <div className="text-xs font-bold tracking-wider text-muted-foreground">
+          CURRENT FAVOURITES
+        </div>
+        <div className="text-xs font-semibold text-muted-foreground/90 tabular-nums">
+          {songPositionLabel}
+        </div>
       </div>
 
       <div className="flex items-center gap-6 flex-grow min-w-0">

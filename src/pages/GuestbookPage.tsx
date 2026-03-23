@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import DashboardNavbar from "@/components/DashboardNavbar";
-import ThemeToggle from "@/components/ThemeToggle";
-import CardSectionIcon from "@/components/CardSectionIcon";
+import DashboardNavbar from "@/components/navigation/DashboardNavbar";
+import ThemeToggle from "@/components/theme/ThemeToggle";
+import CardSectionIcon from "@/components/common/CardSectionIcon";
 import { MessageSquare, Send, User } from "lucide-react";
 import { toast } from "sonner";
 import {

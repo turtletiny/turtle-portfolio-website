@@ -12,7 +12,7 @@ import Projects from "./pages/Projects";
 import Callback from "./pages/Callback";
 import NotFound from "./pages/NotFound";
 import GuestbookPage from "./pages/GuestbookPage";
-import Particles from "@/components/Particles";
+import Particles from "@/components/effects/Particles";
 import { useTheme } from "@/hooks/useTheme";
 
 const queryClient = new QueryClient();

@@ -1,5 +1,5 @@
-import DashboardNavbar from "@/components/DashboardNavbar";
-import ThemeToggle from "@/components/ThemeToggle";
+import DashboardNavbar from "@/components/navigation/DashboardNavbar";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 import {
   Gamepad2,
   ScrollText,

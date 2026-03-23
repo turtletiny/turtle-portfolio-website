@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
-import DashboardNavbar from "@/components/DashboardNavbar";
-import ThemeToggle from "@/components/ThemeToggle";
-import TextType from "@/components/TextType";
+import DashboardNavbar from "@/components/navigation/DashboardNavbar";
+import ThemeToggle from "@/components/theme/ThemeToggle";
+import TextType from "@/components/typography/TextType";
 import {
   Folder,
   FolderOpen,

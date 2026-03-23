@@ -13,7 +13,7 @@ import {
   GUESTBOOK_MAX_NAME_LENGTH,
   GUESTBOOK_QUERY_KEY,
   postGuestbookEntry,
-} from "@/lib/guestbook-api";
+} from "@/lib/api/guestbook";
 
 // --- Main Component ---
 

@@ -30,6 +30,7 @@
     "useDefineForClassFields": true
   },
   "include": [
-    "src"
-, "api/spotify.ts"  ]
+    "src",
+    "api/**/*.ts"
+  ]
 }

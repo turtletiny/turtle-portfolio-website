@@ -11,7 +11,7 @@ import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Callback from "./pages/Callback";
 import NotFound from "./pages/NotFound";
-import GuestbookPage from "./pages/GuestBookPage";
+import GuestbookPage from "./pages/GuestbookPage";
 import Particles from "@/components/Particles";
 import { useTheme } from "@/hooks/useTheme";
 

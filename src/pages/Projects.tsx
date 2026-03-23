@@ -91,9 +91,6 @@ export default function Projects() {
                 pauseDuration={1500}
                 showCursor
                 cursorCharacter="|"
-                variableSpeedEnabled={false}
-                variableSpeedMin={60}
-                variableSpeedMax={120}
                 cursorBlinkDuration={0.5}
                 className="font-bold text-sm tracking-wide"
               />

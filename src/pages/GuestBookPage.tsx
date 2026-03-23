@@ -7,6 +7,13 @@ import ThemeToggle from "@/components/ThemeToggle";
 import CardSectionIcon from "@/components/CardSectionIcon";
 import { MessageSquare, Send, User } from "lucide-react";
 import { toast } from "sonner";
+import {
+  fetchGuestbookMessages,
+  GUESTBOOK_MAX_MESSAGE_LENGTH,
+  GUESTBOOK_MAX_NAME_LENGTH,
+  GUESTBOOK_QUERY_KEY,
+  postGuestbookEntry,
+} from "@/lib/guestbook-api";
 
 // --- Main Component ---
 
@@ -17,26 +24,15 @@ export default function Guestbook() {
 
   // 1. Fetch messages from our new API
   const { data: messages, isLoading } = useQuery({
-    queryKey: ["guestbook"],
-    queryFn: async () => {
-      const res = await fetch("/api/guestbook");
-      return res.json();
-    },
+    queryKey: GUESTBOOK_QUERY_KEY,
+    queryFn: fetchGuestbookMessages,
   });
 
   // 2. Submit a new message
   const mutation = useMutation({
-    mutationFn: async (newEntry: { name: string; message: string }) => {
-      const res = await fetch("/api/guestbook", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newEntry),
-      });
-      if (!res.ok) throw new Error("Failed to post message");
-      return res.json();
-    },
+    mutationFn: postGuestbookEntry,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["guestbook"] });
+      queryClient.invalidateQueries({ queryKey: GUESTBOOK_QUERY_KEY });
       setName("");
       setMessage("");
       toast.success("Message posted! Thanks for stopping by.");
@@ -48,8 +44,13 @@ export default function Guestbook() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !message.trim()) return;
-    mutation.mutate({ name, message });
+    if (!message.trim()) return;
+
+    const finalName = name.trim() === "" ? "Anonymous" : name.trim();
+    mutation.mutate({
+      name: finalName.slice(0, GUESTBOOK_MAX_NAME_LENGTH),
+      message: message.trim().slice(0, GUESTBOOK_MAX_MESSAGE_LENGTH),
+    });
   };
 
   return (
@@ -81,7 +82,7 @@ export default function Guestbook() {
               onChange={(e) => setName(e.target.value)}
               placeholder="Who are you?"
               className="bg-secondary/30 border border-border rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-              maxLength={50}
+              maxLength={GUESTBOOK_MAX_NAME_LENGTH}
             />
           </div>
 
@@ -94,7 +95,7 @@ export default function Guestbook() {
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Write something cool..."
               className="bg-secondary/30 border border-border rounded-lg p-3 text-sm min-h-[100px] focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all resize-none"
-              maxLength={500}
+              maxLength={GUESTBOOK_MAX_MESSAGE_LENGTH}
             />
           </div>
 
@@ -115,7 +116,7 @@ export default function Guestbook() {
               Loading messages...
             </div>
           ) : (
-            messages?.map((msg: any) => (
+            messages?.map((msg) => (
               <div
                 key={msg.id}
                 className="card-base flex flex-col gap-2 animate-in fade-in slide-in-from-bottom-2 duration-500"

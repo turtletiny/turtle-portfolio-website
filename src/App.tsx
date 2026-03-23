@@ -1,5 +1,3 @@
-import { useState, useEffect } from "react";
-import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -15,30 +13,12 @@ import Callback from "./pages/Callback";
 import NotFound from "./pages/NotFound";
 import GuestbookPage from "./pages/GuestBookPage";
 import Particles from "@/components/Particles";
+import { useTheme } from "@/hooks/useTheme";
 
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [isPastel, setIsPastel] = useState(false);
-
-  useEffect(() => {
-    const checkTheme = () => {
-      // Checks both <html> and <body> tags to be 100% sure we catch the theme change
-      const isHtmlPastel = document.documentElement.classList.contains("pastel");
-      const isBodyPastel = document.body.classList.contains("pastel");
-      
-      setIsPastel(isHtmlPastel || isBodyPastel);
-    };
-
-    checkTheme();
-
-    // Watch for class changes on both html and body
-    const observer = new MutationObserver(checkTheme);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
-    observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
-
-    return () => observer.disconnect();
-  }, []);
+  const { isPastel } = useTheme();
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -62,7 +42,6 @@ const App = () => {
 
         {/* WRAP CONTENT IN RELATIVE Z-10 */}
         <div className="relative z-10 w-full min-h-screen">
-          <Toaster />
           <Sonner />
           <BrowserRouter>
             <Routes>

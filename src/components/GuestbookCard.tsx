@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Send, MessageSquare, Loader2 } from "lucide-react";
+import {
+  fetchGuestbookMessages,
+  GUESTBOOK_MAX_MESSAGE_LENGTH,
+  GUESTBOOK_MAX_NAME_LENGTH,
+  GUESTBOOK_QUERY_KEY,
+  postGuestbookEntry,
+} from "@/lib/guestbook-api";
 
 export default function GuestbookCard() {
   const [name, setName] = useState("");
@@ -10,26 +17,15 @@ export default function GuestbookCard() {
 
   // 1. Fetch messages
   const { data: messages, isLoading } = useQuery({
-    queryKey: ["guestbook"],
-    queryFn: async () => {
-      const res = await fetch("/api/guestbook");
-      if (!res.ok) throw new Error("Network response was not ok");
-      return res.json();
-    },
+    queryKey: GUESTBOOK_QUERY_KEY,
+    queryFn: fetchGuestbookMessages,
   });
 
   // 2. Submit a new message
   const mutation = useMutation({
-    mutationFn: async (newEntry: { name: string; message: string }) => {
-      const res = await fetch("/api/guestbook", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newEntry),
-      });
-      return res.json();
-    },
+    mutationFn: postGuestbookEntry,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["guestbook"] });
+      queryClient.invalidateQueries({ queryKey: GUESTBOOK_QUERY_KEY });
       setName("");
       setMessage("");
 
@@ -45,8 +41,11 @@ export default function GuestbookCard() {
     e.preventDefault();
     if (!message.trim()) return;
 
-    const finalName = name.trim() === "" ? "Anonymous" : name;
-    mutation.mutate({ name: finalName, message });
+    const finalName = name.trim() === "" ? "Anonymous" : name.trim();
+    mutation.mutate({
+      name: finalName.slice(0, GUESTBOOK_MAX_NAME_LENGTH),
+      message: message.trim().slice(0, GUESTBOOK_MAX_MESSAGE_LENGTH),
+    });
   };
 
   return (
@@ -64,7 +63,7 @@ export default function GuestbookCard() {
             onChange={(e) => setName(e.target.value)}
             placeholder="Name (optional)"
             className="w-full bg-secondary text-foreground text-sm p-4 rounded-xl border border-transparent focus:outline-none focus:border-primary transition-colors"
-            maxLength={40}
+            maxLength={GUESTBOOK_MAX_NAME_LENGTH}
           />
 
           <div className="flex gap-3 items-center">
@@ -74,13 +73,13 @@ export default function GuestbookCard() {
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Leave a comment..."
                 className="w-full bg-secondary text-foreground text-sm p-4 rounded-xl border border-transparent resize-none focus:outline-none focus:border-primary transition-colors min-h-[90px]"
-                maxLength={300}
+                maxLength={GUESTBOOK_MAX_MESSAGE_LENGTH}
               />
               <div className="flex justify-end pr-1">
                 <span
-                  className={`text-[10px] font-medium transition-colors ${message.length >= 300 ? "text-destructive" : "text-muted-foreground"}`}
+                  className={`text-[10px] font-medium transition-colors ${message.length >= GUESTBOOK_MAX_MESSAGE_LENGTH ? "text-destructive" : "text-muted-foreground"}`}
                 >
-                  {message.length}/300
+                  {message.length}/{GUESTBOOK_MAX_MESSAGE_LENGTH}
                 </span>
               </div>
             </div>
@@ -126,7 +125,7 @@ export default function GuestbookCard() {
               Loading messages...
             </div>
           ) : (
-            messages?.map((msg: any) => (
+            messages?.map((msg) => (
               <div
                 key={msg.id}
                 className="text-sm p-1 animate-in fade-in slide-in-from-bottom-1 duration-300"

@@ -198,19 +198,17 @@ body {
 
 
 a, button, [role="button"], input {
-  cursor: pointer;
+  cursor: crosshair;
 }
 
 /* Pastel Mode Cursor (Kirby) */
 .pastel, .pastel body {
-  cursor: url('/kirbyswordnew.png'), auto; 
+  cursor: url('/kirbyswordnew.png') 12 22 /* cursor hitbox at 12 22*/, auto; 
 }
-
 
 .pastel a, .pastel button, .pastel [role="button"], .pastel input {
-  cursor: url('/kirbyswordnew.png'), pointer;
+  cursor: url('/kirbyswordnew.png') 12 22, pointer;
 }
-
 
 /* TextType Component CSS */
 .text-type {
@@ -237,25 +235,3 @@ a, button, [role="button"], input {
 }
 
 
-/* ----------------------------------
-   CUSTOM CURSORS 
------------------------------------ */
-
-/* Default / Dark Mode Cursor */
-body {
-  cursor: crosshair;
-}
-
-a, button, [role="button"] {
-  cursor: pointer;
-}
-
-/* Pastel Mode Cursor (Kirby) */
-.pastel, .pastel body {
-
-  cursor: url('/kirbyswordnew.png'), auto; 
-}
-
-.pastel a, .pastel button, .pastel [role="button"] {
-  cursor: url('/kirbyswordnew.png'), pointer;
-}

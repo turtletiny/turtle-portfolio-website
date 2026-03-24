@@ -58,7 +58,7 @@ export default function Projects() {
         <div className="z-10 bg-background pt-8">
           <button
             onClick={handleMainClick}
-            className={`flex flex-col items-center justify-center gap-3 p-8 rounded-3xl transform transition-all duration-500 ease-in-out cursor-pointer w-48 bg-card border-2 ${
+            className={`flex flex-col items-center justify-center gap-3 p-8 rounded-3xl transform transition-all duration-150 ease-out cursor-pointer w-48 bg-card border-2 ${
               isMainOpen
                 ? "border-yellow-500/50 pastel:border-red-500/50 scale-[1.02] hover:scale-105 shadow-lg shadow-yellow-500/10 pastel:shadow-red-500/10 bg-yellow-500/5 pastel:bg-red-500/5"
                 : "border-border/50 scale-100 hover:scale-[1.02] hover:bg-secondary/40 shadow-sm"
@@ -68,14 +68,14 @@ export default function Projects() {
               <Folder
                 size={70}
                 strokeWidth={1.5}
-                className={`text-yellow-500 pastel:text-red-500 transition-all duration-300 absolute ${
+                className={`text-yellow-500 pastel:text-red-500 transition-all duration-150 absolute ${
                   isMainOpen ? "opacity-0 scale-90" : "opacity-100 scale-100"
                 }`}
               />
               <FolderOpen
                 size={70}
                 strokeWidth={1.5}
-                className={`text-yellow-500 pastel:text-red-500 transition-all duration-300 absolute ${
+                className={`text-yellow-500 pastel:text-red-500 transition-all duration-150 absolute ${
                   isMainOpen ? "opacity-100 scale-100" : "opacity-0 scale-110"
                 }`}
               />
@@ -132,7 +132,7 @@ export default function Projects() {
 
                 <button
                   onClick={() => toggleSubFolder("current")}
-                  className={`w-full flex flex-col items-center text-center p-6 transform transition-all duration-500 ease-in-out group bg-card border-2 rounded-2xl ${
+                  className={`w-full flex flex-col items-center text-center p-6 transform transition-all duration-150 ease-out group bg-card border-2 rounded-2xl ${
                     animStep < 4
                       ? "opacity-0 translate-y-4 scale-95 border-border/50"
                       : activeFolder === "current"
@@ -140,16 +140,16 @@ export default function Projects() {
                         : "opacity-100 translate-y-0 scale-100 border-border/50 hover:scale-[1.02] hover:bg-secondary/40 shadow-sm"
                   }`}
                 >
-                  <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-blue-500/10 text-blue-500 group-hover:scale-110 transition-transform duration-300 mb-4">
+                  <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-blue-500/10 text-blue-500 group-hover:scale-110 transition-transform duration-150 mb-4">
                     <Folder
                       size={32}
                       strokeWidth={1.5}
-                      className={`absolute transition-all duration-300 ${activeFolder === "current" ? "opacity-0 scale-90" : "opacity-100 scale-100"}`}
+                      className={`absolute transition-all duration-150 ${activeFolder === "current" ? "opacity-0 scale-90" : "opacity-100 scale-100"}`}
                     />
                     <FolderOpen
                       size={32}
                       strokeWidth={1.5}
-                      className={`absolute transition-all duration-300 ${activeFolder === "current" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`}
+                      className={`absolute transition-all duration-150 ${activeFolder === "current" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`}
                     />
                   </div>
                   <h2 className="text-base font-bold">Current Projects</h2>
@@ -174,7 +174,7 @@ export default function Projects() {
 
                 <button
                   onClick={() => toggleSubFolder("past")}
-                  className={`w-full flex flex-col items-center text-center p-6 transform transition-all duration-500 ease-in-out group bg-card border-2 rounded-2xl ${
+                  className={`w-full flex flex-col items-center text-center p-6 transform transition-all duration-150 ease-out group bg-card border-2 rounded-2xl ${
                     animStep < 4
                       ? "opacity-0 translate-y-4 scale-95 border-border/50"
                       : activeFolder === "past"
@@ -182,16 +182,16 @@ export default function Projects() {
                         : "opacity-100 translate-y-0 scale-100 border-border/50 hover:scale-[1.02] hover:bg-secondary/40 shadow-sm"
                   }`}
                 >
-                  <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-pink-500/10 text-pink-500 group-hover:scale-110 transition-transform duration-300 mb-4">
+                  <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-pink-500/10 text-pink-500 group-hover:scale-110 transition-transform duration-150 mb-4">
                     <Folder
                       size={32}
                       strokeWidth={1.5}
-                      className={`absolute transition-all duration-300 ${activeFolder === "past" ? "opacity-0 scale-90" : "opacity-100 scale-100"}`}
+                      className={`absolute transition-all duration-150 ${activeFolder === "past" ? "opacity-0 scale-90" : "opacity-100 scale-100"}`}
                     />
                     <FolderOpen
                       size={32}
                       strokeWidth={1.5}
-                      className={`absolute transition-all duration-300 ${activeFolder === "past" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`}
+                      className={`absolute transition-all duration-150 ${activeFolder === "past" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`}
                     />
                   </div>
                   <h2 className="text-base font-bold">Past Projects</h2>
@@ -216,7 +216,7 @@ export default function Projects() {
 
                 <button
                   onClick={() => toggleSubFolder("future")}
-                  className={`w-full flex flex-col items-center text-center p-6 transform transition-all duration-500 ease-in-out group bg-card border-2 rounded-2xl ${
+                  className={`w-full flex flex-col items-center text-center p-6 transform transition-all duration-150 ease-out group bg-card border-2 rounded-2xl ${
                     animStep < 4
                       ? "opacity-0 translate-y-4 scale-95 border-border/50"
                       : activeFolder === "future"
@@ -224,16 +224,16 @@ export default function Projects() {
                         : "opacity-100 translate-y-0 scale-100 border-border/50 hover:scale-[1.02] hover:bg-secondary/40 shadow-sm"
                   }`}
                 >
-                  <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-green-500/10 text-green-500 group-hover:scale-110 transition-transform duration-300 mb-4">
+                  <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-green-500/10 text-green-500 group-hover:scale-110 transition-transform duration-150 mb-4">
                     <Folder
                       size={32}
                       strokeWidth={1.5}
-                      className={`absolute transition-all duration-300 ${activeFolder === "future" ? "opacity-0 scale-90" : "opacity-100 scale-100"}`}
+                      className={`absolute transition-all duration-150 ${activeFolder === "future" ? "opacity-0 scale-90" : "opacity-100 scale-100"}`}
                     />
                     <FolderOpen
                       size={32}
                       strokeWidth={1.5}
-                      className={`absolute transition-all duration-300 ${activeFolder === "future" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`}
+                      className={`absolute transition-all duration-150 ${activeFolder === "future" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`}
                     />
                   </div>
                   <h2 className="text-base font-bold">Future Projects Ideas</h2>

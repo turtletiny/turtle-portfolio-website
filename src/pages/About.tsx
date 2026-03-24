@@ -41,15 +41,15 @@ function ChessModeStatCard({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative p-3 bg-secondary rounded-lg border border-border min-h-[124px] overflow-hidden transition-all duration-300 hover:border-[hsl(var(--card-hover-border))] hover:[box-shadow:var(--card-hover-shadow)] hover:scale-[1.02] active:scale-[0.99]"
+      className="group relative p-3 bg-secondary rounded-lg border border-border min-h-[124px] overflow-hidden transition-all duration-150 hover:border-[hsl(var(--card-hover-border))] hover:[box-shadow:var(--card-hover-shadow)] hover:scale-[1.02] active:scale-[0.99]"
       aria-label={`${label} stats`}
     >
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 text-center transition-transform duration-300 ease-out group-hover:-translate-y-3">
-        <div className="mb-1 transition-transform duration-300 ease-out scale-110 group-hover:scale-100 group-hover:-translate-y-0.5">{icon}</div>
-        <span className="text-2xl font-bold text-primary transition-transform duration-300 ease-out group-hover:scale-90">{rating}</span>
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 text-center transition-transform duration-150 ease-out group-hover:-translate-y-3">
+        <div className="mb-1 transition-transform duration-150 ease-out scale-110 group-hover:scale-100 group-hover:-translate-y-0.5">{icon}</div>
+        <span className="text-2xl font-bold text-primary transition-transform duration-150 ease-out group-hover:scale-90">{rating}</span>
       </div>
 
-      <div className="absolute inset-x-0 bottom-2 flex flex-col items-center justify-end gap-0.5 text-center px-2 opacity-0 translate-y-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+      <div className="absolute inset-x-0 bottom-2 flex flex-col items-center justify-end gap-0.5 text-center px-2 opacity-0 translate-y-2 transition-all duration-150 ease-out group-hover:opacity-100 group-hover:translate-y-0">
         <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
           {label}
         </span>
@@ -179,7 +179,7 @@ export default function About() {
                 href="https://store.steampowered.com/app/1229490/ULTRAKILL/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-24 h-36 sm:w-28 sm:h-40 bg-card rounded flex-shrink-0 shadow-sm border border-border flex items-center justify-center overflow-hidden hover:scale-105 transition-transform duration-300 group"
+                className="w-24 h-36 sm:w-28 sm:h-40 bg-card rounded flex-shrink-0 shadow-sm border border-border flex items-center justify-center overflow-hidden hover:scale-105 transition-transform duration-150 group"
               >
                 <img
                   src="ultrakillcover.jpg"
@@ -237,7 +237,7 @@ export default function About() {
                   href={game.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col gap-2 group transition-transform duration-300 hover:scale-105"
+                  className="flex flex-col gap-2 group transition-transform duration-150 hover:scale-105"
                 >
                   <div className="aspect-[2/3] rounded-lg overflow-hidden bg-secondary border border-border transition-all group-hover:shadow-xl group-hover:border-primary/20">
                     <img
@@ -338,7 +338,7 @@ export default function About() {
                       href={artist.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="relative aspect-square rounded-lg overflow-hidden group transition-all duration-300 hover:scale-105 border border-border shadow-sm"
+                      className="relative aspect-square rounded-lg overflow-hidden group transition-all duration-150 hover:scale-105 border border-border shadow-sm"
                     >
                       <img
                         src={artist.image}
@@ -400,7 +400,7 @@ export default function About() {
                   href={profile?.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 w-fit p-2 pr-3 bg-secondary border border-border rounded-lg hover:border-primary hover:scale-[1.05] active:scale-[0.97] transition-all duration-300 group shadow-sm"
+                  className="flex items-center gap-3 w-fit p-2 pr-3 bg-secondary border border-border rounded-lg hover:border-primary hover:scale-[1.05] active:scale-[0.97] transition-all duration-150 group shadow-sm"
                 >
                   <span className="text-lg font-bold pl-1">
                     {profile?.username}
@@ -515,7 +515,7 @@ export default function About() {
                     href={lichessProfile?.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 w-fit p-2 pr-3 bg-secondary border border-border rounded-lg hover:border-primary hover:scale-[1.05] active:scale-[0.97] transition-all duration-300 group shadow-sm"
+                    className="flex items-center gap-3 w-fit p-2 pr-3 bg-secondary border border-border rounded-lg hover:border-primary hover:scale-[1.05] active:scale-[0.97] transition-all duration-150 group shadow-sm"
                   >
                     <span className="text-lg font-bold pl-1">
                       {lichessProfile?.username}
@@ -648,7 +648,7 @@ export default function About() {
               href="https://anilist.co/user/turtletiny/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-[10px] uppercase tracking-wider font-bold text-muted-foreground hover:text-primary hover:scale-110 transition-all duration-300 origin-right"
+              className="flex items-center gap-2 text-[10px] uppercase tracking-wider font-bold text-muted-foreground hover:text-primary hover:scale-110 transition-all duration-150 origin-right"
             >
               <img
                 src="anilist.png"
@@ -713,7 +713,7 @@ export default function About() {
                   href={anime.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col gap-2 group transition-transform duration-300 hover:scale-105"
+                  className="flex flex-col gap-2 group transition-transform duration-150 hover:scale-105"
                 >
                   <div className="aspect-[2/3] rounded-lg overflow-hidden bg-secondary border border-border transition-all group-hover:shadow-xl group-hover:border-primary/20">
                     <img
@@ -755,7 +755,7 @@ export default function About() {
               href="https://www.goodreads.com/book/show/18490.Frankenstein"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-start gap-4 p-4 bg-secondary rounded-lg border border-border transition-all duration-300 hover:scale-[1.02] hover:shadow-md group"
+              className="flex items-start gap-4 p-4 bg-secondary rounded-lg border border-border transition-all duration-150 hover:scale-[1.02] hover:shadow-md group"
             >
               <div className="w-16 h-24 bg-card rounded flex-shrink-0 shadow-sm border border-border flex items-center justify-center overflow-hidden">
                 <img
@@ -809,7 +809,7 @@ export default function About() {
                   href={book.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex flex-col gap-2 group transition-transform duration-300 hover:scale-105"
+                  className="flex flex-col gap-2 group transition-transform duration-150 hover:scale-105"
                 >
                   <div className="aspect-[2/3] rounded-lg overflow-hidden bg-secondary border border-border transition-all group-hover:shadow-xl group-hover:border-primary/20">
                     <img

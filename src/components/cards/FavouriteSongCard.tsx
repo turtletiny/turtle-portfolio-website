@@ -107,8 +107,8 @@ export default function FavouriteSongCard() {
   };
 
   return (
-    <div className="card-base flex flex-col w-full h-full">
-      <div className="flex items-center justify-between mb-6">
+    <div className="card-base flex flex-col w-full h-full p-4 sm:p-6">
+      <div className="flex items-center justify-between mb-4 sm:mb-6">
         <div className="text-xs font-bold tracking-wider text-muted-foreground">
           CURRENT FAVOURITES
         </div>
@@ -117,13 +117,13 @@ export default function FavouriteSongCard() {
         </div>
       </div>
 
-      <div className="flex items-center gap-6 flex-grow min-w-0">
+      <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 flex-grow min-w-0">
         {/* Album Art */}
         <a
           href={currentSong.spotifyUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-[110px] h-[110px] rounded-xl flex-shrink-0 border border-border shadow-lg overflow-hidden hover:scale-105 transition-transform"
+          className="w-[120px] h-[120px] sm:w-[110px] sm:h-[110px] rounded-xl flex-shrink-0 border border-border shadow-lg overflow-hidden hover:scale-105 transition-transform"
         >
           <img
             src={currentSong.art}
@@ -133,17 +133,17 @@ export default function FavouriteSongCard() {
         </a>
 
         {/* Right Side: Info, Controls, and Progress Bar */}
-        <div className="flex flex-col justify-center w-full min-w-0 gap-4">
+        <div className="flex flex-col justify-center w-full min-w-0 gap-3 sm:gap-4">
           
           {/* Top row: Text & Buttons */}
-          <div className="flex items-center justify-between w-full min-w-0">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between w-full min-w-0 gap-3 sm:gap-0">
             {/* Song Info (Left) */}
-            <div className="flex flex-col justify-center flex-1 min-w-0 pr-4">
+            <div className="flex flex-col justify-center flex-1 min-w-0 text-center sm:text-left">
               <a
                 href={currentSong.spotifyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-xl leading-tight text-foreground hover:text-primary transition-colors cursor-pointer break-words"
+                className="font-bold text-lg sm:text-xl leading-tight text-foreground hover:text-primary transition-colors cursor-pointer break-words"
               >
                 {currentSong.title}
               </a>
@@ -153,8 +153,8 @@ export default function FavouriteSongCard() {
             </div>
 
             {/* Controls (Right) */}
-            <div className="relative flex items-center gap-2 flex-shrink-0">
-              <div className="relative group/prev">
+            <div className="relative flex items-center justify-center sm:justify-end gap-2 flex-shrink-0 w-full sm:w-auto">
+              <div className="relative group/prev hidden md:block">
                 <div
                   className="absolute left-1/2 top-0 z-20 min-w-[180px] max-w-[230px] -translate-x-1/2 -translate-y-full rounded-xl border bg-transparent px-3 py-2 opacity-0 pointer-events-none transition-all duration-300 group-hover/prev:-translate-y-[135%] group-hover/prev:opacity-100"
                   style={{ borderColor: "hsl(var(--card-hover-border))" }}
@@ -185,8 +185,16 @@ export default function FavouriteSongCard() {
               </div>
 
               <button
+                onClick={prevSong}
+                className="md:hidden p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                aria-label="Previous"
+              >
+                <SkipBack size={16} />
+              </button>
+
+              <button
                 onClick={toggle}
-                className="w-14 h-14 rounded-full border-2 flex items-center justify-center transition-all duration-200 hover:scale-110 flex-shrink-0"
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 flex items-center justify-center transition-all duration-200 hover:scale-110 flex-shrink-0"
                 style={{
                   backgroundColor: "hsl(var(--spotify-btn-bg))",
                   borderColor: "hsl(var(--spotify-btn-border))",
@@ -201,10 +209,10 @@ export default function FavouriteSongCard() {
                   e.currentTarget.style.boxShadow = "none";
                 }}
               >
-                {playing ? <Pause size={24} /> : <Play size={24} className="ml-1" />}
+                {playing ? <Pause size={20} className="sm:w-6 sm:h-6" /> : <Play size={20} className="ml-0.5 sm:ml-1 sm:w-6 sm:h-6" />}
               </button>
 
-              <div className="relative group/next">
+              <div className="relative group/next hidden md:block">
                 <div
                   className="absolute left-1/2 top-0 z-20 min-w-[180px] max-w-[230px] -translate-x-1/2 -translate-y-full rounded-xl border bg-transparent px-3 py-2 opacity-0 pointer-events-none transition-all duration-300 group-hover/next:-translate-y-[135%] group-hover/next:opacity-100"
                   style={{ borderColor: "hsl(var(--card-hover-border))" }}
@@ -233,6 +241,14 @@ export default function FavouriteSongCard() {
                   <SkipForward size={16} />
                 </button>
               </div>
+
+              <button
+                onClick={nextSong}
+                className="md:hidden p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                aria-label="Next"
+              >
+                <SkipForward size={16} />
+              </button>
             </div>
           </div>
 

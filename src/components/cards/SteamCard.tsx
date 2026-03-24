@@ -167,7 +167,7 @@ export default function SteamCard() {
           {/* Recently Played */}
           {steamData.recentGames && steamData.recentGames.length > 0 && (
             <div className="mt-5 pt-4 border-t border-border flex flex-col gap-3">
-              <div className="text-[10px] font-bold tracking-wider text-muted-foreground flex items-center gap-1.5">
+              <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
                 RECENTLY PLAYED
               </div>
               <div className="flex flex-col gap-2">
@@ -185,7 +185,7 @@ export default function SteamCard() {
                       className="w-20 sm:w-24 h-auto aspect-[460/215] rounded border border-border/50 object-cover flex-shrink-0"
                     />
                     <div className="flex flex-col overflow-hidden">
-                      <span className="text-sm font-medium truncate group-hover:text-primary transition-colors">
+                      <span className="text-sm font-semibold text-foreground truncate group-hover:text-primary transition-colors">
                         {game.name}
                       </span>
                       <span className="text-[11px] text-muted-foreground">

@@ -196,11 +196,11 @@
 }
 
 :root {
-  --spotify-title-hover: hsl(145 63% 42%);
+  --spotify-title-hover: 145 63% 42%;
 }
 
 .pastel {
-  --spotify-title-hover: hsl(213 100% 65%);
+  --spotify-title-hover: 213 100% 65%;
 }
 
 .spotify-title:hover {

@@ -115,7 +115,7 @@ export default function ProfileCard() {
             href="https://discord.com/users/644484730070237215"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-3xl font-bold leading-tight hover:text-primary transition-colors"
+            className="text-3xl font-bold leading-tight hover:text-primary transition-colors block"
           >
             {displayName}
           </a>
@@ -123,7 +123,7 @@ export default function ProfileCard() {
             href="https://discord.com/users/644484730070237215"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground text-sm font-medium hover:text-foreground transition-colors block"
+            className="text-muted-foreground text-sm font-medium hover:text-foreground transition-colors inline-flex items-center gap-1.5"
           >
             {username}
           </a>

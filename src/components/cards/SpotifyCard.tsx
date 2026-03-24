@@ -171,7 +171,7 @@ export default function SpotifyCard() {
                 href={song.songUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-base truncate transition-colors w-fit max-w-full hover:text-green-500 pastel:hover:text-[hsl(var(--spotify-bar))]"
+                className="font-bold text-base truncate transition-colors w-fit max-w-full spotify-title"
               >
                 {song.title}
               </a>

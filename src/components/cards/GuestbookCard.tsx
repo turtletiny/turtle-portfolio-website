@@ -62,7 +62,7 @@ export default function GuestbookCard() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Name (optional)"
-            className="w-full bg-secondary text-foreground text-sm p-4 rounded-xl border border-transparent focus:outline-none focus:border-primary transition-colors"
+            className="w-full bg-secondary text-foreground text-sm p-4 rounded-xl border border-transparent hover:border-[hsl(var(--card-hover-border))] focus:outline-none focus:border-[hsl(var(--card-hover-border))] transition-colors"
             maxLength={GUESTBOOK_MAX_NAME_LENGTH}
           />
 
@@ -72,7 +72,7 @@ export default function GuestbookCard() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Leave a comment..."
-                className="w-full bg-secondary text-foreground text-sm p-4 rounded-xl border border-transparent resize-none focus:outline-none focus:border-primary transition-colors min-h-[90px]"
+                className="w-full bg-secondary text-foreground text-sm p-4 rounded-xl border border-transparent resize-none hover:border-[hsl(var(--card-hover-border))] focus:outline-none focus:border-[hsl(var(--card-hover-border))] transition-colors min-h-[90px]"
                 maxLength={GUESTBOOK_MAX_MESSAGE_LENGTH}
               />
               <div className="flex justify-end pr-1">

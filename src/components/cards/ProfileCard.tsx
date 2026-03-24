@@ -144,7 +144,7 @@ export default function ProfileCard() {
             rel="noopener noreferrer"
             aria-label={s.label}
             
-            className={`flex items-center justify-center w-10 h-10 rounded-lg border border-border text-muted-foreground transition-all duration-200 hover:bg-border hover:scale-110 ${s.hoverClass}`}
+            className={`group flex items-center justify-center w-10 h-10 rounded-lg border border-border text-muted-foreground transition-all duration-300 hover:border-[hsl(var(--card-hover-border))] hover:[box-shadow:var(--card-hover-shadow)] hover:scale-[1.05] hover:-translate-y-0.5 active:scale-[0.97] ${s.hoverClass}`}
           >
             <s.icon size={s.iconSize} />
           </a>

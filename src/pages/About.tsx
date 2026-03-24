@@ -1,5 +1,6 @@
 import DashboardNavbar from "@/components/navigation/DashboardNavbar";
 import ThemeToggle from "@/components/theme/ThemeToggle";
+import type { ReactNode } from "react";
 import {
   Gamepad2,
   ScrollText,
@@ -21,6 +22,42 @@ import { useLastfmStats } from "@/hooks/useLastfmStats";
 
 const CHESS_USERNAME = "turtletinys";
 const LICHESS_USERNAME = "Zappyy";
+
+function ChessModeStatCard({
+  href,
+  icon,
+  rating,
+  label,
+  hoverDetail,
+}: {
+  href: string;
+  icon: ReactNode;
+  rating: number;
+  label: string;
+  hoverDetail: string;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative p-3 bg-secondary rounded-lg border border-border min-h-[124px] overflow-hidden transition-all duration-300 hover:border-[hsl(var(--card-hover-border))] hover:[box-shadow:var(--card-hover-shadow)] hover:scale-[1.02] active:scale-[0.99]"
+      aria-label={`${label} stats`}
+    >
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 text-center transition-transform duration-300 ease-out group-hover:-translate-y-3">
+        <div className="mb-1 transition-transform duration-300 ease-out scale-110 group-hover:scale-100 group-hover:-translate-y-0.5">{icon}</div>
+        <span className="text-2xl font-bold text-primary transition-transform duration-300 ease-out group-hover:scale-90">{rating}</span>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-2 flex flex-col items-center justify-end gap-0.5 text-center px-2 opacity-0 translate-y-2 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:translate-y-0">
+        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          {label}
+        </span>
+        <span className="text-xs font-bold">{hoverDetail}</span>
+      </div>
+    </a>
+  );
+}
 
 export default function About() {
   const { stats, profile, loading, error } = useChessStats(CHESS_USERNAME);
@@ -358,88 +395,93 @@ export default function About() {
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 w-fit p-2 pr-3 bg-secondary border border-border rounded-lg hover:border-primary hover:scale-[1.05] active:scale-[0.97] transition-all duration-300 group shadow-sm"
                 >
-                  <span className="text-lg font-bold pl-1 group-hover:text-primary transition-colors">
+                  <span className="text-lg font-bold pl-1">
                     {profile?.username}
                   </span>
-                  <span className="text-xs font-medium text-muted-foreground bg-background px-2 py-1 rounded shadow-sm">
-                    Chess.com
+                  <span>
+                    <img
+                      src="/chesscom.png"
+                      alt="Chess.com"
+                      className="h-6 w-auto object-contain"
+                    />
                   </span>
                 </a>
 
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
                   {rapid && (
-                    <div className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-1 text-center">
-                      <Timer
-                        size={24}
-                        className="text-green-500 mb-1"
-                        strokeWidth={2.5}
-                      />
-                      <span className="text-xl font-bold text-primary">
-                        {rapid.rating}
-                      </span>
-                      <span className="text-xs font-medium">Rapid</span>
-                      <span className="text-[10px] text-muted-foreground">
-                        {rapid.wins}W / {rapid.losses}L
-                      </span>
-                    </div>
+                    <ChessModeStatCard
+                      href={`https://www.chess.com/stats/live/rapid/${CHESS_USERNAME}`}
+                      icon={
+                        <Timer
+                          size={24}
+                          className="text-green-500"
+                          strokeWidth={2.5}
+                        />
+                      }
+                      rating={rapid.rating}
+                      label="Rapid"
+                      hoverDetail={`${rapid.wins}W / ${rapid.losses}L`}
+                    />
                   )}
                   {blitz && (
-                    <div className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-1 text-center">
-                      <Zap
-                        size={24}
-                        className="text-blue-500 dark:text-yellow-400 mb-1"
-                        fill="currentColor"
-                      />
-                      <span className="text-xl font-bold text-primary">
-                        {blitz.rating}
-                      </span>
-                      <span className="text-xs font-medium">Blitz</span>
-                      <span className="text-[10px] text-muted-foreground">
-                        {blitz.wins}W / {blitz.losses}L
-                      </span>
-                    </div>
+                    <ChessModeStatCard
+                      href={`https://www.chess.com/stats/live/blitz/${CHESS_USERNAME}`}
+                      icon={
+                        <Zap
+                          size={24}
+                          className="text-blue-500 dark:text-yellow-400"
+                          fill="currentColor"
+                        />
+                      }
+                      rating={blitz.rating}
+                      label="Blitz"
+                      hoverDetail={`${blitz.wins}W / ${blitz.losses}L`}
+                    />
                   )}
                   {bullet && (
-                    <div className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-1 text-center">
-                      <Rocket
-                        size={24}
-                        className="text-amber-500 mb-1"
-                        fill="currentColor"
-                      />
-                      <span className="text-xl font-bold text-primary">
-                        {bullet.rating}
-                      </span>
-                      <span className="text-xs font-medium">Bullet</span>
-                      <span className="text-[10px] text-muted-foreground">
-                        {bullet.wins}W / {bullet.losses}L
-                      </span>
-                    </div>
+                    <ChessModeStatCard
+                      href={`https://www.chess.com/stats/live/bullet/${CHESS_USERNAME}`}
+                      icon={
+                        <Rocket
+                          size={24}
+                          className="text-amber-500"
+                          fill="currentColor"
+                        />
+                      }
+                      rating={bullet.rating}
+                      label="Bullet"
+                      hoverDetail={`${bullet.wins}W / ${bullet.losses}L`}
+                    />
                   )}
                   {stats?.puzzle_rush && (
-                    <div className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-1 text-center">
-                      <Flame
-                        size={24}
-                        className="text-red-500 mb-1"
-                        fill="currentColor"
-                      />
-                      <span className="text-xl font-bold text-primary">
-                        {stats.puzzle_rush.best.score}
-                      </span>
-                      <span className="text-xs font-medium">Puzzle Rush</span>
-                    </div>
+                    <ChessModeStatCard
+                      href={`https://www.chess.com/stats/puzzles/rush/${CHESS_USERNAME}`}
+                      icon={
+                        <Flame
+                          size={24}
+                          className="text-red-500"
+                          fill="currentColor"
+                        />
+                      }
+                      rating={stats.puzzle_rush.best.score}
+                      label="Puzzle Rush"
+                      hoverDetail={`${stats.puzzle_rush.best.total_attempts} Plays`}
+                    />
                   )}
                   {stats?.tactics && (
-                    <div className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-1 text-center">
-                      <Puzzle
-                        size={24}
-                        className="text-orange-500 mb-1"
-                        fill="currentColor"
-                      />
-                      <span className="text-xl font-bold text-primary">
-                        {stats.tactics.highest.rating}
-                      </span>
-                      <span className="text-xs font-medium">Puzzles</span>
-                    </div>
+                    <ChessModeStatCard
+                      href={`https://www.chess.com/stats/puzzles/${CHESS_USERNAME}`}
+                      icon={
+                        <Puzzle
+                          size={24}
+                          className="text-orange-500"
+                          fill="currentColor"
+                        />
+                      }
+                      rating={stats.tactics.highest.rating}
+                      label="Puzzles"
+                      hoverDetail="Puzzles"
+                    />
                   )}
                 </div>
               </>
@@ -468,78 +510,98 @@ export default function About() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 w-fit p-2 pr-3 bg-secondary border border-border rounded-lg hover:border-primary hover:scale-[1.05] active:scale-[0.97] transition-all duration-300 group shadow-sm"
                   >
-                    <span className="text-lg font-bold pl-1 group-hover:text-primary transition-colors">
+                    <span className="text-lg font-bold pl-1">
                       {lichessProfile?.username}
                     </span>
-                    <span className="text-xs font-medium text-muted-foreground bg-background px-2 py-1 rounded shadow-sm">
-                      Lichess
+                    <span className="flex items-center gap-1">
+                      <img
+                        src="/lichesswhite.svg"
+                        alt="Lichess"
+                        className="h-6 w-auto object-contain block [.pastel_&]:hidden"
+                      />
+                      <img
+                        src="/lichess.svg"
+                        alt="Lichess"
+                        className="h-6 w-auto object-contain hidden [.pastel_&]:block"
+                      />
+                      <span className="text-lg font-bold pl-1">
+                        lichess.org
+                      </span>
                     </span>
                   </a>
 
                   <div className="grid grid-cols-2 gap-3">
                     {lichessProfile?.perfs?.rapid && (
-                      <div className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-1 text-center">
-                        <Timer
-                          size={24}
-                          className="text-green-500 mb-1"
-                          strokeWidth={2.5}
-                        />
-                        <span className="text-xl font-bold text-primary">
-                          {lichessProfile.perfs.rapid.rating}
-                        </span>
-                        <span className="text-xs font-medium">Rapid</span>
-                        <span className="text-[10px] text-muted-foreground">
-                          {lichessProfile.perfs.rapid.games} Games
-                        </span>
-                      </div>
+                      <ChessModeStatCard
+                        href={`https://lichess.org/@/${LICHESS_USERNAME}/perf/rapid`}
+                        icon={
+                          <Timer
+                            size={24}
+                            className="text-green-500"
+                            strokeWidth={2.5}
+                          />
+                        }
+                        rating={lichessProfile.perfs.rapid.rating}
+                        label="Rapid"
+                        hoverDetail={
+                          lichessProfile.perfStats?.rapid
+                            ? `${lichessProfile.perfStats.rapid.wins}W / ${lichessProfile.perfStats.rapid.losses}L`
+                            : `${lichessProfile.perfs.rapid.games} Games`
+                        }
+                      />
                     )}
                     {lichessProfile?.perfs?.blitz && (
-                      <div className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-1 text-center">
-                        <Zap
-                          size={24}
-                          className="text-blue-500 dark:text-yellow-400 mb-1"
-                          fill="currentColor"
-                        />
-                        <span className="text-xl font-bold text-primary">
-                          {lichessProfile.perfs.blitz.rating}
-                        </span>
-                        <span className="text-xs font-medium">Blitz</span>
-                        <span className="text-[10px] text-muted-foreground">
-                          {lichessProfile.perfs.blitz.games} Games
-                        </span>
-                      </div>
+                      <ChessModeStatCard
+                        href={`https://lichess.org/@/${LICHESS_USERNAME}/perf/blitz`}
+                        icon={
+                          <Zap
+                            size={24}
+                            className="text-blue-500 dark:text-yellow-400"
+                            fill="currentColor"
+                          />
+                        }
+                        rating={lichessProfile.perfs.blitz.rating}
+                        label="Blitz"
+                        hoverDetail={
+                          lichessProfile.perfStats?.blitz
+                            ? `${lichessProfile.perfStats.blitz.wins}W / ${lichessProfile.perfStats.blitz.losses}L`
+                            : `${lichessProfile.perfs.blitz.games} Games`
+                        }
+                      />
                     )}
                     {lichessProfile?.perfs?.bullet && (
-                      <div className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-1 text-center">
-                        <Rocket
-                          size={24}
-                          className="text-amber-500 mb-1"
-                          fill="currentColor"
-                        />
-                        <span className="text-xl font-bold text-primary">
-                          {lichessProfile.perfs.bullet.rating}
-                        </span>
-                        <span className="text-xs font-medium">Bullet</span>
-                        <span className="text-[10px] text-muted-foreground">
-                          {lichessProfile.perfs.bullet.games} Games
-                        </span>
-                      </div>
+                      <ChessModeStatCard
+                        href={`https://lichess.org/@/${LICHESS_USERNAME}/perf/bullet`}
+                        icon={
+                          <Rocket
+                            size={24}
+                            className="text-amber-500"
+                            fill="currentColor"
+                          />
+                        }
+                        rating={lichessProfile.perfs.bullet.rating}
+                        label="Bullet"
+                        hoverDetail={
+                          lichessProfile.perfStats?.bullet
+                            ? `${lichessProfile.perfStats.bullet.wins}W / ${lichessProfile.perfStats.bullet.losses}L`
+                            : `${lichessProfile.perfs.bullet.games} Games`
+                        }
+                      />
                     )}
                     {lichessProfile?.perfs?.puzzle && (
-                      <div className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-1 text-center">
-                        <Puzzle
-                          size={24}
-                          className="text-orange-500 mb-1"
-                          fill="currentColor"
-                        />
-                        <span className="text-xl font-bold text-primary">
-                          {lichessProfile.perfs.puzzle.rating}
-                        </span>
-                        <span className="text-xs font-medium">Puzzles</span>
-                        <span className="text-[10px] text-muted-foreground">
-                          {lichessProfile.perfs.puzzle.games} Plays
-                        </span>
-                      </div>
+                      <ChessModeStatCard
+                        href={`https://lichess.org/training/dashboard/90/dashboard?u=${LICHESS_USERNAME}`}
+                        icon={
+                          <Puzzle
+                            size={24}
+                            className="text-orange-500"
+                            fill="currentColor"
+                          />
+                        }
+                        rating={lichessProfile.perfs.puzzle.rating}
+                        label="Puzzles"
+                        hoverDetail={`${lichessProfile.perfs.puzzle.games} Plays`}
+                      />
                     )}
                   </div>
                 </>

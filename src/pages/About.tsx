@@ -794,9 +794,7 @@ export default function About() {
             <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium">
               Blender
             </div>
-            <div className="px-4 py-2 bg-secondary rounded-full border border-border text-sm font-medium">
-              Collecting... something, idk yet... probably plushies since I have a lot already
-            </div>
+            
           </div>
         </div>
       </div>

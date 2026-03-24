@@ -268,9 +268,16 @@ export default function About() {
           </div>
 
           {lastfmLoading ? (
-            <div className="space-y-4">
-              <Skeleton className="h-32 w-full rounded-lg" />
-              <Skeleton className="h-48 w-full rounded-lg" />
+            <div className="flex items-center justify-center py-10 animate-pulse">
+              <div className="flex items-center gap-3 text-sm text-muted-foreground">
+                <Headphones size={18} className="block [.pastel_&]:hidden" />
+                <img
+                  src="pixelheadphones.png"
+                  alt="Last.fm"
+                  className="hidden [.pastel_&]:block w-[18px] h-[18px] object-contain"
+                />
+                <span>Connecting to Last.fm stats...</span>
+              </div>
             </div>
           ) : lastfmError ? (
             <p className="text-destructive">Failed to load Last.fm stats</p>

@@ -70,7 +70,7 @@ export default function About() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {[
               {
-                name: "React",
+                name: "ReactJS",
                 img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
                 url: "https://react.dev/",
               },
@@ -85,7 +85,7 @@ export default function About() {
                 url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
               },
               {
-                name: "Tailwind",
+                name: "TailwindCSS",
                 img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
                 url: "https://tailwindcss.com/",
               },
@@ -94,11 +94,7 @@ export default function About() {
                 img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
                 url: "https://www.python.org/",
               },
-              {
-                name: "Pygame",
-                img: "pygame_ce_tiny.png",
-                url: "https://pyga.me/",
-              },
+
               {
                 name: "Java",
                 img: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg",

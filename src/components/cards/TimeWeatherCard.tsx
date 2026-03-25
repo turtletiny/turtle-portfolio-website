@@ -24,8 +24,8 @@ export default function TimeWeatherCard() {
         LOCAL TIME
       </div>
 
-      <div className="flex items-start justify-between flex-grow pb-3">
-        <div className="flex flex-col">
+      <div className="flex items-start justify-between flex-grow pb-4">
+        <div className="flex flex-col self-end -translate-y-[8px]">
           <p className="font-bold text-3xl tabular-nums tracking-wide">
             {time || "--:--:--"}
           </p>
@@ -34,7 +34,7 @@ export default function TimeWeatherCard() {
           </p>
         </div>
 
-        <div className="flex flex-col items-center -mt-5">
+        <div className="flex flex-col items-center self-end -translate-y-[8px]">
           {WeatherIcon ? (
             <WeatherIcon size={60} className="text-foreground" />
           ) : (
@@ -45,7 +45,7 @@ export default function TimeWeatherCard() {
           </p>
         </div>
 
-        <div className="pt-1 translate-y-1">
+        <div className="translate-y-[20px]">
           <p className="font-bold text-3xl leading-none">
             {weather ? `${weather.temp}°C` : "--°C"}
           </p>

@@ -1,11 +1,12 @@
 import { useLocalTime } from "@/hooks/useLocalTime";
-import { useWeather, getWeatherIcon } from "@/hooks/useWeather";
+import { useWeather, getWeatherIcon, getWeatherStatus } from "@/hooks/useWeather";
 import { Clock } from "lucide-react";
 
 export default function TimeWeatherCard() {
   const time = useLocalTime();
   const weather = useWeather();
   const WeatherIcon = weather ? getWeatherIcon(weather.code) : null;
+  const weatherStatus = weather ? getWeatherStatus(weather.code) : "Loading weather";
 
   return (
     <div className="card-base flex flex-col">
@@ -23,7 +24,7 @@ export default function TimeWeatherCard() {
         LOCAL TIME
       </div>
 
-      <div className="flex items-center justify-between flex-grow pb-3">
+      <div className="flex items-start justify-between flex-grow pb-3">
         <div className="flex flex-col">
           <p className="font-bold text-3xl tabular-nums tracking-wide">
             {time || "--:--:--"}
@@ -33,12 +34,18 @@ export default function TimeWeatherCard() {
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-col items-center -mt-5">
           {WeatherIcon ? (
             <WeatherIcon size={60} className="text-foreground" />
           ) : (
             <div className="w-9 h-9 animate-spin rounded-full border-2 border-muted-foreground border-t-transparent" />
           )}
+          <p className="text-muted-foreground text-sm font-medium whitespace-nowrap">
+            {weatherStatus}
+          </p>
+        </div>
+
+        <div className="pt-1 translate-y-1">
           <p className="font-bold text-3xl leading-none">
             {weather ? `${weather.temp}°C` : "--°C"}
           </p>

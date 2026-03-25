@@ -123,7 +123,7 @@ export default function ProfileCard() {
             href="https://discord.com/users/644484730070237215"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-muted-foreground text-sm font-medium hover:text-foreground transition-colors inline-flex items-center gap-1.5"
+            className="text-muted-foreground text-sm font-medium hover:text-foreground transition-colors"
           >
             {username}
           </a>

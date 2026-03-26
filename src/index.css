@@ -135,12 +135,12 @@
   opacity: 0;
   transform: translate(0, 0);
   transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
+    opacity 0.15s ease,
+    transform 0.15s ease;
 }
 
 .group\/tt .tiktok-main {
-  transition: fill 0.2s ease;
+  transition: fill 0.15s ease;
 }
 
 .group\/tt:hover .tiktok-main {

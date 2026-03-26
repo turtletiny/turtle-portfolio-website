@@ -102,15 +102,15 @@ const fragment = /* glsl */ `
 const Particles: React.FC<ParticlesProps> = ({
   particleCount = 200,
   particleSpread = 10,
-  speed = 0.1,
+  speed = 0.01,
   particleColors,
   moveParticlesOnHover = false,
   particleHoverFactor = 1,
   alphaParticles = false,
-  particleBaseSize = 100,
+  particleBaseSize = 50,
   sizeRandomness = 1,
   cameraDistance = 20,
-  disableRotation = false,
+  disableRotation = true,
   pixelRatio = 1,
   className
 }) => {

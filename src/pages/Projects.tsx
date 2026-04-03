@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import DashboardNavbar from "@/components/navigation/DashboardNavbar";
 import ThemeToggle from "@/components/theme/ThemeToggle";
+import { useTheme } from "@/hooks/useTheme";
 import TextType from "@/components/typography/TextType";
 import {
   Folder,
@@ -14,6 +15,7 @@ import {
 } from "lucide-react";
 
 export default function Projects() {
+  const { isPastel } = useTheme();
   const [isMainOpen, setIsMainOpen] = useState(false);
   const [activeFolder, setActiveFolder] = useState<string | null>(null);
   const [animStep, setAnimStep] = useState(0);
@@ -60,7 +62,7 @@ export default function Projects() {
             onClick={handleMainClick}
             className={`flex flex-col items-center justify-center gap-3 p-8 rounded-3xl transform transition-all duration-150 ease-out cursor-pointer w-48 bg-card border-2 ${
               isMainOpen
-                ? "border-yellow-500/50 pastel:border-red-500/50 scale-[1.02] hover:scale-105 shadow-lg shadow-yellow-500/10 pastel:shadow-red-500/10 bg-yellow-500/5 pastel:bg-red-500/5"
+                ? `${isPastel ? "border-pink-500/50 shadow-pink-500/20 bg-pink-500/20" : "border-yellow-500/50 shadow-yellow-500/10 bg-yellow-500/5"} scale-[1.02] hover:scale-105 shadow-lg`
                 : "border-border/50 scale-100 hover:scale-[1.02] hover:bg-secondary/40 shadow-sm"
             }`}
           >
@@ -238,7 +240,7 @@ export default function Projects() {
                   </div>
                   <h2 className="text-base font-bold">Future Projects Ideas</h2>
                   <p className="text-xs text-muted-foreground mt-1">
-                    5 projects
+                    2 projects
                   </p>
                 </button>
               </div>

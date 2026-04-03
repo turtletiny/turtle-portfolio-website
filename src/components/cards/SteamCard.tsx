@@ -165,11 +165,11 @@ export default function SteamCard() {
           </div>
 
           {/* Recently Played */}
-          {steamData.recentGames && steamData.recentGames.length > 0 && (
-            <div className="mt-5 pt-4 border-t border-border flex flex-col gap-3">
-              <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
-                RECENTLY PLAYED
-              </div>
+          <div className="mt-5 pt-4 border-t border-border flex flex-col gap-3">
+            <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
+              RECENTLY PLAYED
+            </div>
+            {steamData.recentGames && steamData.recentGames.length > 0 ? (
               <div className="flex flex-col gap-2">
                 {steamData.recentGames.slice(0, 2).map((game) => (
                   <a
@@ -195,8 +195,12 @@ export default function SteamCard() {
                   </a>
                 ))}
               </div>
-            </div>
-          )}
+            ) : (
+              <p className="text-xs text-muted-foreground">
+                No recent games found (Steam play history may be private).
+              </p>
+            )}
+          </div>
         </div>
       )}
     </div>

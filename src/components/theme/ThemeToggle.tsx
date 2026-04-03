@@ -31,7 +31,7 @@ export default function ThemeToggle() {
     
     <div className="fixed top-6 left-6 sm:top-8 sm:left-8 z-[100] hover:scale-105 transition-transform duration-200">
       <StyledWrapper>
-        <label className="switch">
+        <label className={`switch ${isPastel ? "pastel-mode" : "dark-mode"}`}>
           <span className="sun">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <g fill="#ffd43b">
@@ -42,7 +42,13 @@ export default function ThemeToggle() {
           </span>
           <span className="moon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
-              <path d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z" />
+              <path
+                d="m223.5 32c-123.5 0-223.5 100.3-223.5 224s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="28"
+                strokeLinejoin="round"
+              />
             </svg>
           </span>
           <input 
@@ -66,6 +72,7 @@ const StyledWrapper = styled.div`
     display: inline-block;
     width: 64px;
     height: 34px;
+    border-radius: 30px;
   }
 
   .switch input {
@@ -81,10 +88,23 @@ const StyledWrapper = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #73C0FC;
-    transition: .4s;
+    transition: .32s ease;
     border-radius: 30px;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    overflow: hidden;
+  }
+
+  .dark-mode .slider {
+    border: 1px solid rgba(255, 255, 255, 0.92);
+    background: transparent;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 8px 18px rgba(0, 0, 0, 0.28);
+  }
+
+  .pastel-mode .slider {
+    border: 0;
+    background-color: #73c0fc;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   }
 
   .slider:before {
@@ -96,8 +116,21 @@ const StyledWrapper = styled.div`
     left: 2px;
     bottom: 2px;
     z-index: 2;
+    transition: .32s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark-mode .slider:before {
+    border: 1px solid rgba(92, 92, 92, 0.55);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 1), rgba(246, 246, 246, 1));
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.7),
+      0 5px 8px rgba(0, 0, 0, 0.18);
+  }
+
+  .pastel-mode .slider:before {
+    border: 0;
     background-color: #e8e8e8;
-    transition: .4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: none;
   }
 
   .sun svg {
@@ -107,16 +140,36 @@ const StyledWrapper = styled.div`
     z-index: 1;
     width: 24px;
     height: 24px;
+    transition: opacity .2s ease;
   }
 
   .moon svg {
-    fill: #73C0FC;
+    fill: #9fc5ff;
     position: absolute;
     top: 5px;
     left: 5px;
     z-index: 1;
     width: 24px;
     height: 24px;
+    transition: opacity .2s ease;
+  }
+
+  .dark-mode .moon svg {
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  .dark-mode .sun svg {
+    opacity: 0.45;
+  }
+
+  .pastel-mode .moon svg {
+    fill: #73c0fc;
+    opacity: 1;
+  }
+
+  .pastel-mode .sun svg {
+    opacity: 1;
   }
 
   /* .switch:hover */.sun svg {
@@ -139,12 +192,9 @@ const StyledWrapper = styled.div`
     100% { transform: rotate(0deg); }
   }
 
-  .input:checked + .slider {
-    background-color: #183153;
-  }
-
-  .input:focus + .slider {
-    box-shadow: 0 0 1px #183153;
+  .input:focus-visible + .slider {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
   }
 
   .input:checked + .slider:before {

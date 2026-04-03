@@ -283,3 +283,46 @@ select:focus,
   width: 100%;
   height: 100%;
 }
+
+/* Guestbook custom scrollbar */
+.guestbook-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--card-hover-border)) hsl(var(--secondary));
+}
+
+.guestbook-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.guestbook-scrollbar::-webkit-scrollbar-track {
+  background: hsl(var(--secondary));
+  border-radius: 9999px;
+}
+
+.guestbook-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--card-hover-border));
+  border: 2px solid hsl(var(--secondary));
+  border-radius: 9999px;
+  transition: background-color 0.2s ease;
+}
+
+.guestbook-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+.pastel .guestbook-scrollbar {
+  scrollbar-color: hsl(var(--border)) hsl(var(--secondary));
+}
+
+.pastel .guestbook-scrollbar::-webkit-scrollbar-track {
+  background: hsl(var(--secondary));
+}
+
+.pastel .guestbook-scrollbar::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-color: hsl(var(--secondary));
+}
+
+.pastel .guestbook-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--border));
+}

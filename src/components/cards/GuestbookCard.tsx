@@ -118,7 +118,7 @@ export default function GuestbookCard() {
         </form>
 
         {/* Messages List */}
-        <div className="flex flex-col gap-5 pt-3 max-h-[350px] overflow-y-auto pr-2">
+        <div className="guestbook-scrollbar flex flex-col gap-5 pt-3 max-h-[350px] overflow-y-auto pr-2">
           {isLoading ? (
             <div className="text-center py-6 text-sm text-muted-foreground/80">
               <Loader2 className="animate-spin mx-auto mb-2" />

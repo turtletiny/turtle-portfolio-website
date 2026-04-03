@@ -143,7 +143,7 @@ export default function About() {
                 href={tech.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-2 hover:border-primary transition-all hover:scale-105 group"
+                className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-2 hover:border-[hsl(var(--card-hover-border))] hover:[box-shadow:var(--card-hover-shadow)] transition-all hover:scale-105 group"
               >
                 <img
                   src={tech.img}
@@ -295,7 +295,7 @@ export default function About() {
                       href={track.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-4 p-3 bg-secondary rounded-lg border border-border hover:border-primary transition-all hover:scale-[1.02] group shadow-sm"
+                      className="flex items-center gap-4 p-3 bg-secondary rounded-lg border border-border hover:border-[hsl(var(--card-hover-border))] hover:[box-shadow:var(--card-hover-shadow)] transition-all hover:scale-[1.02] group shadow-sm"
                     >
                       <div className="w-12 h-12 rounded bg-card flex-shrink-0 overflow-hidden shadow-sm relative border border-border">
                         <img
@@ -400,7 +400,7 @@ export default function About() {
                   href={profile?.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 w-fit p-2 pr-3 bg-secondary border border-border rounded-lg hover:border-primary hover:scale-[1.05] active:scale-[0.97] transition-all duration-150 group shadow-sm"
+                  className="flex items-center gap-3 w-fit p-2 pr-3 bg-secondary border border-border rounded-lg hover:border-[hsl(var(--card-hover-border))] hover:[box-shadow:var(--card-hover-shadow)] hover:scale-[1.05] active:scale-[0.97] transition-all duration-150 group shadow-sm"
                 >
                   <span className="text-lg font-bold pl-1">
                     {profile?.username}
@@ -515,7 +515,7 @@ export default function About() {
                     href={lichessProfile?.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 w-fit p-2 pr-3 bg-secondary border border-border rounded-lg hover:border-primary hover:scale-[1.05] active:scale-[0.97] transition-all duration-150 group shadow-sm"
+                    className="flex items-center gap-3 w-fit p-2 pr-3 bg-secondary border border-border rounded-lg hover:border-[hsl(var(--card-hover-border))] hover:[box-shadow:var(--card-hover-shadow)] hover:scale-[1.05] active:scale-[0.97] transition-all duration-150 group shadow-sm"
                   >
                     <span className="text-lg font-bold pl-1">
                       {lichessProfile?.username}

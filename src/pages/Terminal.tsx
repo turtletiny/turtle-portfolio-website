@@ -607,7 +607,7 @@ export default function TerminalPage() {
             "OS: turtletiny.lol",
             "Shell: interactive-terminal",
             "Theme: DarkMinimal/PastelPink+Blue",
-            "Font: Jetbrains Mono",
+            "Font: JetBrains Mono",
             "Data: Spotify + Steam + Last.fm + Lanyard + Guestbook",
           ],
           "muted",

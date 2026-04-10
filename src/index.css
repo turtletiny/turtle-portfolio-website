@@ -362,12 +362,6 @@ select:focus,
   background: rgba(25, 26, 30, 0.78);
 }
 
-.terminal-inputbar {
-  border-top: 1px solid rgba(255, 255, 255, 0.09);
-  padding: 12px 20px;
-  background: rgba(25, 26, 30, 0.78);
-}
-
 .terminal-text {
   color: rgba(242, 242, 244, 0.96);
 }

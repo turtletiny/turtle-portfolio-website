@@ -697,6 +697,16 @@ export default function TerminalPage() {
     };
   }, []);
 
+  useEffect(() => {
+    if (pendingCommand || isAutoTyping) return;
+
+    const rafId = window.requestAnimationFrame(() => {
+      inputRef.current?.focus();
+    });
+
+    return () => window.cancelAnimationFrame(rafId);
+  }, [pendingCommand, isAutoTyping]);
+
   return (
     <div className="min-h-screen flex flex-col items-center text-foreground font-main relative z-10">
       <ThemeToggle />
@@ -782,22 +792,7 @@ export default function TerminalPage() {
               </motion.div>
             )}
 
-            <div ref={scrollAnchorRef} />
-          </div>
-
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              if (pendingCommand || isAutoTyping) return;
-              void runCommand(input);
-            }}
-            className="terminal-inputbar"
-          >
-            <label htmlFor="terminal-input" className="sr-only">
-              Terminal command input
-            </label>
-
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 pt-1">
               <span className="terminal-success text-xs sm:text-sm shrink-0">
                 {promptLabel}
               </span>
@@ -808,9 +803,17 @@ export default function TerminalPage() {
                 type="text"
                 autoComplete="off"
                 spellCheck={false}
+                aria-label="Terminal command input"
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    event.preventDefault();
+                    if (pendingCommand || isAutoTyping) return;
+                    void runCommand(input);
+                    return;
+                  }
+
                   if (event.key === "ArrowUp") {
                     event.preventDefault();
                     if (history.length === 0) return;
@@ -852,7 +855,9 @@ export default function TerminalPage() {
                 disabled={Boolean(pendingCommand) || isAutoTyping}
               />
             </div>
-          </form>
+
+            <div ref={scrollAnchorRef} />
+          </div>
         </section>
       </div>
     </div>

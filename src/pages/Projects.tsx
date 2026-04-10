@@ -156,7 +156,7 @@ export default function Projects() {
                   </div>
                   <h2 className="text-base font-bold">Current Projects</h2>
                   <p className="text-xs text-muted-foreground mt-1">
-                    1 project
+                    2 Files
                   </p>
                 </button>
               </div>
@@ -198,7 +198,7 @@ export default function Projects() {
                   </div>
                   <h2 className="text-base font-bold">Past Projects</h2>
                   <p className="text-xs text-muted-foreground mt-1">
-                    1 project
+                    1 File
                   </p>
                 </button>
               </div>
@@ -240,7 +240,7 @@ export default function Projects() {
                   </div>
                   <h2 className="text-base font-bold">Future Projects Ideas</h2>
                   <p className="text-xs text-muted-foreground mt-1">
-                    2 projects
+                    2 Files
                   </p>
                 </button>
               </div>
@@ -368,6 +368,49 @@ export default function Projects() {
                   </span>
                   <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border">
                     TAILWIND CSS
+                  </span>
+                </div>
+              </div>
+
+              {/* New: Student Planner Dashboard */}
+              <div className="card-base flex flex-col gap-4 group transition-all duration-300 relative overflow-hidden bg-card border-border/50">
+                <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                <div className="flex justify-between items-start relative z-10">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-secondary/50 rounded-lg border border-border">
+                      <Clock size={20} className="text-green-500" />
+                    </div>
+                    <h3 className="text-xl font-bold">Student Planner Dashboard</h3>
+                  </div>
+                  <div className="flex gap-2">
+                    <a
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 bg-secondary/50 border border-border rounded hover:text-primary transition-all hover:scale-110"
+                    >
+                      <Github size={18} />
+                    </a>
+                    <a
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 bg-secondary/50 border border-border rounded hover:text-primary transition-all hover:scale-110"
+                    >
+                      <ExternalLink size={18} />
+                    </a>
+                  </div>
+                </div>
+                <div className="text-muted-foreground leading-relaxed text-sm relative z-10">
+                  <p>
+                    Student planner dashboard I made for personal use
+                    
+
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2 relative z-10">
+                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border">
+                    WEB APP
                   </span>
                 </div>
               </div>

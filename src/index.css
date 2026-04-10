@@ -329,14 +329,14 @@ select:focus,
 }
 
 .terminal-window {
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 18px;
   overflow: hidden;
-  background: rgba(35, 37, 43, 0.28);
-  backdrop-filter: blur(12px) saturate(1.08);
+  background: rgba(35, 37, 43, 0.14);
+  backdrop-filter: blur(6px) saturate(1.1);
   box-shadow:
-    0 14px 40px rgba(0, 0, 0, 0.36),
-    0 1px 0 rgba(255, 255, 255, 0.04) inset;
+    0 12px 30px rgba(0, 0, 0, 0.28),
+    0 1px 0 rgba(255, 255, 255, 0.03) inset;
 }
 
 .terminal-titlebar {
@@ -346,8 +346,8 @@ select:focus,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  background: rgba(63, 62, 64, 0.38);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  background: rgba(63, 62, 64, 0.18);
 }
 
 .terminal-title {
@@ -364,7 +364,7 @@ select:focus,
 }
 
 .terminal-pane {
-  background: rgba(25, 26, 30, 0.28);
+  background: rgba(25, 26, 30, 0.10);
 }
 
 .terminal-text {

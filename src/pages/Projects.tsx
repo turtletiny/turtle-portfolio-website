@@ -361,6 +361,7 @@ export default function Projects() {
                 </div>
                 <div className="text-muted-foreground text-sm relative z-10 mt-2">
                   <ul className="list-disc list-inside space-y-1">
+                    <li>Interactive terminal with commands</li>
                     <li>Responsive layout + Mobile support</li>
                     <li>Dark/Light theme switch</li>
                     <li>Custom Cursor</li>

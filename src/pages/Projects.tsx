@@ -6,8 +6,8 @@ import TextType from "@/components/typography/TextType";
 import {
   Folder,
   FolderOpen,
-  Clock,
-  CheckCircle2,
+  Gamepad,
+  AppWindow,
   Sparkles,
   Github,
   ExternalLink,
@@ -154,7 +154,7 @@ export default function Projects() {
                       className={`absolute transition-all duration-150 ${activeFolder === "current" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`}
                     />
                   </div>
-                  <h2 className="text-base font-bold">Current Projects</h2>
+                  <h2 className="text-base font-bold">Current WIP</h2>
                   <p className="text-xs text-muted-foreground mt-1">
                     2 Files
                   </p>
@@ -238,7 +238,7 @@ export default function Projects() {
                       className={`absolute transition-all duration-150 ${activeFolder === "future" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`}
                     />
                   </div>
-                  <h2 className="text-base font-bold">Future Projects Ideas</h2>
+                  <h2 className="text-base font-bold">Future Plans</h2>
                   <p className="text-xs text-muted-foreground mt-1">
                     2 Files
                   </p>
@@ -359,15 +359,24 @@ export default function Projects() {
                     personal project and first website using React.
                   </p>
                 </div>
+                <div className="text-muted-foreground text-sm relative z-10 mt-2">
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Responsive layout + Mobile support</li>
+                    <li>Dark/Light theme switch</li>
+                    <li>Custom Cursor</li>
+                    <li>Interactive UI elements and animations </li>
+                    <li>Live widgets with API integrations (Spotify activity, Discord status, local time + weather, Steam activity, Last.fm stats, 
+                      Chess.com + Lichess stats </li>
+                    <li>Commenting feature stored in backend database</li>
+                    <li>Mini Music Player</li>
+                    <li>Interactive Project showcase page  </li>
+                    
+                    
+                  </ul>
+                </div>
                 <div className="flex flex-wrap gap-2 mt-2 relative z-10">
                   <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border">
-                    REACT
-                  </span>
-                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border">
-                    TYPESCRIPT
-                  </span>
-                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border">
-                    TAILWIND CSS
+                    WEBSITE
                   </span>
                 </div>
               </div>
@@ -375,14 +384,14 @@ export default function Projects() {
               {/* New: Student Planner Dashboard */}
               <div className="card-base flex flex-col gap-4 group transition-all duration-300 relative overflow-hidden bg-card border-border/50">
                 <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
-                <div className="flex justify-between items-start relative z-10">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-secondary/50 rounded-lg border border-border">
-                      <Clock size={20} className="text-green-500" />
+                  <div className="flex justify-between items-start relative z-10">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-secondary/50 rounded-lg border border-border">
+                        <Globe size={20} className="text-blue-500" />
+                      </div>
+                      <h3 className="text-xl font-bold">Student Planner Dashboard</h3>
                     </div>
-                    <h3 className="text-xl font-bold">Student Planner Dashboard</h3>
-                  </div>
-                  <div className="flex gap-2">
+                    <div className="flex gap-2">
                     <a
                       href="#"
                       target="_blank"
@@ -403,10 +412,25 @@ export default function Projects() {
                 </div>
                 <div className="text-muted-foreground leading-relaxed text-sm relative z-10">
                   <p>
-                    Student planner dashboard I made for personal use
+                    A matcha themed student planner dashboard for personal-use to help me organise my life
                     
 
                   </p>
+                </div>
+                <div className="text-muted-foreground text-sm relative z-10 mt-2">
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Google Calendar intgration with read + write functionality</li>
+                    <li>Habit Tracker</li>
+                    <li>To-Do list synced to Google Calendar events</li>
+                    <li>Pomodoro study timer</li>
+                    <li>Assignment tracking</li>
+                    <li>Grade calculator</li>
+                    <li>Habit Tracker</li>
+                    <li>Subject Note Organisation</li>
+                    <li>Cute "digital garden" with growing plants to represent habit consistency</li>
+                    <li>Responsive Layout + Mobile Support</li>
+                    <li>Database integration for cross device syncing</li>
+                  </ul>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-2 relative z-10">
                   <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border">
@@ -425,7 +449,7 @@ export default function Projects() {
                 <div className="flex justify-between items-start relative z-10">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-secondary/50 rounded-lg border border-border">
-                      <CheckCircle2 size={20} className="text-pink-500" />
+                      <Gamepad size={20} className="text-pink-500" />
                     </div>
                     <h3 className="text-xl font-bold">Spaceshooter</h3>
                   </div>
@@ -443,12 +467,16 @@ export default function Projects() {
                   spaceshooter game that taught me the fundamentals of Pygame
                   and game loops.
                 </p>
+                <div className="text-muted-foreground text-sm relative z-10 mt-2">
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>2D arcade shooter built with Pygame</li>
+                    <li>Keyboard + Mouse player controls, enemy waves, and scoring system</li>
+                    <li>Simple bullet collisions</li>
+                  </ul>
+                </div>
                 <div className="flex flex-wrap gap-2 mt-auto relative z-10">
                   <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border uppercase">
-                    Python
-                  </span>
-                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border uppercase">
-                    Pygame
+                    GAME
                   </span>
                 </div>
               </div>
@@ -464,13 +492,30 @@ export default function Projects() {
                 <h3 className="text-lg font-bold relative z-10">
                   Pokemon Game Clone
                 </h3>
+                  <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                  <div className="flex justify-between items-start relative z-10">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-secondary/50 rounded-lg border border-border">
+                        <Gamepad size={20} className="text-green-500" />
+                      </div>
+                      <h3 className="text-lg font-bold relative z-10">Pokemon Game Clone</h3>
+                    </div>
+                  </div>
                 <p className="text-muted-foreground leading-relaxed text-sm relative z-10">
                   A 2D Pokemon Clone with with a short custom storyline and
                   classic Pokemon battle mechanics.
                 </p>
+                <div className="text-muted-foreground text-sm relative z-10 mt-2">
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>World exploration with NPCs and sidequests</li>
+                    <li>Pokedex</li>
+                    <li>Classic PokemonTurn-based battle system</li>
+                    <li>Custom storyline</li>
+                  </ul>
+                </div>
                 <div className="flex flex-wrap gap-2 mt-auto relative z-10">
                   <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border uppercase">
-                    Python
+                    GAME
                   </span>
                 </div>
               </div>
@@ -480,10 +525,26 @@ export default function Projects() {
                 <h3 className="text-lg font-bold relative z-10">
                   Improved Anki Clone
                 </h3>
+                  <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                  <div className="flex justify-between items-start relative z-10">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 bg-secondary/50 rounded-lg border border-border">
+                        <AppWindow size={20} className="text-green-500" />
+                      </div>
+                      <h3 className="text-lg font-bold relative z-10">Improved Anki Clone</h3>
+                    </div>
+                  </div>
                 <p className="text-muted-foreground leading-relaxed text-sm relative z-10">
                   A modern, intuitive redesign of Anki to fix its outdated user
                   interface.
                 </p>
+                <div className="text-muted-foreground text-sm relative z-10 mt-2">
+                  <ul className="list-disc list-inside space-y-1">
+                    <li>Modernized UI with improved card review flow</li>
+                    <li>Spaced repetition algorithm and deck management</li>
+                    <li>Export/import decks and customisation options</li>
+                  </ul>
+                </div>
                 <div className="flex flex-wrap gap-2 mt-auto relative z-10">
                   <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border uppercase">
                     App

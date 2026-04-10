@@ -4,6 +4,7 @@ import { Loader2, Menu, Search, SquarePlus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import DashboardNavbar from "@/components/navigation/DashboardNavbar";
 import ThemeToggle from "@/components/theme/ThemeToggle";
+import { SONGS } from "@/lib/songs";
 import { getWeatherStatus } from "@/hooks/useWeather";
 import {
   GUESTBOOK_MAX_MESSAGE_LENGTH,
@@ -125,6 +126,7 @@ const COMMANDS = [
   "weather",
   "spotify",
   "steam",
+  "play [songNum]",
   "specs",
   "profile",
   "lastfm",
@@ -269,6 +271,8 @@ export default function TerminalPage() {
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollAnchorRef = useRef<HTMLDivElement>(null);
   const typingTimerRef = useRef<number | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const currentSongIndexRef = useRef<number | null>(null);
 
   const toneClassMap: Record<TerminalTone, string> = useMemo(
     () => ({
@@ -307,6 +311,19 @@ export default function TerminalPage() {
     },
     [pushEntry],
   );
+
+  const resolveCurrentSongIndex = useCallback(() => {
+    if (currentSongIndexRef.current !== null) {
+      return currentSongIndexRef.current;
+    }
+
+    const source = audioRef.current?.src;
+    if (!source) {
+      return -1;
+    }
+
+    return SONGS.findIndex((song) => source.endsWith(song.src));
+  }, []);
 
   const executeCommand = useCallback(
     async (rawCommand: string) => {
@@ -616,13 +633,90 @@ export default function TerminalPage() {
         return;
       }
 
+      if (cmd === "play") {
+        // list songs when no argument provided
+        if (!args) {
+          pushText([
+            "Favourite songs:",
+            ...SONGS.map((s, i) => `${i + 1}: ${s.title} - ${s.artist}`),
+          ]);
+          return;
+        }
+
+        const idx = parseInt(args, 10);
+        if (Number.isNaN(idx) || idx < 1 || idx > SONGS.length) {
+          pushText("Usage: play [songNum]  — use 'play' to list songs", "error");
+          return;
+        }
+
+        const song = SONGS[idx - 1];
+
+        try {
+          if (!audioRef.current) audioRef.current = new Audio();
+          if (audioRef.current.src !== song.src) audioRef.current.src = song.src;
+          audioRef.current.volume = 0.5;
+          await audioRef.current.play();
+          currentSongIndexRef.current = idx - 1;
+          pushText(
+            [
+              `Playing: ${song.title} - ${song.artist}`,
+              "Use 'skip' for the next song or 'stop' to pause playback.",
+            ],
+            "success",
+          );
+        } catch {
+          pushText("Failed to play audio (interaction required by browser).", "error");
+        }
+
+        return;
+      }
+
+      if (cmd === "skip") {
+        if (!audioRef.current) {
+          pushText("No song is loaded. Run play [songNum] first.", "error");
+          return;
+        }
+
+        const currentIndex = resolveCurrentSongIndex();
+        if (currentIndex < 0) {
+          pushText("No song is loaded. Run play [songNum] first.", "error");
+          return;
+        }
+
+        const nextIndex = (currentIndex + 1) % SONGS.length;
+        const nextSong = SONGS[nextIndex];
+
+        try {
+          audioRef.current.src = nextSong.src;
+          audioRef.current.volume = 0.5;
+          await audioRef.current.play();
+          currentSongIndexRef.current = nextIndex;
+          pushText(`Skipped to: ${nextSong.title} - ${nextSong.artist}`, "success");
+        } catch {
+          pushText("Could not skip to the next song.", "error");
+        }
+
+        return;
+      }
+
+      if (cmd === "stop") {
+        if (!audioRef.current || !audioRef.current.src) {
+          pushText("No song is loaded. Run play [songNum] first.", "error");
+          return;
+        }
+
+        audioRef.current.pause();
+        pushText("Playback paused. Use play [songNum] or skip to continue.", "muted");
+        return;
+      }
+
       const suggestions = getCommandSuggestions(cmd);
       pushText(`Command not found: ${cmd}`, "error");
       if (suggestions.length > 0) {
         pushSuggestions("Did you mean:", suggestions);
       }
     },
-    [navigate, pushSuggestions, pushText],
+    [navigate, pushSuggestions, pushText, resolveCurrentSongIndex],
   );
 
   const runCommand = useCallback(

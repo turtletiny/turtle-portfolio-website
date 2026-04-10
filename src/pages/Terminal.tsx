@@ -132,7 +132,7 @@ const COMMANDS = [
   "guestbook list",
   "guestbook post <name>|<message>",
   "theme [dark|pastel|toggle]",
-  "open [home|about|projects|guestbook|terminal]",
+  "open [main|about|projects|terminal]",
   "neofetch",
 ] as const;
 
@@ -324,7 +324,7 @@ export default function TerminalPage() {
           ],
           "muted",
         );
-        pushSuggestions("Try one:", ["time", "spotify", "steam", "guestbook list"]);
+        pushSuggestions("Try one:", ["time", "spotify", "steam", "specs"]);
         return;
       }
 
@@ -581,15 +581,14 @@ export default function TerminalPage() {
       if (cmd === "open") {
         const target = args.toLowerCase();
         const map: Record<string, string> = {
-          home: "/",
+          main: "/main",
           about: "/about",
           projects: "/projects",
-          guestbook: "/guestbook",
           terminal: "/terminal",
         };
 
         if (!target || !map[target]) {
-          pushText("Usage: open [home|about|projects|guestbook|terminal]", "error");
+          pushText("Usage: open [main|about|projects|guestbook|terminal]", "error");
           return;
         }
 

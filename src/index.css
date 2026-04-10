@@ -402,6 +402,25 @@ select:focus,
   background: #f36755;
 }
 
+/* Navbar terminal icon */
+.nav-terminal-icon {
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  color: hsl(var(--muted-foreground, 240 5% 65%));
+}
+.nav-terminal-icon rect {
+  transition: fill 0.18s ease, stroke 0.18s ease;
+}
+.nav-terminal-icon:hover {
+  transform: translateY(-2px);
+  color: hsl(var(--foreground));
+}
+.nav-terminal-icon.active {
+  color: hsl(var(--foreground));
+}
+
 @media (max-width: 768px) {
   .terminal-title {
     font-size: 17px;

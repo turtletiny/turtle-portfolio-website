@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Terminal } from "lucide-react";
 
 const links = [
-  { label: "Home", to: "/" },
+  { label: "Home", to: "/main" },
   { label: "About", to: "/about" },
   { label: "Projects", to: "/projects" },
 ];

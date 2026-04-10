@@ -115,7 +115,7 @@ const PERIPHERALS = [
   "Mouse: VXE Dragonfly R1 SE+",
   "Mousepad: Aqua Control II",
   "Headphones: HyperX Cloud II",
-  "IEMs: Aoshida E20",
+  "IEMs: Aoshida E20 / Truthear Gate (Custom EQ)",
 ];
 
 const COMMANDS = [
@@ -133,20 +133,12 @@ const COMMANDS = [
   "guestbook post <name>|<message>",
   "theme [dark|pastel|toggle]",
   "open [home|about|projects|guestbook|terminal]",
-  "roll",
-  "fortune",
   "neofetch",
 ] as const;
 
 const QUICK_COMMANDS = ["help", "time", "spotify", "steam", "specs"];
 
-const FORTUNES = [
-  "Your next commit will compile first try.",
-  "A side project will unexpectedly become your favorite one.",
-  "Today is good for refactoring old code.",
-  "You will fix a bug by deleting less code than expected.",
-  "Your playlist has the right song for the next deep-work session.",
-];
+
 
 const createId = () => {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
@@ -252,7 +244,7 @@ export default function TerminalPage() {
       kind: "text",
       tone: "success",
       lines: [
-        "turtletiny interactive terminal",
+        "Welcome to my Website :)",
         "Type 'help' to see available commands.",
       ],
     },
@@ -268,6 +260,11 @@ export default function TerminalPage() {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [pendingCommand, setPendingCommand] = useState<string | null>(null);
   const [isAutoTyping, setIsAutoTyping] = useState(false);
+  const [guestbookDraft, setGuestbookDraft] = useState<
+    | { stage: "idle" }
+    | { stage: "name" }
+    | { stage: "message"; name: string }
+  >({ stage: "idle" });
 
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollAnchorRef = useRef<HTMLDivElement>(null);
@@ -519,34 +516,43 @@ export default function TerminalPage() {
         }
 
         if (sub === "post") {
-          const payload = rest.join(" ").trim();
-          const [namePart, ...messageParts] = payload.split("|");
-          const fallbackName = namePart?.trim() || "Anonymous";
-          const message = messageParts.join("|").trim();
+            const payload = rest.join(" ").trim();
 
-          if (!message) {
-            pushText(
-              "Usage: guestbook post <name>|<message>  (name can be blank)",
-              "error",
-            );
+            // If the user provided a payload inline, keep existing behaviour
+            if (payload) {
+              const [namePart, ...messageParts] = payload.split("|");
+              const fallbackName = namePart?.trim() || "Anonymous";
+              const message = messageParts.join("|").trim();
+
+              if (!message) {
+                pushText(
+                  "Usage: guestbook post <name>|<message>  (name can be blank)",
+                  "error",
+                );
+                return;
+              }
+
+              const name = fallbackName.slice(0, GUESTBOOK_MAX_NAME_LENGTH);
+              const clippedMessage = message.slice(0, GUESTBOOK_MAX_MESSAGE_LENGTH);
+
+              try {
+                await fetchJson<{ success: boolean }>("/api/guestbook", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ name, message: clippedMessage }),
+                });
+
+                pushText("Guestbook message posted successfully.", "success");
+              } catch {
+                pushText("Failed to post guestbook message.", "error");
+              }
+              return;
+            }
+
+            // Start interactive flow: ask for name first
+            pushText("Guestbook post initiated. Enter your name (leave blank for Anonymous).", "muted");
+            setGuestbookDraft({ stage: "name" });
             return;
-          }
-
-          const name = fallbackName.slice(0, GUESTBOOK_MAX_NAME_LENGTH);
-          const clippedMessage = message.slice(0, GUESTBOOK_MAX_MESSAGE_LENGTH);
-
-          try {
-            await fetchJson<{ success: boolean }>("/api/guestbook", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ name, message: clippedMessage }),
-            });
-
-            pushText("Guestbook message posted successfully.", "success");
-          } catch {
-            pushText("Failed to post guestbook message.", "error");
-          }
-          return;
         }
 
         pushText("Unknown guestbook subcommand. Use: guestbook list | guestbook post", "error");
@@ -592,31 +598,22 @@ export default function TerminalPage() {
         return;
       }
 
-      if (cmd === "roll") {
-        const result = Math.floor(Math.random() * 100) + 1;
-        pushText(`You rolled: ${result}`);
-        return;
-      }
-
-      if (cmd === "fortune") {
-        const pick = FORTUNES[Math.floor(Math.random() * FORTUNES.length)];
-        pushText(pick, "muted");
-        return;
-      }
+      
 
       if (cmd === "neofetch") {
         pushText(
           [
-            "turtletiny@website",
+            "guest@turtletiny",
             "------------------",
-            "OS: Personal Website",
+            "OS: turtletiny.lol",
             "Shell: interactive-terminal",
-            "Theme: dark/pastel toggle",
+            "Theme: DarkMinimal/PastelPink+Blue",
+            "Font: Jetbrains Mono",
             "Data: Spotify + Steam + Last.fm + Lanyard + Guestbook",
-            "Uptime: always online (when Vercel behaves)",
           ],
           "muted",
         );
+
         return;
       }
 
@@ -810,6 +807,52 @@ export default function TerminalPage() {
                   if (event.key === "Enter") {
                     event.preventDefault();
                     if (pendingCommand || isAutoTyping) return;
+
+                    // If we're in the interactive guestbook flow, handle the stages
+                    if (guestbookDraft.stage === "name") {
+                      const nameInput = input.trim();
+                      // echo the input
+                      pushEntry({ id: createId(), kind: "input", command: nameInput || "" });
+                      setHistory((prev) => [...prev, nameInput]);
+                      setHistoryIndex(-1);
+                      setInput("");
+
+                      pushText("Enter your message:", "muted");
+                      setGuestbookDraft({ stage: "message", name: nameInput || "Anonymous" });
+                      return;
+                    }
+
+                    if (guestbookDraft.stage === "message") {
+                      const messageInput = input.trim();
+                      // echo the input
+                      pushEntry({ id: createId(), kind: "input", command: messageInput || "" });
+                      setHistory((prev) => [...prev, messageInput]);
+                      setHistoryIndex(-1);
+                      setInput("");
+
+                      // submit the post
+                      (async () => {
+                        const name = (guestbookDraft as any).name.slice(0, GUESTBOOK_MAX_NAME_LENGTH);
+                        const clippedMessage = messageInput.slice(0, GUESTBOOK_MAX_MESSAGE_LENGTH);
+
+                        try {
+                          await fetchJson<{ success: boolean }>("/api/guestbook", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ name, message: clippedMessage }),
+                          });
+
+                          pushText("Guestbook message posted successfully.", "success");
+                        } catch {
+                          pushText("Failed to post guestbook message.", "error");
+                        } finally {
+                          setGuestbookDraft({ stage: "idle" });
+                        }
+                      })();
+
+                      return;
+                    }
+
                     void runCommand(input);
                     return;
                   }

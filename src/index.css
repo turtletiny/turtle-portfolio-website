@@ -329,37 +329,42 @@ select:focus,
 }
 
 .terminal-window {
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
   overflow: hidden;
-  background: rgba(35, 37, 43, 0.72);
-  backdrop-filter: blur(8px);
+  background: rgba(35, 37, 43, 0.28);
+  backdrop-filter: blur(12px) saturate(1.08);
   box-shadow:
-    0 14px 40px rgba(0, 0, 0, 0.38),
-    0 1px 0 rgba(255, 255, 255, 0.08) inset;
+    0 14px 40px rgba(0, 0, 0, 0.36),
+    0 1px 0 rgba(255, 255, 255, 0.04) inset;
 }
 
 .terminal-titlebar {
-  height: 50px;
+  position: relative;
+  height: 42px;
   padding: 0 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
-  background: rgba(63, 62, 64, 0.86);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(63, 62, 64, 0.38);
 }
 
 .terminal-title {
-  color: rgba(235, 235, 235, 0.95);
-  font-size: 30px;
+  color: rgba(235, 235, 235, 0.90);
+  font-size: 16px;
   line-height: 1;
   letter-spacing: -0.2px;
   font-weight: 500;
   white-space: nowrap;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
 }
 
 .terminal-pane {
-  background: rgba(25, 26, 30, 0.78);
+  background: rgba(25, 26, 30, 0.28);
 }
 
 .terminal-text {

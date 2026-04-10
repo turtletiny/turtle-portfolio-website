@@ -52,7 +52,8 @@ const App = () => {
           <BrowserRouter>
             <Suspense fallback={<div className="min-h-screen" />}>
               <Routes>
-                <Route path="/" element={<Index />} />
+                <Route path="/" element={<Terminal />} />
+                <Route path="/main" element={<Index />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/guestbook" element={<GuestbookPage />} />

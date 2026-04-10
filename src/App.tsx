@@ -16,6 +16,7 @@ const Projects = lazy(() => import("./pages/Projects"));
 const Callback = lazy(() => import("./pages/Callback"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const GuestbookPage = lazy(() => import("./pages/GuestbookPage"));
+const Terminal = lazy(() => import("./pages/Terminal"));
 const Particles = lazy(() => import("@/components/effects/Particles"));
 
 const queryClient = new QueryClient();
@@ -55,6 +56,7 @@ const App = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/guestbook" element={<GuestbookPage />} />
+                <Route path="/terminal" element={<Terminal />} />
                 <Route path="/callback" element={<Callback />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

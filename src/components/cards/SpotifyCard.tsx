@@ -46,7 +46,7 @@ export default function SpotifyCard() {
 
   const fetchPlayingSong = async () => {
     try {
-      const response = await fetch("/api/lastfm-now-playing");
+      const response = await fetch("/api/now-playing");
       if (!response.ok) {
         throw new Error("Failed to fetch now playing song");
       }
@@ -97,7 +97,7 @@ export default function SpotifyCard() {
     }
   };
 
-  // Poll Last.fm/Spotify API every 15s
+  // Poll aggregated now-playing API every 15s
   useEffect(() => {
     fetchPlayingSong();
     const interval = setInterval(fetchPlayingSong, 15000);

@@ -151,6 +151,7 @@ const createId = () => {
 
 const promptLabel = "guest@turtletiny:~$";
 const terminalWindowTitle = "guest@turtletiny: ~";
+const GITHUB_URL = import.meta.env.VITE_GITHUB_URL || "https://github.com/turtletiny";
 
 function getSydneyTime() {
   return new Date().toLocaleTimeString("en-US", {
@@ -614,6 +615,16 @@ export default function TerminalPage() {
         return;
       }
 
+      if (cmd === "github" || cmd === "gh") {
+        try {
+          window.open(GITHUB_URL, "_blank", "noopener,noreferrer");
+          pushText(`Opened GitHub: ${GITHUB_URL}`, "success");
+        } catch {
+          pushText([`GitHub: ${GITHUB_URL}`], "muted");
+        }
+        return;
+      }
+
       
 
       if (cmd === "neofetch") {
@@ -844,9 +855,26 @@ export default function TerminalPage() {
                     </div>
                   ) : entry.kind === "text" ? (
                     <div className={toneClassMap[entry.tone]}>
-                      {entry.lines.map((line, idx) => (
-                        <p key={`${entry.id}-${idx}`}>{line || "\u00A0"}</p>
-                      ))}
+                      {entry.lines.map((line, idx) => {
+                        const text = line || "\u00A0";
+                        const isUrl = /^https?:\/\/\S+$/.test(text.trim());
+                        return (
+                          <p key={`${entry.id}-${idx}`}>
+                            {isUrl ? (
+                              <a
+                                href={text}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="underline text-emerald-300"
+                              >
+                                {text}
+                              </a>
+                            ) : (
+                              text
+                            )}
+                          </p>
+                        );
+                      })}
                     </div>
                   ) : (
                     <div className="py-1">

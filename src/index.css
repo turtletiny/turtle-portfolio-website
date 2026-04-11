@@ -464,3 +464,39 @@ select:focus,
 .pastel .guestbook-scrollbar::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--border));
 }
+
+/* Pastel-mode terminal styling overrides */
+.pastel .terminal-window {
+  background: rgba(255, 192, 203, 0.22) !important; /* stronger soft pink */
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 8px 30px rgba(255, 192, 203, 0.08) !important;
+}
+.pastel .terminal-pane {
+  background: rgba(255, 240, 245, 0.10) !important;
+}
+.pastel .terminal-titlebar {
+  background: rgba(219, 112, 147, 0.28) !important; /* darker pink */
+  border-bottom-color: rgba(0,0,0,0.06) !important;
+}
+.pastel .terminal-title {
+  color: #000000 !important; /* black title text in titlebar */
+}
+.pastel .terminal-text {
+  color: #000000; /* black text for terminal content */
+}
+.pastel .terminal-success {
+  color: #1e40af; /* blue for user/prompt text */
+}
+.pastel .terminal-muted {
+  color: #2563eb !important; /* darker blue for muted/grey lines */
+}
+.pastel .terminal-window input,
+.pastel .terminal-window input,
+.pastel #terminal-input {
+  color: #000000 !important; /* typed user input should be black */
+  caret-color: #000000 !important;
+}
+.pastel .terminal-window input::placeholder,
+.pastel #terminal-input::placeholder {
+  color: #6b7280 !important; /* subtle placeholder in pastel mode */
+}

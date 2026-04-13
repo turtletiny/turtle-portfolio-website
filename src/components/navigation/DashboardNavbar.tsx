@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { FolderKanban, Home, TerminalSquare, UserRound, type LucideIcon } from "lucide-react";
+import { preloadRoute } from "@/lib/routePreload";
 
 const links: { label: string; to: string; icon: LucideIcon }[] = [
   { label: "Home", to: "/main", icon: Home },
@@ -24,6 +25,9 @@ export default function DashboardNavbar() {
               to={l.to}
               aria-label={l.label}
               title={l.label}
+              onMouseEnter={() => preloadRoute(l.to)}
+              onFocus={() => preloadRoute(l.to)}
+              onTouchStart={() => preloadRoute(l.to)}
               className={`text-sm font-medium border-2 transition-all duration-200 hover:scale-105 flex items-center justify-center rounded-lg h-11 w-11 md:h-9 md:w-auto px-0 md:px-4 ${
                 isActive
                   ? "text-foreground border-foreground shadow-sm bg-secondary/20"

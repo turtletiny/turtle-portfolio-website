@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+const CACHE_TTL_MS = 5 * 60 * 1000;
+
 interface ChessRating {
   last: { rating: number; date: number };
   best?: { rating: number; date: number };
@@ -26,6 +28,12 @@ interface ChessProfile {
   url: string;
 }
 
+const chessCache = new Map<string, {
+  stats: ChessStats;
+  profile: ChessProfile;
+  fetchedAt: number;
+}>();
+
 export function useChessStats(username: string) {
   const [stats, setStats] = useState<ChessStats | null>(null);
   const [profile, setProfile] = useState<ChessProfile | null>(null);
@@ -33,6 +41,17 @@ export function useChessStats(username: string) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!username) return;
+
+    const cached = chessCache.get(username);
+    if (cached && Date.now() - cached.fetchedAt < CACHE_TTL_MS) {
+      setStats(cached.stats);
+      setProfile(cached.profile);
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     async function fetchChessData() {
       try {
         setLoading(true);
@@ -52,6 +71,11 @@ export function useChessStats(username: string) {
 
         setProfile(profileData);
         setStats(statsData);
+        chessCache.set(username, {
+          profile: profileData,
+          stats: statsData,
+          fetchedAt: Date.now(),
+        });
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
@@ -59,9 +83,7 @@ export function useChessStats(username: string) {
       }
     }
 
-    if (username) {
-      fetchChessData();
-    }
+    fetchChessData();
   }, [username]);
 
   return { stats, profile, loading, error };

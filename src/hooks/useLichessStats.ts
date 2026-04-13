@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+const CACHE_TTL_MS = 5 * 60 * 1000;
+
 interface LichessPerf {
   games: number;
   rating: number;
@@ -29,12 +31,27 @@ interface LichessProfile {
   url: string;
 }
 
+const lichessCache = new Map<string, {
+  profile: LichessProfile;
+  fetchedAt: number;
+}>();
+
 export function useLichessStats(username: string) {
   const [profile, setProfile] = useState<LichessProfile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!username) return;
+
+    const cached = lichessCache.get(username);
+    if (cached && Date.now() - cached.fetchedAt < CACHE_TTL_MS) {
+      setProfile(cached.profile);
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     async function fetchLichessData() {
       try {
         setLoading(true);
@@ -86,10 +103,16 @@ export function useLichessStats(username: string) {
 
         const perfStats = Object.fromEntries(perfStatEntries);
 
-        setProfile({
+        const nextProfile = {
           ...data,
           perfStats,
           url: `https://lichess.org/@/${username}`,
+        };
+
+        setProfile(nextProfile);
+        lichessCache.set(username, {
+          profile: nextProfile,
+          fetchedAt: Date.now(),
         });
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error');
@@ -98,9 +121,7 @@ export function useLichessStats(username: string) {
       }
     }
 
-    if (username) {
-      fetchLichessData();
-    }
+    fetchLichessData();
   }, [username]);
 
   return { profile, loading, error };

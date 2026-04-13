@@ -247,7 +247,7 @@ export default function TerminalPage() {
       kind: "text",
       tone: "success",
       lines: [
-        "Welcome to my Website :)",
+        "Welcome to my website :)",
         "Type 'help' to see available commands.",
       ],
     },

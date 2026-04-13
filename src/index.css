@@ -61,7 +61,9 @@
     --spotify-btn-bg: transparent;
     --spotify-btn-border: 0 0% 100%;
     --spotify-btn-text: 0 0% 100%;
-    --spotify-btn-hover-bg: 0 0% 100% / 0.1;
+      --spotify-btn-hover-bg: 0 0% 100% / 0.1;
+      /* Terminal success (used for welcome/prompt text) */
+      --terminal-success-color: #10b981;
   }
 
   .pastel {
@@ -103,7 +105,9 @@
     --spotify-btn-bg: 213 100% 65%;
     --spotify-btn-border: 213 100% 65%;
     --spotify-btn-text: 0 0% 100%;
-    --spotify-btn-hover-bg: 213 100% 55% / 1;
+      --spotify-btn-hover-bg: 213 100% 55% / 1;
+      /* Pastel terminal success override */
+      --terminal-success-color: #1e40af;
   }
 
   * {
@@ -365,6 +369,12 @@ select:focus,
 
 .terminal-pane {
   background: rgba(25, 26, 30, 0.10);
+}
+
+/* Pastel: make terminal quick-start buttons match theme on hover */
+.pastel .terminal-pane button:hover {
+  border-color: hsl(var(--primary)) !important;
+  color: var(--terminal-success-color) !important;
 }
 
 .terminal-text {

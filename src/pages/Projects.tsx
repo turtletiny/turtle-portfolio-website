@@ -1,561 +1,148 @@
-import { useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Folder, FolderOpen, SquarePlus } from "lucide-react";
 import DashboardNavbar from "@/components/navigation/DashboardNavbar";
 import ThemeToggle from "@/components/theme/ThemeToggle";
-import { useTheme } from "@/hooks/useTheme";
 import TextType from "@/components/typography/TextType";
-import {
-  Folder,
-  FolderOpen,
-  Gamepad,
-  AppWindow,
-  Sparkles,
-  Github,
-  ExternalLink,
-  Globe,
-} from "lucide-react";
+import ProjectAppIcon from "@/components/projects/ProjectAppIcon";
+import ProjectDetailModal from "@/components/projects/ProjectDetailModal";
+import { PROJECTS } from "@/lib/projects";
+import { ProjectEntry } from "@/types/project";
 
 export default function Projects() {
-  const { isPastel } = useTheme();
   const [isMainOpen, setIsMainOpen] = useState(false);
-  const [activeFolder, setActiveFolder] = useState<string | null>(null);
-  const [animStep, setAnimStep] = useState(0);
+  const [showIcons, setShowIcons] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<ProjectEntry | null>(null);
+  const timersRef = useRef<number[]>([]);
 
-  const timersRef = useRef<NodeJS.Timeout[]>([]);
+  const clearTimers = () => {
+    timersRef.current.forEach((timer) => window.clearTimeout(timer));
+    timersRef.current = [];
+  };
 
   const handleMainClick = () => {
-    timersRef.current.forEach(clearTimeout);
-    timersRef.current = [];
+    clearTimers();
 
     if (isMainOpen) {
-      setAnimStep(0);
-      setActiveFolder(null);
-      timersRef.current.push(setTimeout(() => setIsMainOpen(false), 500));
-    } else {
-      setIsMainOpen(true);
-
-      timersRef.current.push(setTimeout(() => setAnimStep(1), 150));
-      timersRef.current.push(setTimeout(() => setAnimStep(2), 400));
-      timersRef.current.push(setTimeout(() => setAnimStep(3), 650));
-      timersRef.current.push(setTimeout(() => setAnimStep(4), 900));
-
-      timersRef.current.push(
-        setTimeout(() => setActiveFolder("current"), 1100),
-      );
+      setShowIcons(false);
+      setSelectedProject(null);
+      timersRef.current.push(window.setTimeout(() => setIsMainOpen(false), 180));
+      return;
     }
+
+    setIsMainOpen(true);
+    timersRef.current.push(window.setTimeout(() => setShowIcons(true), 140));
   };
 
-  const toggleSubFolder = (folderName: string) => {
-    setActiveFolder((prev) => (prev === folderName ? null : folderName));
-  };
+  useEffect(() => {
+    return () => clearTimers();
+  }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center text-foreground font-main relative z-10">
+    <div className="relative z-10 flex min-h-screen flex-col items-center font-main text-foreground">
       <ThemeToggle />
       <DashboardNavbar />
 
-      <div className="w-full max-w-[900px] flex flex-col items-center px-4 pb-20">
-        {/* =========================================
-            ROOT FOLDER
-            ========================================= */}
-        <div className="z-10 bg-background pt-8">
+      <div className="w-full max-w-[980px] px-4 pb-20">
+        <div className="flex justify-center pt-8">
           <button
+            type="button"
             onClick={handleMainClick}
-            className={`flex flex-col items-center justify-center gap-3 p-8 rounded-3xl transform transition-all duration-150 ease-out cursor-pointer w-48 bg-card border-2 ${
+            aria-label={isMainOpen ? "Close projects folder" : "Open projects folder"}
+            className={`group flex w-56 flex-col items-center justify-center gap-3 rounded-3xl border-2 bg-card p-8 transition-all duration-200 ${
               isMainOpen
-                ? `${isPastel ? "border-pink-500/50 shadow-pink-500/20 bg-pink-500/20" : "border-yellow-500/50 shadow-yellow-500/10 bg-yellow-500/5"} scale-[1.02] hover:scale-105 shadow-lg`
-                : "border-border/50 scale-100 hover:scale-[1.02] hover:bg-secondary/40 shadow-sm"
+                ? "scale-[1.02] border-primary/70 shadow-xl"
+                : "scale-100 border-border/60 hover:scale-[1.02] hover:border-primary/45"
             }`}
           >
-            <div className="relative w-20 h-20 flex items-center justify-center">
+            <div className="relative flex h-20 w-20 items-center justify-center">
               <Folder
                 size={70}
-                strokeWidth={1.5}
-                className={`text-yellow-500 pastel:text-red-500 transition-all duration-150 absolute ${
-                  isMainOpen ? "opacity-0 scale-90" : "opacity-100 scale-100"
+                strokeWidth={1.55}
+                className={`absolute text-primary transition-all duration-200 ${
+                  isMainOpen ? "scale-90 opacity-0" : "scale-100 opacity-100"
                 }`}
               />
               <FolderOpen
                 size={70}
-                strokeWidth={1.5}
-                className={`text-yellow-500 pastel:text-red-500 transition-all duration-150 absolute ${
-                  isMainOpen ? "opacity-100 scale-100" : "opacity-0 scale-110"
+                strokeWidth={1.55}
+                className={`absolute text-primary transition-all duration-200 ${
+                  isMainOpen ? "scale-100 opacity-100" : "scale-110 opacity-0"
                 }`}
               />
             </div>
-            
-            {/* REACT BITS TEXT TYPE ANIMATION  */}
-            <div className="h-5 flex items-center justify-center">
+
+            <div className="flex h-5 items-center justify-center">
               <TextType
-                key={isMainOpen ? "close" : "open"}
+                key={isMainOpen ? "close-projects" : "open-projects"}
                 text={[isMainOpen ? "Close Projects" : "Open Projects"]}
-                typingSpeed={75}
-                deletingSpeed={50}
-                pauseDuration={1500}
+                typingSpeed={72}
+                deletingSpeed={45}
+                pauseDuration={1200}
                 showCursor
                 cursorCharacter="|"
-                cursorBlinkDuration={0.5}
-                className="font-bold text-sm tracking-wide"
+                cursorBlinkDuration={0.45}
+                className="text-sm font-bold tracking-wide"
               />
             </div>
-
           </button>
         </div>
 
-        {/* =========================================
-            BRANCHING
-            ========================================= */}
         <div
-          className={`grid transition-all duration-500 ease-in-out w-full ${
-            isMainOpen
-              ? "grid-rows-[1fr] opacity-100"
-              : "grid-rows-[0fr] opacity-0"
+          className={`mt-8 grid w-full transition-all duration-300 ${
+            isMainOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
           }`}
         >
-          <div className="overflow-hidden w-full flex flex-col items-center px-4 pb-6">
+          <div className="overflow-visible">
             <div
-              className={`w-[2px] h-10 bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-top transition-transform duration-150 ease-linear ${
-                animStep >= 1 ? "scale-y-100" : "scale-y-0"
+              className={`space-y-5 transition-all duration-300 ${
+                showIcons ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0"
               }`}
-            ></div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full pt-4 md:pt-0">
-              {/* CURRENT */}
-              <div className="relative pt-0 md:pt-8">
-                <div
-                  className={`absolute top-0 right-0 w-1/2 h-[2px] bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-right transition-transform duration-150 ease-linear ${
-                    animStep >= 2 ? "scale-x-100" : "scale-x-0"
-                  }`}
-                ></div>
-                <div
-                  className={`absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-8 bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-top transition-transform duration-150 ease-linear ${
-                    animStep >= 3 ? "scale-y-100" : "scale-y-0"
-                  }`}
-                ></div>
-
-                <button
-                  onClick={() => toggleSubFolder("current")}
-                  className={`w-full flex flex-col items-center text-center p-6 transform transition-all duration-150 ease-out group bg-card border-2 rounded-2xl ${
-                    animStep < 4
-                      ? "opacity-0 translate-y-4 scale-95 border-border/50"
-                      : activeFolder === "current"
-                        ? "opacity-100 translate-y-0 scale-[1.02] hover:scale-105 border-blue-500 shadow-lg shadow-blue-500/10"
-                        : "opacity-100 translate-y-0 scale-100 border-border/50 hover:scale-[1.02] hover:bg-secondary/40 shadow-sm"
-                  }`}
-                >
-                  <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-blue-500/10 text-blue-500 group-hover:scale-110 transition-transform duration-150 mb-4">
-                    <Folder
-                      size={32}
-                      strokeWidth={1.5}
-                      className={`absolute transition-all duration-150 ${activeFolder === "current" ? "opacity-0 scale-90" : "opacity-100 scale-100"}`}
-                    />
-                    <FolderOpen
-                      size={32}
-                      strokeWidth={1.5}
-                      className={`absolute transition-all duration-150 ${activeFolder === "current" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`}
-                    />
+            >
+              {/* Terminal-style window wrapper for the apps */}
+              <section className="terminal-window">
+                <div className="terminal-titlebar">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <SquarePlus size={15} className="terminal-muted" />
                   </div>
-                  <h2 className="text-base font-bold">Current WIP</h2>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    2 Files
-                  </p>
-                </button>
-              </div>
 
-              {/* PAST */}
-              <div className="relative pt-0 md:pt-8">
-                <div
-                  className={`absolute top-0 left-0 w-full h-[2px] bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-center transition-transform duration-150 ease-linear ${
-                    animStep >= 2 ? "scale-x-100" : "scale-x-0"
-                  }`}
-                ></div>
-                <div
-                  className={`absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-8 bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-top transition-transform duration-150 ease-linear ${
-                    animStep >= 3 ? "scale-y-100" : "scale-y-0"
-                  }`}
-                ></div>
+                  <div className="terminal-title">Projects</div>
 
-                <button
-                  onClick={() => toggleSubFolder("past")}
-                  className={`w-full flex flex-col items-center text-center p-6 transform transition-all duration-150 ease-out group bg-card border-2 rounded-2xl ${
-                    animStep < 4
-                      ? "opacity-0 translate-y-4 scale-95 border-border/50"
-                      : activeFolder === "past"
-                        ? "opacity-100 translate-y-0 scale-[1.02] hover:scale-105 border-pink-500 shadow-lg shadow-pink-500/10"
-                        : "opacity-100 translate-y-0 scale-100 border-border/50 hover:scale-[1.02] hover:bg-secondary/40 shadow-sm"
-                  }`}
-                >
-                  <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-pink-500/10 text-pink-500 group-hover:scale-110 transition-transform duration-150 mb-4">
-                    <Folder
-                      size={32}
-                      strokeWidth={1.5}
-                      className={`absolute transition-all duration-150 ${activeFolder === "past" ? "opacity-0 scale-90" : "opacity-100 scale-100"}`}
-                    />
-                    <FolderOpen
-                      size={32}
-                      strokeWidth={1.5}
-                      className={`absolute transition-all duration-150 ${activeFolder === "past" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`}
-                    />
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2.5 pl-1">
+                      <span className="terminal-dot terminal-dot-yellow" />
+                      <span className="terminal-dot terminal-dot-green" />
+                      <span className="terminal-dot terminal-dot-red" />
+                    </div>
                   </div>
-                  <h2 className="text-base font-bold">Past Projects</h2>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    1 File
-                  </p>
-                </button>
-              </div>
+                </div>
 
-              {/* future */}
-              <div className="relative pt-0 md:pt-8">
-                <div
-                  className={`absolute top-0 left-0 w-1/2 h-[2px] bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-left transition-transform duration-150 ease-linear ${
-                    animStep >= 2 ? "scale-x-100" : "scale-x-0"
-                  }`}
-                ></div>
-                <div
-                  className={`absolute top-0 left-1/2 -translate-x-1/2 w-[2px] h-8 bg-yellow-500/40 pastel:bg-red-500/40 hidden md:block origin-top transition-transform duration-150 ease-linear ${
-                    animStep >= 3 ? "scale-y-100" : "scale-y-0"
-                  }`}
-                ></div>
-
-                <button
-                  onClick={() => toggleSubFolder("future")}
-                  className={`w-full flex flex-col items-center text-center p-6 transform transition-all duration-150 ease-out group bg-card border-2 rounded-2xl ${
-                    animStep < 4
-                      ? "opacity-0 translate-y-4 scale-95 border-border/50"
-                      : activeFolder === "future"
-                        ? "opacity-100 translate-y-0 scale-[1.02] hover:scale-105 border-green-500 shadow-lg shadow-green-500/10"
-                        : "opacity-100 translate-y-0 scale-100 border-border/50 hover:scale-[1.02] hover:bg-secondary/40 shadow-sm"
-                  }`}
-                >
-                  <div className="relative w-16 h-16 flex items-center justify-center rounded-2xl bg-green-500/10 text-green-500 group-hover:scale-110 transition-transform duration-150 mb-4">
-                    <Folder
-                      size={32}
-                      strokeWidth={1.5}
-                      className={`absolute transition-all duration-150 ${activeFolder === "future" ? "opacity-0 scale-90" : "opacity-100 scale-100"}`}
-                    />
-                    <FolderOpen
-                      size={32}
-                      strokeWidth={1.5}
-                      className={`absolute transition-all duration-150 ${activeFolder === "future" ? "opacity-100 scale-100" : "opacity-0 scale-110"}`}
-                    />
+                <div className="terminal-pane p-4 sm:p-5">
+                  <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
+                    {PROJECTS.map((project, index) => (
+                      <ProjectAppIcon
+                        key={project.id}
+                        project={project}
+                        index={index}
+                        onOpen={setSelectedProject}
+                      />
+                    ))}
                   </div>
-                  <h2 className="text-base font-bold">Future Plans</h2>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    2 Files
-                  </p>
-                </button>
-              </div>
+                </div>
+              </section>
             </div>
           </div>
-        </div>
-
-        {/* connecting branches */}
-        <div
-          className={`w-full transition-all duration-500 ease-in-out overflow-hidden hidden md:block ${
-            activeFolder && isMainOpen ? "h-24 opacity-100" : "h-0 opacity-0"
-          }`}
-        >
-          <div className="relative w-full h-full px-4">
-            <div className="grid grid-cols-3 gap-6 w-full h-1/2">
-              <div className="flex justify-center">
-                <div
-                  className={`w-[2px] h-full bg-yellow-500/40 pastel:bg-red-500/40 transition-transform duration-150 ease-linear origin-top ${
-                    activeFolder === "current"
-                      ? "scale-y-100 delay-0"
-                      : "scale-y-0 delay-0"
-                  }`}
-                ></div>
-              </div>
-              <div className="flex justify-center">
-                <div
-                  className={`w-[2px] h-full bg-yellow-500/40 pastel:bg-red-500/40 transition-transform duration-150 ease-linear origin-top ${
-                    activeFolder === "past"
-                      ? "scale-y-100 delay-0"
-                      : "scale-y-0 delay-0"
-                  }`}
-                ></div>
-              </div>
-              <div className="flex justify-center">
-                <div
-                  className={`w-[2px] h-full bg-yellow-500/40 pastel:bg-red-500/40 transition-transform duration-150 ease-linear origin-top ${
-                    activeFolder === "future"
-                      ? "scale-y-100 delay-0"
-                      : "scale-y-0 delay-0"
-                  }`}
-                ></div>
-              </div>
-            </div>
-
-            <div className="absolute top-1/2 left-0 w-full h-[2px] px-4">
-              <div className="relative w-full h-full">
-                <div
-                  className={`absolute top-0 left-[16.66%] w-[33.33%] h-full bg-yellow-500/40 pastel:bg-red-500/40 transition-transform duration-150 ease-linear origin-left ${
-                    activeFolder === "current"
-                      ? "scale-x-100 delay-150"
-                      : "scale-x-0 delay-0"
-                  }`}
-                ></div>
-                <div
-                  className={`absolute top-0 right-[16.66%] w-[33.33%] h-full bg-yellow-500/40 pastel:bg-red-500/40 transition-transform duration-150 ease-linear origin-right ${
-                    activeFolder === "future"
-                      ? "scale-x-100 delay-150"
-                      : "scale-x-0 delay-0"
-                  }`}
-                ></div>
-              </div>
-            </div>
-
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-[2px] h-1/2">
-              <div
-                className={`w-full h-full bg-yellow-500/40 pastel:bg-red-500/40 transition-transform duration-150 ease-linear origin-top ${
-                  activeFolder === "current" || activeFolder === "future"
-                    ? "scale-y-100 delay-300"
-                    : activeFolder === "past"
-                      ? "scale-y-100 delay-150"
-                      : "scale-y-0 delay-0"
-                }`}
-              ></div>
-            </div>
-          </div>
-        </div>
-
-        {/* projects */}
-        <div className="w-full mt-6 md:mt-0">
-          {/* CURRENT PROJECTS */}
-          {activeFolder === "current" && (
-            <div className="animate-in fade-in slide-in-from-top-4 duration-500 delay-300 fill-mode-both flex flex-col gap-6 px-4">
-              <div className="card-base flex flex-col gap-4 group transition-all duration-300 relative overflow-hidden bg-card border-border/50">
-                <div className="absolute -top-24 -right-24 w-48 h-48 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
-                <div className="flex justify-between items-start relative z-10">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-secondary/50 rounded-lg border border-border">
-                      <Globe size={20} className="text-blue-500" />
-                    </div>
-                    <h3 className="text-xl font-bold">
-                      Personal Portfolio Website
-                    </h3>
-                  </div>
-                  <div className="flex gap-2">
-                    <a
-                      href="https://github.com/turtletiny/turtle-portfolio-website"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 bg-secondary/50 border border-border rounded hover:text-primary transition-all hover:scale-110"
-                    >
-                      <Github size={18} />
-                    </a>
-                    <a
-                      href="https://turtletiny.lol/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 bg-secondary/50 border border-border rounded hover:text-primary transition-all hover:scale-110"
-                    >
-                      <ExternalLink size={18} />
-                    </a>
-                  </div>
-                </div>
-                <div className="text-muted-foreground leading-relaxed text-sm relative z-10">
-                  <p>
-                    The website you are looking at right now! My first large
-                    personal project and first website using React.
-                  </p>
-                </div>
-                <div className="text-muted-foreground text-sm relative z-10 mt-2">
-                  <ul className="list-disc list-inside space-y-1">
-                    <li>Interactive terminal with commands</li>
-                    <li>Responsive layout + Mobile support</li>
-                    <li>Dark/Light theme switch</li>
-                    <li>Custom Cursor</li>
-                    <li>Interactive UI elements and animations </li>
-                    <li>Live widgets with API integrations (Spotify activity, Discord status, local time + weather, Steam activity, Last.fm stats, 
-                      Chess.com + Lichess stats </li>
-                    <li>Commenting feature stored in backend database</li>
-                    <li>Mini Music Player</li>
-                    <li>Interactive Project showcase page  </li>
-                    
-                    
-                  </ul>
-                </div>
-                <div className="flex flex-wrap gap-2 mt-2 relative z-10">
-                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border">
-                    WEBSITE
-                  </span>
-                </div>
-              </div>
-
-              {/* New: Student Planner Dashboard */}
-              <div className="card-base flex flex-col gap-4 group transition-all duration-300 relative overflow-hidden bg-card border-border/50">
-                <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
-                  <div className="flex justify-between items-start relative z-10">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-secondary/50 rounded-lg border border-border">
-                        <Globe size={20} className="text-blue-500" />
-                      </div>
-                      <h3 className="text-xl font-bold">Student Planner Dashboard</h3>
-                    </div>
-                    <div className="flex gap-2">
-                    <a
-                      href="#"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 bg-secondary/50 border border-border rounded hover:text-primary transition-all hover:scale-110"
-                    >
-                      <Github size={18} />
-                    </a>
-                    <a
-                      href="#"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-2 bg-secondary/50 border border-border rounded hover:text-primary transition-all hover:scale-110"
-                    >
-                      <ExternalLink size={18} />
-                    </a>
-                  </div>
-                </div>
-                <div className="text-muted-foreground leading-relaxed text-sm relative z-10">
-                  <p>
-                    A matcha themed student planner dashboard for personal-use to help me organise my life
-                    
-
-                  </p>
-                </div>
-                <div className="text-muted-foreground text-sm relative z-10 mt-2">
-                  <ul className="list-disc list-inside space-y-1">
-                    <li>Google Calendar intgration with read + write functionality</li>
-                    <li>Habit Tracker</li>
-                    <li>To-Do list synced to Google Calendar events</li>
-                    <li>Pomodoro study timer</li>
-                    <li>Assignment tracking</li>
-                    <li>Grade calculator</li>
-                    <li>Habit Tracker</li>
-                    <li>Subject Note Organisation</li>
-                    <li>Cute "digital garden" with growing plants to represent habit consistency</li>
-                    <li>Responsive Layout + Mobile Support</li>
-                    <li>Database integration for cross device syncing</li>
-                  </ul>
-                </div>
-                <div className="flex flex-wrap gap-2 mt-2 relative z-10">
-                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border">
-                    WEB APP
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* PAST PROJECTS */}
-          {activeFolder === "past" && (
-            <div className="animate-in fade-in slide-in-from-top-4 duration-500 delay-300 fill-mode-both flex flex-col gap-6 px-4">
-              <div className="card-base flex flex-col gap-4 group transition-all duration-300 relative overflow-hidden bg-card border-border/50">
-                <div className="absolute -top-24 -right-24 w-48 h-48 bg-pink-500/5 rounded-full blur-3xl pointer-events-none"></div>
-                <div className="flex justify-between items-start relative z-10">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 bg-secondary/50 rounded-lg border border-border">
-                      <Gamepad size={20} className="text-pink-500" />
-                    </div>
-                    <h3 className="text-xl font-bold">Spaceshooter</h3>
-                  </div>
-                  <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 bg-secondary/50 border border-border rounded hover:text-primary transition-all hover:scale-110"
-                  >
-                    <Github size={18} />
-                  </a>
-                </div>
-                <p className="text-muted-foreground leading-relaxed text-sm relative z-10">
-                  My very first personal project. A simple 2D arcade
-                  spaceshooter game that taught me the fundamentals of Pygame
-                  and game loops.
-                </p>
-                <div className="text-muted-foreground text-sm relative z-10 mt-2">
-                  <ul className="list-disc list-inside space-y-1">
-                    <li>2D arcade shooter built with Pygame</li>
-                    <li>Keyboard + Mouse player controls, enemy waves, and scoring system</li>
-                    <li>Simple bullet collisions</li>
-                  </ul>
-                </div>
-                <div className="flex flex-wrap gap-2 mt-auto relative z-10">
-                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border uppercase">
-                    GAME
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* FUTURE PROJECTS */}
-          {activeFolder === "future" && (
-            // Changed from grid layout to flex column
-            <div className="animate-in fade-in slide-in-from-top-4 duration-500 delay-300 fill-mode-both flex flex-col gap-6 px-4">
-              <div className="card-base flex flex-col gap-4 relative overflow-hidden bg-card border-border/50">
-                <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
-                <h3 className="text-lg font-bold relative z-10">
-                  Pokemon Game Clone
-                </h3>
-                  <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
-                  <div className="flex justify-between items-start relative z-10">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-secondary/50 rounded-lg border border-border">
-                        <Gamepad size={20} className="text-green-500" />
-                      </div>
-                      <h3 className="text-lg font-bold relative z-10">Pokemon Game Clone</h3>
-                    </div>
-                  </div>
-                <p className="text-muted-foreground leading-relaxed text-sm relative z-10">
-                  A 2D Pokemon Clone with with a short custom storyline and
-                  classic Pokemon battle mechanics.
-                </p>
-                <div className="text-muted-foreground text-sm relative z-10 mt-2">
-                  <ul className="list-disc list-inside space-y-1">
-                    <li>World exploration with NPCs and sidequests</li>
-                    <li>Pokedex</li>
-                    <li>Classic PokemonTurn-based battle system</li>
-                    <li>Custom storyline</li>
-                  </ul>
-                </div>
-                <div className="flex flex-wrap gap-2 mt-auto relative z-10">
-                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border uppercase">
-                    GAME
-                  </span>
-                </div>
-              </div>
-
-              <div className="card-base flex flex-col gap-4 relative overflow-hidden bg-card border-border/50">
-                <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
-                <h3 className="text-lg font-bold relative z-10">
-                  Improved Anki Clone
-                </h3>
-                  <div className="absolute -top-24 -right-24 w-48 h-48 bg-green-500/5 rounded-full blur-3xl pointer-events-none"></div>
-                  <div className="flex justify-between items-start relative z-10">
-                    <div className="flex items-center gap-3">
-                      <div className="p-2 bg-secondary/50 rounded-lg border border-border">
-                        <AppWindow size={20} className="text-green-500" />
-                      </div>
-                      <h3 className="text-lg font-bold relative z-10">Improved Anki Clone</h3>
-                    </div>
-                  </div>
-                <p className="text-muted-foreground leading-relaxed text-sm relative z-10">
-                  A modern, intuitive redesign of Anki to fix its outdated user
-                  interface.
-                </p>
-                <div className="text-muted-foreground text-sm relative z-10 mt-2">
-                  <ul className="list-disc list-inside space-y-1">
-                    <li>Modernized UI with improved card review flow</li>
-                    <li>Spaced repetition algorithm and deck management</li>
-                    <li>Export/import decks and customisation options</li>
-                  </ul>
-                </div>
-                <div className="flex flex-wrap gap-2 mt-auto relative z-10">
-                  <span className="px-3 py-1 bg-secondary/50 rounded-full text-[10px] font-bold border border-border uppercase">
-                    App
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
+
+      <ProjectDetailModal
+        project={selectedProject}
+        open={Boolean(selectedProject)}
+        onOpenChange={(open) => {
+          if (!open) {
+            setSelectedProject(null);
+          }
+        }}
+      />
     </div>
   );
 }

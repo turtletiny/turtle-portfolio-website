@@ -1,27 +1,13 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useTheme } from "@/hooks/useTheme";
 
 export default function ThemeToggle() {
-  // Check pastel state
-  const [isPastel, setIsPastel] = useState(false);
-
-  useEffect(() => {
-    const isPastelActive = document.documentElement.classList.contains("pastel");
-    setIsPastel(isPastelActive);
-  }, []);
+  const { isPastel } = useTheme();
 
   const handleToggle = () => {
-    const newTheme = !isPastel;
-    setIsPastel(newTheme);
-
-    
-    if (newTheme) {
-      document.documentElement.classList.add("pastel");
-      document.body.classList.add("pastel");
-    } else {
-      document.documentElement.classList.remove("pastel");
-      document.body.classList.remove("pastel");
-    }
+    const shouldUsePastel = !isPastel;
+    document.documentElement.classList.toggle("pastel", shouldUsePastel);
+    document.body.classList.toggle("pastel", shouldUsePastel);
   };
 
   

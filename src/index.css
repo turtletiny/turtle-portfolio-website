@@ -404,6 +404,10 @@ select:focus,
   background: #f8bc2c;
 }
 
+.terminal-dot-orange {
+  background: #f8bc2c;
+}
+
 .terminal-dot-green {
   background: #76d243;
 }

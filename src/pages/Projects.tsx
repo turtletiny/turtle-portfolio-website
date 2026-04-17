@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Folder, FolderOpen, SquarePlus } from "lucide-react";
+import { Folder, FolderOpen } from "lucide-react";
 import DashboardNavbar from "@/components/navigation/DashboardNavbar";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import TextType from "@/components/typography/TextType";
@@ -101,19 +101,15 @@ export default function Projects() {
               {/* Terminal-style window wrapper for the apps */}
               <section className="terminal-window">
                 <div className="terminal-titlebar">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <SquarePlus size={15} className="terminal-muted" />
+                  <div className="flex items-center gap-2.5 min-w-0 pl-1">
+                    <span className="terminal-dot terminal-dot-red" />
+                    <span className="terminal-dot terminal-dot-orange" />
+                    <span className="terminal-dot terminal-dot-green" />
                   </div>
 
                   <div className="terminal-title">Projects</div>
 
-                  <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-2.5 pl-1">
-                      <span className="terminal-dot terminal-dot-yellow" />
-                      <span className="terminal-dot terminal-dot-green" />
-                      <span className="terminal-dot terminal-dot-red" />
-                    </div>
-                  </div>
+                  <div className="w-[63px]" aria-hidden="true" />
                 </div>
 
                 <div className="terminal-pane p-4 sm:p-5">

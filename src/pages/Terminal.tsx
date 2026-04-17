@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Loader2, Menu, Search, SquarePlus } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import DashboardNavbar from "@/components/navigation/DashboardNavbar";
 import ThemeToggle from "@/components/theme/ThemeToggle";
@@ -820,21 +820,15 @@ export default function TerminalPage() {
           aria-label="Interactive terminal"
         >
           <div className="terminal-titlebar">
-            <div className="flex items-center gap-3 min-w-0">
-              <SquarePlus size={15} className="terminal-muted" />
+            <div className="flex items-center gap-2.5 min-w-0 pl-1">
+              <span className="terminal-dot terminal-dot-red" />
+              <span className="terminal-dot terminal-dot-orange" />
+              <span className="terminal-dot terminal-dot-green" />
             </div>
 
             <div className="terminal-title">{terminalWindowTitle}</div>
 
-            <div className="flex items-center gap-3">
-              <Search size={16} className="terminal-muted" />
-              <Menu size={16} className="terminal-muted" />
-              <div className="flex items-center gap-2.5 pl-1">
-                <span className="terminal-dot terminal-dot-yellow" />
-                <span className="terminal-dot terminal-dot-green" />
-                <span className="terminal-dot terminal-dot-red" />
-              </div>
-            </div>
+            <div className="w-[63px]" aria-hidden="true" />
           </div>
 
           <div className="terminal-pane h-[65vh] min-h-[460px] overflow-y-auto p-4 sm:p-5 text-[13px] leading-relaxed space-y-1 terminal-history">

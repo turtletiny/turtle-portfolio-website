@@ -60,25 +60,16 @@ export default function ProjectDetailModal({
                   <div className="space-y-4">
                     {project.media.map((block) => {
                       if (block.kind === "image") {
+                        // Image media intentionally not shown — only show title/notes
                         return (
                           <article
                             key={block.id}
-                            className="overflow-hidden rounded-2xl border border-border bg-secondary/40"
+                            className="rounded-2xl border border-border bg-secondary/30 p-4"
                           >
-                            {block.src ? (
-                              <img
-                                src={block.src}
-                                alt={block.alt || block.title}
-                                loading="lazy"
-                                className="h-56 w-full object-cover"
-                              />
+                            <h3 className="text-sm font-semibold text-foreground">{block.title}</h3>
+                            {block.description ? (
+                              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{block.description}</p>
                             ) : null}
-                            <div className="space-y-1 p-4">
-                              <h3 className="text-sm font-semibold text-foreground">{block.title}</h3>
-                              {block.description ? (
-                                <p className="text-sm text-muted-foreground">{block.description}</p>
-                              ) : null}
-                            </div>
                           </article>
                         );
                       }

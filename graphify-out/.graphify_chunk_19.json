@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "lichesswhite_asset",
+      "label": "Asset: lichesswhite.svg",
+      "file_type": "image/svg+xml",
+      "source_file": "public\\lichesswhite.svg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lichesswhite_lichess_white_logo_mark",
+      "label": "Lichess white logo mark",
+      "file_type": "image/svg+xml",
+      "source_file": "public\\lichesswhite.svg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "lichesswhite_online_chess_platform_brand",
+      "label": "Online chess platform brand",
+      "file_type": "image/svg+xml",
+      "source_file": "public\\lichesswhite.svg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "lichesswhite_asset",
+      "target": "lichesswhite_lichess_white_logo_mark",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\lichesswhite.svg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "lichesswhite_lichess_white_logo_mark",
+      "target": "lichesswhite_online_chess_platform_brand",
+      "relation": "cites",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\lichesswhite.svg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_19_theme",
+      "label": "Chunk 19 semantic cluster",
+      "nodes": [
+        "lichesswhite_asset",
+        "lichesswhite_lichess_white_logo_mark",
+        "lichesswhite_online_chess_platform_brand"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\lichesswhite.svg"
+    }
+  ],
+  "input_tokens": 293,
+  "output_tokens": 408
+}

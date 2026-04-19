@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "cyberpunk_asset",
+      "label": "Asset: cyberpunk.jpg",
+      "file_type": "image/jpeg",
+      "source_file": "public\\cyberpunk.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "cyberpunk_cyberpunk_edgerunners_poster",
+      "label": "Cyberpunk Edgerunners poster",
+      "file_type": "image/jpeg",
+      "source_file": "public\\cyberpunk.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "cyberpunk_anime_sci_fi_ensemble",
+      "label": "Anime sci-fi ensemble cast",
+      "file_type": "image/jpeg",
+      "source_file": "public\\cyberpunk.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "cyberpunk_asset",
+      "target": "cyberpunk_cyberpunk_edgerunners_poster",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\cyberpunk.jpg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "cyberpunk_cyberpunk_edgerunners_poster",
+      "target": "cyberpunk_anime_sci_fi_ensemble",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\cyberpunk.jpg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_11_theme",
+      "label": "Chunk 11 semantic cluster",
+      "nodes": [
+        "cyberpunk_asset",
+        "cyberpunk_cyberpunk_edgerunners_poster",
+        "cyberpunk_anime_sci_fi_ensemble"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\cyberpunk.jpg"
+    }
+  ],
+  "input_tokens": 60848,
+  "output_tokens": 396
+}

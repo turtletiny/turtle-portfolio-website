@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "pixelgojo_asset",
+      "label": "Asset: pixelgojo.png",
+      "file_type": "image/png",
+      "source_file": "public\\pixelgojo.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pixelgojo_pixel_gojo_character",
+      "label": "Pixel Gojo character",
+      "file_type": "image/png",
+      "source_file": "public\\pixelgojo.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pixelgojo_jujutsu_kaisen_reference",
+      "label": "Jujutsu Kaisen reference",
+      "file_type": "image/png",
+      "source_file": "public\\pixelgojo.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "pixelgojo_asset",
+      "target": "pixelgojo_pixel_gojo_character",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\pixelgojo.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "pixelgojo_pixel_gojo_character",
+      "target": "pixelgojo_jujutsu_kaisen_reference",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "public\\pixelgojo.png",
+      "source_location": "visual:full_frame",
+      "weight": 0.9
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_30_theme",
+      "label": "Chunk 30 semantic cluster",
+      "nodes": [
+        "pixelgojo_asset",
+        "pixelgojo_pixel_gojo_character",
+        "pixelgojo_jujutsu_kaisen_reference"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\pixelgojo.png"
+    }
+  ],
+  "input_tokens": 879,
+  "output_tokens": 387
+}

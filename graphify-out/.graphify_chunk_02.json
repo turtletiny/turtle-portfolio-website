@@ -1,0 +1,108 @@
+{
+  "nodes": [
+    {
+      "id": "homepage_asset",
+      "label": "Asset: homepage.png",
+      "file_type": "image/png",
+      "source_file": "public\\Showcase\\homepage.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "homepage_dashboard_ui",
+      "label": "Personal website dashboard UI",
+      "file_type": "image/png",
+      "source_file": "public\\Showcase\\homepage.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "homepage_profile_and_social_hub",
+      "label": "Profile and social links hub",
+      "file_type": "image/png",
+      "source_file": "public\\Showcase\\homepage.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "homepage_music_and_guestbook_widgets",
+      "label": "Music and guestbook widgets",
+      "file_type": "image/png",
+      "source_file": "public\\Showcase\\homepage.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "homepage_asset",
+      "target": "homepage_dashboard_ui",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\Showcase\\homepage.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "homepage_dashboard_ui",
+      "target": "homepage_profile_and_social_hub",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\Showcase\\homepage.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "homepage_dashboard_ui",
+      "target": "homepage_music_and_guestbook_widgets",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\Showcase\\homepage.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "homepage_profile_and_social_hub",
+      "target": "homepage_music_and_guestbook_widgets",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.82,
+      "source_file": "public\\Showcase\\homepage.png",
+      "source_location": "visual:full_frame",
+      "weight": 0.82
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_02_theme",
+      "label": "Chunk 2 semantic cluster",
+      "nodes": [
+        "homepage_asset",
+        "homepage_dashboard_ui",
+        "homepage_profile_and_social_hub",
+        "homepage_music_and_guestbook_widgets"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\Showcase\\homepage.png"
+    }
+  ],
+  "input_tokens": 38539,
+  "output_tokens": 598
+}

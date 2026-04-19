@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "oddtaxi_asset",
+      "label": "Asset: oddtaxi.png",
+      "file_type": "image/png",
+      "source_file": "public\\oddtaxi.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "oddtaxi_odd_taxi_poster_art",
+      "label": "Odd Taxi poster art",
+      "file_type": "image/png",
+      "source_file": "public\\oddtaxi.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "oddtaxi_anthropomorphic_taxi_characters",
+      "label": "Anthropomorphic taxi characters",
+      "file_type": "image/png",
+      "source_file": "public\\oddtaxi.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "oddtaxi_asset",
+      "target": "oddtaxi_odd_taxi_poster_art",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\oddtaxi.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "oddtaxi_odd_taxi_poster_art",
+      "target": "oddtaxi_anthropomorphic_taxi_characters",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\oddtaxi.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_23_theme",
+      "label": "Chunk 23 semantic cluster",
+      "nodes": [
+        "oddtaxi_asset",
+        "oddtaxi_odd_taxi_poster_art",
+        "oddtaxi_anthropomorphic_taxi_characters"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\oddtaxi.png"
+    }
+  ],
+  "input_tokens": 601506,
+  "output_tokens": 385
+}

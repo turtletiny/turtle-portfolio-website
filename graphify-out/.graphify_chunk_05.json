@@ -1,0 +1,98 @@
+{
+  "nodes": [
+    {
+      "id": "e_asset",
+      "label": "Asset: E.svg",
+      "file_type": "image/svg+xml",
+      "source_file": "public\\audio\\E.svg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "e_stylized_letter_e_logo",
+      "label": "Stylized letter E logo",
+      "file_type": "image/svg+xml",
+      "source_file": "public\\audio\\E.svg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "e_monochrome_badge_mark",
+      "label": "Monochrome badge mark",
+      "file_type": "image/svg+xml",
+      "source_file": "public\\audio\\E.svg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "e_audio_brand_reference",
+      "label": "Possible audio brand reference",
+      "file_type": "image/svg+xml",
+      "source_file": "public\\audio\\E.svg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "e_asset",
+      "target": "e_stylized_letter_e_logo",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\audio\\E.svg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "e_stylized_letter_e_logo",
+      "target": "e_monochrome_badge_mark",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\audio\\E.svg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "e_stylized_letter_e_logo",
+      "target": "e_audio_brand_reference",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.22,
+      "source_file": "public\\audio\\E.svg",
+      "source_location": "visual:full_frame",
+      "weight": 0.22
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_05_theme",
+      "label": "Chunk 5 semantic cluster",
+      "nodes": [
+        "e_asset",
+        "e_stylized_letter_e_logo",
+        "e_monochrome_badge_mark",
+        "e_audio_brand_reference"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\audio\\E.svg"
+    }
+  ],
+  "input_tokens": 36915,
+  "output_tokens": 496
+}

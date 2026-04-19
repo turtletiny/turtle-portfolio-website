@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "hello_asset",
+      "label": "Asset: hello.png",
+      "file_type": "image/png",
+      "source_file": "public\\hello.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hello_pixel_turtle_icon",
+      "label": "Pixel turtle icon",
+      "file_type": "image/png",
+      "source_file": "public\\hello.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "hello_favicon_candidate",
+      "label": "Website favicon candidate",
+      "file_type": "image/png",
+      "source_file": "public\\hello.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "hello_asset",
+      "target": "hello_pixel_turtle_icon",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\hello.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "hello_pixel_turtle_icon",
+      "target": "hello_favicon_candidate",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.84,
+      "source_file": "public\\hello.png",
+      "source_location": "visual:full_frame",
+      "weight": 0.84
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_14_theme",
+      "label": "Chunk 14 semantic cluster",
+      "nodes": [
+        "hello_asset",
+        "hello_pixel_turtle_icon",
+        "hello_favicon_candidate"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\hello.png"
+    }
+  ],
+  "input_tokens": 4600,
+  "output_tokens": 363
+}

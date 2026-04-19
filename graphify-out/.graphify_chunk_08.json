@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "chess_dark_asset",
+      "label": "Asset: chess-dark.svg",
+      "file_type": "image/svg+xml",
+      "source_file": "public\\chess-dark.svg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "chess_dark_dark_chess_icon",
+      "label": "Dark chess icon",
+      "file_type": "image/svg+xml",
+      "source_file": "public\\chess-dark.svg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "chess_dark_strategy_game_symbol",
+      "label": "Strategy game symbol",
+      "file_type": "image/svg+xml",
+      "source_file": "public\\chess-dark.svg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "chess_dark_asset",
+      "target": "chess_dark_dark_chess_icon",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\chess-dark.svg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "chess_dark_dark_chess_icon",
+      "target": "chess_dark_strategy_game_symbol",
+      "relation": "conceptually_related_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.28,
+      "source_file": "public\\chess-dark.svg",
+      "source_location": "visual:full_frame",
+      "weight": 0.28
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_08_theme",
+      "label": "Chunk 8 semantic cluster",
+      "nodes": [
+        "chess_dark_asset",
+        "chess_dark_dark_chess_icon",
+        "chess_dark_strategy_game_symbol"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\chess-dark.svg"
+    }
+  ],
+  "input_tokens": 108,
+  "output_tokens": 388
+}

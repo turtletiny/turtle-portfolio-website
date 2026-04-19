@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "pixelmusic_asset",
+      "label": "Asset: pixelmusic.png",
+      "file_type": "image/png",
+      "source_file": "public\\pixelmusic.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pixelmusic_pixel_music_note_icon",
+      "label": "Pixel music note icon",
+      "file_type": "image/png",
+      "source_file": "public\\pixelmusic.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pixelmusic_audio_media_symbol",
+      "label": "Audio media symbol",
+      "file_type": "image/png",
+      "source_file": "public\\pixelmusic.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "pixelmusic_asset",
+      "target": "pixelmusic_pixel_music_note_icon",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\pixelmusic.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "pixelmusic_pixel_music_note_icon",
+      "target": "pixelmusic_audio_media_symbol",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\pixelmusic.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_32_theme",
+      "label": "Chunk 32 semantic cluster",
+      "nodes": [
+        "pixelmusic_asset",
+        "pixelmusic_pixel_music_note_icon",
+        "pixelmusic_audio_media_symbol"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\pixelmusic.png"
+    }
+  ],
+  "input_tokens": 7683,
+  "output_tokens": 386
+}

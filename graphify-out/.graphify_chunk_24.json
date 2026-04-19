@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "omegaruby_asset",
+      "label": "Asset: omegaruby.jpg",
+      "file_type": "image/jpeg",
+      "source_file": "public\\omegaruby.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "omegaruby_pokemon_omega_ruby_cover",
+      "label": "Pokemon Omega Ruby cover",
+      "file_type": "image/jpeg",
+      "source_file": "public\\omegaruby.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "omegaruby_groudon_character_art",
+      "label": "Groudon character art",
+      "file_type": "image/jpeg",
+      "source_file": "public\\omegaruby.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "omegaruby_asset",
+      "target": "omegaruby_pokemon_omega_ruby_cover",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\omegaruby.jpg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "omegaruby_pokemon_omega_ruby_cover",
+      "target": "omegaruby_groudon_character_art",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\omegaruby.jpg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_24_theme",
+      "label": "Chunk 24 semantic cluster",
+      "nodes": [
+        "omegaruby_asset",
+        "omegaruby_pokemon_omega_ruby_cover",
+        "omegaruby_groudon_character_art"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\omegaruby.jpg"
+    }
+  ],
+  "input_tokens": 22818,
+  "output_tokens": 390
+}

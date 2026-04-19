@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "deathnote_asset",
+      "label": "Asset: deathnote.jpg",
+      "file_type": "image/jpeg",
+      "source_file": "public\\deathnote.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "deathnote_death_note_key_art",
+      "label": "Death Note key art",
+      "file_type": "image/jpeg",
+      "source_file": "public\\deathnote.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "deathnote_supernatural_thriller_theme",
+      "label": "Supernatural thriller anime theme",
+      "file_type": "image/jpeg",
+      "source_file": "public\\deathnote.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "deathnote_asset",
+      "target": "deathnote_death_note_key_art",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\deathnote.jpg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "deathnote_death_note_key_art",
+      "target": "deathnote_supernatural_thriller_theme",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\deathnote.jpg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_12_theme",
+      "label": "Chunk 12 semantic cluster",
+      "nodes": [
+        "deathnote_asset",
+        "deathnote_death_note_key_art",
+        "deathnote_supernatural_thriller_theme"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\deathnote.jpg"
+    }
+  ],
+  "input_tokens": 19809,
+  "output_tokens": 390
+}

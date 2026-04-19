@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "morra_asset",
+      "label": "Asset: morra.gif",
+      "file_type": "image/gif",
+      "source_file": "public\\morra.gif",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "morra_chessboard_start_position",
+      "label": "Chessboard start position",
+      "file_type": "image/gif",
+      "source_file": "public\\morra.gif",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "morra_single_pawn_advance",
+      "label": "Single pawn advanced position",
+      "file_type": "image/gif",
+      "source_file": "public\\morra.gif",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "morra_asset",
+      "target": "morra_chessboard_start_position",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\morra.gif",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "morra_chessboard_start_position",
+      "target": "morra_single_pawn_advance",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\morra.gif",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_22_theme",
+      "label": "Chunk 22 semantic cluster",
+      "nodes": [
+        "morra_asset",
+        "morra_chessboard_start_position",
+        "morra_single_pawn_advance"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\morra.gif"
+    }
+  ],
+  "input_tokens": 45777,
+  "output_tokens": 374
+}

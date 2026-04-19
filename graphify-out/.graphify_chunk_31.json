@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "pixelheadphones_asset",
+      "label": "Asset: pixelheadphones.png",
+      "file_type": "image/png",
+      "source_file": "public\\pixelheadphones.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pixelheadphones_pixel_headphones_icon",
+      "label": "Pixel headphones icon",
+      "file_type": "image/png",
+      "source_file": "public\\pixelheadphones.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pixelheadphones_audio_listening_symbol",
+      "label": "Audio listening symbol",
+      "file_type": "image/png",
+      "source_file": "public\\pixelheadphones.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "pixelheadphones_asset",
+      "target": "pixelheadphones_pixel_headphones_icon",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\pixelheadphones.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "pixelheadphones_pixel_headphones_icon",
+      "target": "pixelheadphones_audio_listening_symbol",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\pixelheadphones.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_31_theme",
+      "label": "Chunk 31 semantic cluster",
+      "nodes": [
+        "pixelheadphones_asset",
+        "pixelheadphones_pixel_headphones_icon",
+        "pixelheadphones_audio_listening_symbol"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\pixelheadphones.png"
+    }
+  ],
+  "input_tokens": 35075,
+  "output_tokens": 412
+}

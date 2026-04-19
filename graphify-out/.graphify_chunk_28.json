@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "pixelclock_asset",
+      "label": "Asset: pixelclock.png",
+      "file_type": "image/png",
+      "source_file": "public\\pixelclock.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pixelclock_pixel_alarm_clock_icon",
+      "label": "Pixel alarm clock icon",
+      "file_type": "image/png",
+      "source_file": "public\\pixelclock.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pixelclock_time_indicator_symbol",
+      "label": "Time indicator symbol",
+      "file_type": "image/png",
+      "source_file": "public\\pixelclock.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "pixelclock_asset",
+      "target": "pixelclock_pixel_alarm_clock_icon",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\pixelclock.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "pixelclock_pixel_alarm_clock_icon",
+      "target": "pixelclock_time_indicator_symbol",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\pixelclock.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_28_theme",
+      "label": "Chunk 28 semantic cluster",
+      "nodes": [
+        "pixelclock_asset",
+        "pixelclock_pixel_alarm_clock_icon",
+        "pixelclock_time_indicator_symbol"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\pixelclock.png"
+    }
+  ],
+  "input_tokens": 31012,
+  "output_tokens": 391
+}

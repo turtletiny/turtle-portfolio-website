@@ -1,0 +1,108 @@
+{
+  "nodes": [
+    {
+      "id": "ghosts_asset",
+      "label": "Asset: ghosts.png",
+      "file_type": "image/png",
+      "source_file": "public\\audio\\ghosts.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ghosts_sunflare_urban_photo",
+      "label": "Sunflare urban photograph",
+      "file_type": "image/png",
+      "source_file": "public\\audio\\ghosts.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ghosts_frog_overlay_graphic",
+      "label": "Cartoon frog overlay graphic",
+      "file_type": "image/png",
+      "source_file": "public\\audio\\ghosts.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ghosts_moody_high_contrast_edit",
+      "label": "Moody high-contrast edit",
+      "file_type": "image/png",
+      "source_file": "public\\audio\\ghosts.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "ghosts_asset",
+      "target": "ghosts_sunflare_urban_photo",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\audio\\ghosts.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "ghosts_sunflare_urban_photo",
+      "target": "ghosts_frog_overlay_graphic",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.72,
+      "source_file": "public\\audio\\ghosts.png",
+      "source_location": "visual:full_frame",
+      "weight": 0.72
+    },
+    {
+      "source": "ghosts_sunflare_urban_photo",
+      "target": "ghosts_moody_high_contrast_edit",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\audio\\ghosts.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "ghosts_frog_overlay_graphic",
+      "target": "ghosts_moody_high_contrast_edit",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.66,
+      "source_file": "public\\audio\\ghosts.png",
+      "source_location": "visual:full_frame",
+      "weight": 0.66
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_06_theme",
+      "label": "Chunk 6 semantic cluster",
+      "nodes": [
+        "ghosts_asset",
+        "ghosts_sunflare_urban_photo",
+        "ghosts_frog_overlay_graphic",
+        "ghosts_moody_high_contrast_edit"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\audio\\ghosts.png"
+    }
+  ],
+  "input_tokens": 87831,
+  "output_tokens": 584
+}

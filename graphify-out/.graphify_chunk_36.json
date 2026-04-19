@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "spiritedaway_asset",
+      "label": "Asset: spiritedaway.jpg",
+      "file_type": "image/jpeg",
+      "source_file": "public\\spiritedaway.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "spiritedaway_spirited_away_key_art",
+      "label": "Spirited Away key art",
+      "file_type": "image/jpeg",
+      "source_file": "public\\spiritedaway.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "spiritedaway_chihiro_and_pig_scene",
+      "label": "Chihiro and transformed pig scene",
+      "file_type": "image/jpeg",
+      "source_file": "public\\spiritedaway.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "spiritedaway_asset",
+      "target": "spiritedaway_spirited_away_key_art",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\spiritedaway.jpg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "spiritedaway_spirited_away_key_art",
+      "target": "spiritedaway_chihiro_and_pig_scene",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\spiritedaway.jpg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_36_theme",
+      "label": "Chunk 36 semantic cluster",
+      "nodes": [
+        "spiritedaway_asset",
+        "spiritedaway_spirited_away_key_art",
+        "spiritedaway_chihiro_and_pig_scene"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\spiritedaway.jpg"
+    }
+  ],
+  "input_tokens": 26597,
+  "output_tokens": 402
+}

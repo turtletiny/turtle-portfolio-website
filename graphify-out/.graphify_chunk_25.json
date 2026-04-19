@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "pcicon_asset",
+      "label": "Asset: pcicon.png",
+      "file_type": "image/png",
+      "source_file": "public\\pcicon.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pcicon_pixel_desktop_monitor_icon",
+      "label": "Pixel desktop monitor icon",
+      "file_type": "image/png",
+      "source_file": "public\\pcicon.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "pcicon_smiling_screen_face",
+      "label": "Smiling screen face",
+      "file_type": "image/png",
+      "source_file": "public\\pcicon.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "pcicon_asset",
+      "target": "pcicon_pixel_desktop_monitor_icon",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\pcicon.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "pcicon_pixel_desktop_monitor_icon",
+      "target": "pcicon_smiling_screen_face",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\pcicon.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_25_theme",
+      "label": "Chunk 25 semantic cluster",
+      "nodes": [
+        "pcicon_asset",
+        "pcicon_pixel_desktop_monitor_icon",
+        "pcicon_smiling_screen_face"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\pcicon.png"
+    }
+  ],
+  "input_tokens": 7602,
+  "output_tokens": 377
+}

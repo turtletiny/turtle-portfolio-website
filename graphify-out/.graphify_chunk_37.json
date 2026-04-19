@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "ultrakillcover_asset",
+      "label": "Asset: ultrakillcover.jpg",
+      "file_type": "image/jpeg",
+      "source_file": "public\\ultrakillcover.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ultrakillcover_ultrakill_cover_art",
+      "label": "Ultrakill cover art",
+      "file_type": "image/jpeg",
+      "source_file": "public\\ultrakillcover.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "ultrakillcover_fast_paced_fps_brand",
+      "label": "Fast-paced FPS game brand",
+      "file_type": "image/jpeg",
+      "source_file": "public\\ultrakillcover.jpg",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "ultrakillcover_asset",
+      "target": "ultrakillcover_ultrakill_cover_art",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\ultrakillcover.jpg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "ultrakillcover_ultrakill_cover_art",
+      "target": "ultrakillcover_fast_paced_fps_brand",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\ultrakillcover.jpg",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_37_theme",
+      "label": "Chunk 37 semantic cluster",
+      "nodes": [
+        "ultrakillcover_asset",
+        "ultrakillcover_ultrakill_cover_art",
+        "ultrakillcover_fast_paced_fps_brand"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\ultrakillcover.jpg"
+    }
+  ],
+  "input_tokens": 310554,
+  "output_tokens": 405
+}

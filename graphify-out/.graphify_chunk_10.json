@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "id": "chiikawaly_removebg_preview_asset",
+      "label": "Asset: chiikawaly-removebg-preview.png",
+      "file_type": "image/png",
+      "source_file": "public\\chiikawaly-removebg-preview.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "chiikawaly_removebg_preview_chiikawa_character_sticker",
+      "label": "Chiikawa character sticker",
+      "file_type": "image/png",
+      "source_file": "public\\chiikawaly-removebg-preview.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "chiikawaly_removebg_preview_heart_emoticon",
+      "label": "Affection heart emoticon",
+      "file_type": "image/png",
+      "source_file": "public\\chiikawaly-removebg-preview.png",
+      "source_location": "visual:full_frame",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "chiikawaly_removebg_preview_asset",
+      "target": "chiikawaly_removebg_preview_chiikawa_character_sticker",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\chiikawaly-removebg-preview.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    },
+    {
+      "source": "chiikawaly_removebg_preview_chiikawa_character_sticker",
+      "target": "chiikawaly_removebg_preview_heart_emoticon",
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1,
+      "source_file": "public\\chiikawaly-removebg-preview.png",
+      "source_location": "visual:full_frame",
+      "weight": 1
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "chunk_10_theme",
+      "label": "Chunk 10 semantic cluster",
+      "nodes": [
+        "chiikawaly_removebg_preview_asset",
+        "chiikawaly_removebg_preview_chiikawa_character_sticker",
+        "chiikawaly_removebg_preview_heart_emoticon"
+      ],
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "public\\chiikawaly-removebg-preview.png"
+    }
+  ],
+  "input_tokens": 50831,
+  "output_tokens": 467
+}

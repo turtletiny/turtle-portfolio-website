@@ -134,8 +134,9 @@ const COMMANDS = [
   "guestbook list",
   "guestbook post <name>|<message>",
   "theme [dark|pastel|toggle]",
-  "open [main|about|projects|terminal]",
+  "cd [main|about|projects|terminal]",
   "neofetch",
+  "fastfetch",
 ] as const;
 
 const QUICK_COMMANDS = ["help", "time", "spotify", "steam", "specs"];
@@ -335,10 +336,15 @@ export default function TerminalPage() {
       }
 
       if (cmd === "help") {
+        const helpCommands = [
+          ...COMMANDS.filter((value) => value !== "neofetch" && value !== "fastfetch"),
+          "fastfetch or neofetch",
+        ];
+
         pushText(
           [
             "Available commands:",
-            ...COMMANDS.map((value) => `- ${value}`),
+            ...helpCommands.map((value) => `- ${value}`),
           ],
           "muted",
         );
@@ -596,7 +602,7 @@ export default function TerminalPage() {
         return;
       }
 
-      if (cmd === "open") {
+      if (cmd === "cd") {
         const target = args.toLowerCase();
         const map: Record<string, string> = {
           main: "/main",
@@ -606,7 +612,7 @@ export default function TerminalPage() {
         };
 
         if (!target || !map[target]) {
-          pushText("Usage: open [main|about|projects|guestbook|terminal]", "error");
+          pushText("Usage: cd [main|about|projects|terminal]", "error");
           return;
         }
 
@@ -627,7 +633,7 @@ export default function TerminalPage() {
 
       
 
-      if (cmd === "neofetch") {
+      if (cmd === "neofetch" || cmd === "fastfetch") {
         pushText(
           [
             "guest@turtletiny",

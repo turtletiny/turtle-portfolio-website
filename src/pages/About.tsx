@@ -104,7 +104,8 @@ export default function About() {
             STACK
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+          <div className="overflow-x-auto px-1 py-2">
+            <div className="flex w-max min-w-full flex-nowrap items-center justify-center gap-4">
             {[
               {
                 name: "ReactJS",
@@ -143,16 +144,18 @@ export default function About() {
                 href={tech.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 bg-secondary rounded-lg border border-border flex flex-col items-center justify-center gap-2 hover:border-[hsl(var(--card-hover-border))] hover:[box-shadow:var(--card-hover-shadow)] transition-all hover:scale-105 group"
+                aria-label={tech.name}
+                title={tech.name}
+                className="group inline-flex items-center justify-center transition-transform duration-150 hover:scale-[1.05] hover:-translate-y-0.5 active:scale-[0.97]"
               >
                 <img
                   src={tech.img}
                   alt={tech.name}
-                  className="w-8 h-8 opacity-90 group-hover:opacity-100 transition-opacity drop-shadow-sm object-contain"
+                  className="h-8 w-8 object-contain opacity-90 transition-opacity group-hover:opacity-100 [.pastel_&]:contrast-125 [.pastel_&]:brightness-110 [.pastel_&]:drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
                 />
-                <span className="font-bold text-sm">{tech.name}</span>
               </a>
             ))}
+            </div>
           </div>
         </div>
 

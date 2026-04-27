@@ -35,20 +35,8 @@ export const PROJECTS: ProjectEntry[] = [
         src: "/pixelbook.avif",
         alt: "Portfolio website landing page preview",
       },
-      {
-        id: "portfolio-shot-2",
-        kind: "image",
-        title: "UI style preview",
-        src: "/pixelbook.png",
-        alt: "Portfolio interface visual preview",
-      },
-      {
-        id: "portfolio-note",
-        kind: "text",
-        title: "Build notes",
-        description:
-          "This project is where I iterate on frontend polish, data integrations, and personal interaction design patterns.",
-      },
+
+      
     ],
   },
   {
@@ -82,150 +70,13 @@ export const PROJECTS: ProjectEntry[] = [
         alt: "Planner dashboard mood and UI concept",
       },
       {
-        id: "planner-shot-2",
-        kind: "image",
-        title: "Productivity visual direction",
-        src: "/pixelclock.png",
-        alt: "Planner feature direction graphic",
-      },
-      {
         id: "planner-note",
         kind: "text",
         title: "Current status",
         description:
-          "In active development. Core planning systems are defined, and the interface is being refined for fast daily use.",
+          "Work In Progress",
       },
     ],
   },
-  {
-    id: "spaceshooter",
-    name: "Spaceshooter",
-    summary:
-      "My first personal project: a 2D arcade shooter that taught me game loops, collisions, and gameplay state management.",
-    status: "past",
-    icon: "gamepad",
-    tags: ["Game", "Python"],
-    techStack: [
-      { name: "Python", icon: "python" },
-      { name: "Pygame", icon: "pygame" },
-    ],
-    features: [
-      "Wave-based enemies",
-      "Keyboard and mouse controls",
-      "Collision and scoring system",
-      "Classic arcade pacing",
-    ],
-    links: [],
-    media: [
-      {
-        id: "spaceshooter-shot-1",
-        kind: "image",
-        title: "Gameplay screen",
-        src: "/pygame_ce_tiny.png",
-        alt: "Spaceshooter gameplay screenshot",
-      },
-      {
-        id: "spaceshooter-shot-2",
-        kind: "image",
-        title: "Retro inspiration",
-        src: "/pixelcontroller.png",
-        alt: "Retro game style visual",
-      },
-      {
-        id: "spaceshooter-note",
-        kind: "text",
-        title: "What I learned",
-        description:
-          "This project established my baseline for game logic, feedback loops, and shipping complete features independently.",
-      },
-    ],
-  },
-  {
-    id: "pokemon-clone",
-    name: "Pokemon Game Clone",
-    summary:
-      "A planned 2D Pokemon-inspired adventure with custom storyline, side quests, and turn-based battle mechanics.",
-    status: "future",
-    icon: "gamepad",
-    tags: ["Game", "RPG"],
-    techStack: [
-      { name: "TBD", icon: "placeholder" },
-      { name: "2D Engine", icon: "placeholder" },
-      { name: "Custom Battle System", icon: "placeholder" },
-    ],
-    features: [
-      "World exploration and side quests",
-      "Custom storyline design",
-      "Turn-based battle loop",
-      "Pokedex progression system",
-    ],
-    links: [],
-    media: [
-      {
-        id: "pokemon-shot-1",
-        kind: "image",
-        title: "Visual inspiration",
-        src: "/omegaruby.jpg",
-        alt: "Pokemon-style visual inspiration",
-      },
-      {
-        id: "pokemon-shot-2",
-        kind: "image",
-        title: "Battle style inspiration",
-        src: "/pixelchess.png",
-        alt: "Turn-based strategy style inspiration",
-      },
-      {
-        id: "pokemon-note",
-        kind: "text",
-        title: "Development plan",
-        description:
-          "Pre-production stage. Story map, progression loops, and encounter balance are being drafted before implementation.",
-      },
-    ],
-  },
-  {
-    id: "anki-clone",
-    name: "Improved Anki Clone",
-    summary:
-      "A cleaner and more intuitive take on spaced-repetition study software with modern interaction patterns.",
-    status: "future",
-    icon: "app-window",
-    tags: ["App", "Education"],
-    techStack: [
-      { name: "TBD", icon: "placeholder" },
-      { name: "Spaced Repetition", icon: "placeholder" },
-      { name: "Cross Platform", icon: "placeholder" },
-    ],
-    features: [
-      "Modernized review interface",
-      "Deck organization and tracking",
-      "Import and export workflows",
-      "Custom study settings",
-    ],
-    links: [],
-    media: [
-      {
-        id: "anki-shot-1",
-        kind: "image",
-        title: "UI direction",
-        src: "/pixelbook.png",
-        alt: "Study app interface direction",
-      },
-      {
-        id: "anki-shot-2",
-        kind: "image",
-        title: "Focus and pacing",
-        src: "/pixelmusic.png",
-        alt: "Calm focused study visual cue",
-      },
-      {
-        id: "anki-note",
-        kind: "text",
-        title: "Product goal",
-        description:
-          "The goal is to keep spaced repetition powerful while making the daily study flow faster and less intimidating.",
-      },
-    ],
-  },
+  
 ];

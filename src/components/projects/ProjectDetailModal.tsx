@@ -137,7 +137,7 @@ export default function ProjectDetailModal({
 
                 <section className="space-y-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                    Key Features
+                    Features
                   </p>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     {project.features.map((feature) => (
@@ -173,7 +173,7 @@ export default function ProjectDetailModal({
                       ))}
                     </div>
                   ) : (
-                    <p className="text-sm text-muted-foreground">Links will be published as development progresses.</p>
+                    <p className="text-sm text-muted-foreground"></p>
                   )}
                 </section>
               </div>

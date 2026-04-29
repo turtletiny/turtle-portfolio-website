@@ -14,8 +14,10 @@ export default function DashboardNavbar() {
   const location = useLocation();
 
   return (
-    <nav className="w-full py-4 md:py-6 flex justify-center sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border mb-8 px-4 md:px-4 relative">
-      <div className="flex flex-wrap justify-center gap-2 md:gap-3 items-center">
+    <nav className="sticky top-0 z-50 mb-8 grid w-full grid-cols-[4.75rem_1fr] items-center border-b border-border bg-background/95 px-4 py-4 backdrop-blur-sm md:grid-cols-[5.75rem_1fr] md:py-6">
+      <div aria-hidden="true" />
+
+      <div className="flex flex-wrap justify-center gap-2 items-center md:gap-3">
         {links.map((l) => {
           const Icon = l.icon;
           const isActive = location.pathname === l.to;

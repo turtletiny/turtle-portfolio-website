@@ -1,5 +1,6 @@
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/hooks/useTheme";
 
 interface ProjectDeviceMockupProps {
   src: string;
@@ -14,10 +15,12 @@ export default function ProjectDeviceMockup({
   device = "laptop",
   className,
 }: ProjectDeviceMockupProps) {
+  const { isPastel } = useTheme();
+
   if (device === "mobile") {
     return (
       <figure className={cn("mx-auto w-full max-w-[240px]", className)}>
-        <div className="rounded-[2.4rem] border border-border/80 bg-secondary/25 p-2.5 shadow-[0_18px_50px_hsl(0_0%_0%_/_0.22)]">
+        <div className={cn("rounded-[2.4rem] border border-border/80 bg-secondary/25 p-2.5", !isPastel ? "shadow-[0_18px_50px_hsl(0_0%_0%_/_0.22)]" : "")}>
           <div className="rounded-[2rem] border border-border/70 bg-card p-2.5">
             <div className="mx-auto mb-2 h-1.5 w-16 rounded-full bg-muted-foreground/35" />
 
@@ -39,7 +42,7 @@ export default function ProjectDeviceMockup({
 
   return (
     <figure className={cn("mx-auto w-full max-w-[720px]", className)}>
-      <div className="rounded-[2rem] border border-border/80 bg-secondary/25 p-3 shadow-[0_22px_60px_hsl(0_0%_0%_/_0.24)]">
+      <div className={cn("rounded-[2rem] border border-border/80 bg-secondary/25 p-3", !isPastel ? "shadow-[0_22px_60px_hsl(0_0%_0%_/_0.24)]" : "")}>
         <div className="overflow-hidden rounded-[1.55rem] border border-border/70 bg-card">
           <AspectRatio ratio={16 / 10}>
             <div className="h-full w-full overflow-hidden bg-black/10">

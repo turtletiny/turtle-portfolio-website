@@ -36,8 +36,14 @@ export const PROJECTS: ProjectEntry[] = [
         alt: "Portfolio website landing page preview",
         device: "laptop",
       },
-
-      
+      {
+        id: "portfolio-shot-2",
+        kind: "image",
+        title: "Mobile view",
+        src: "/pixelbook.png",
+        alt: "Portfolio website mobile view",
+        device: "mobile",
+      },
     ],
   },
   {

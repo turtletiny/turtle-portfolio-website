@@ -3,6 +3,7 @@ export type ProjectStatus = "active" | "past" | "future";
 export type ProjectIconKey = "globe" | "app-window" | "gamepad";
 
 export type ProjectMediaKind = "image" | "video" | "text";
+export type ProjectDeviceKind = "laptop" | "mobile";
 
 export interface ProjectMediaBlock {
   id: string;
@@ -12,6 +13,7 @@ export interface ProjectMediaBlock {
   src?: string;
   alt?: string;
   poster?: string;
+  device?: ProjectDeviceKind;
 }
 
 export interface ProjectLink {

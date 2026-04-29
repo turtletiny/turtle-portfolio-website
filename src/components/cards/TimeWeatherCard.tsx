@@ -16,7 +16,7 @@ export default function TimeWeatherCard() {
         
         {/* Pastel Mode Custom Image (Size increased to w-5 h-5) */}
         <img 
-          src="pixelclock.png" 
+          src="/pixelclock.png" 
           alt="Time" 
           className="hidden [.pastel_&]:block w-5 h-5 object-contain" 
         />

@@ -161,7 +161,7 @@ export default function GuestbookCard() {
           }`}
         >
           <img
-            src="chiikawaly-removebg-preview.png"
+            src="/chiikawaly-removebg-preview.png"
             alt="Chiikawa Heart"
             className="w-32 h-32 object-contain"
           />

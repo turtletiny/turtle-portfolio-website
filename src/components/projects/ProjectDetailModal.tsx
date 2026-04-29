@@ -10,6 +10,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { ProjectEntry } from "@/types/project";
 import TechIcon from "@/components/projects/TechIcon";
+import ProjectDeviceMockup from "@/components/projects/ProjectDeviceMockup";
 
 interface ProjectDetailModalProps {
   project: ProjectEntry | null;
@@ -29,6 +30,8 @@ export default function ProjectDetailModal({
   onOpenChange,
 }: ProjectDetailModalProps) {
   const Icon = project ? iconMap[project.icon] : Globe;
+  const imageBlocks = project?.media.filter((block) => block.kind === "image") ?? [];
+  const otherBlocks = project?.media.filter((block) => block.kind !== "image") ?? [];
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -52,15 +55,84 @@ export default function ProjectDetailModal({
 
             <ScrollArea className="h-[74vh]">
               <div className="space-y-7 px-6 py-6">
-                <section className="space-y-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                    Screenshots, Videos, and Notes
-                  </p>
+                {imageBlocks.length > 0 ? (
+                  <section className="space-y-3">
+                    <div className="flex items-center justify-between gap-4">
+                      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                        Screenshots
+                      </p>
+                      <p className="text-[11px] text-muted-foreground">
+                        Desktop and mobile views stack on smaller screens.
+                      </p>
+                    </div>
 
-                  <div className="space-y-4">
-                    {project.media.map((block) => {
-                      if (block.kind === "image") {
-                        // Image media intentionally not shown — only show title/notes
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {imageBlocks.map((block) => (
+                        <article
+                          key={block.id}
+                          className="space-y-3 rounded-2xl border border-border bg-secondary/30 p-4"
+                        >
+                          {block.src ? (
+                            <ProjectDeviceMockup
+                              src={block.src}
+                              alt={block.alt || block.title}
+                              device={block.device}
+                            />
+                          ) : null}
+
+                          <div className="space-y-1">
+                            <h3 className="text-sm font-semibold text-foreground">{block.title}</h3>
+                            {block.device ? (
+                              <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                                {block.device === "mobile" ? "Mobile view" : "Laptop view"}
+                              </p>
+                            ) : null}
+                          </div>
+
+                          {block.description ? (
+                            <p className="text-sm leading-relaxed text-muted-foreground">{block.description}</p>
+                          ) : null}
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                ) : null}
+
+                {otherBlocks.length > 0 ? (
+                  <section className="space-y-3">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                      Videos and Notes
+                    </p>
+
+                    <div className="space-y-4">
+                      {otherBlocks.map((block) => {
+                        if (block.kind === "video") {
+                          return (
+                            <article
+                              key={block.id}
+                              className="overflow-hidden rounded-2xl border border-border bg-secondary/40"
+                            >
+                              {block.src ? (
+                                <video
+                                  controls
+                                  preload="metadata"
+                                  poster={block.poster}
+                                  className="h-56 w-full bg-black/20 object-cover"
+                                >
+                                  <source src={block.src} />
+                                  Your browser does not support embedded videos.
+                                </video>
+                              ) : null}
+                              <div className="space-y-1 p-4">
+                                <h3 className="text-sm font-semibold text-foreground">{block.title}</h3>
+                                {block.description ? (
+                                  <p className="text-sm text-muted-foreground">{block.description}</p>
+                                ) : null}
+                              </div>
+                            </article>
+                          );
+                        }
+
                         return (
                           <article
                             key={block.id}
@@ -68,55 +140,16 @@ export default function ProjectDetailModal({
                           >
                             <h3 className="text-sm font-semibold text-foreground">{block.title}</h3>
                             {block.description ? (
-                              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{block.description}</p>
+                              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                                {block.description}
+                              </p>
                             ) : null}
                           </article>
                         );
-                      }
-
-                      if (block.kind === "video") {
-                        return (
-                          <article
-                            key={block.id}
-                            className="overflow-hidden rounded-2xl border border-border bg-secondary/40"
-                          >
-                            {block.src ? (
-                              <video
-                                controls
-                                preload="metadata"
-                                poster={block.poster}
-                                className="h-56 w-full bg-black/20 object-cover"
-                              >
-                                <source src={block.src} />
-                                Your browser does not support embedded videos.
-                              </video>
-                            ) : null}
-                            <div className="space-y-1 p-4">
-                              <h3 className="text-sm font-semibold text-foreground">{block.title}</h3>
-                              {block.description ? (
-                                <p className="text-sm text-muted-foreground">{block.description}</p>
-                              ) : null}
-                            </div>
-                          </article>
-                        );
-                      }
-
-                      return (
-                        <article
-                          key={block.id}
-                          className="rounded-2xl border border-border bg-secondary/30 p-4"
-                        >
-                          <h3 className="text-sm font-semibold text-foreground">{block.title}</h3>
-                          {block.description ? (
-                            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                              {block.description}
-                            </p>
-                          ) : null}
-                        </article>
-                      );
-                    })}
-                  </div>
-                </section>
+                      })}
+                    </div>
+                  </section>
+                ) : null}
 
                 <section className="space-y-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">

@@ -32,8 +32,9 @@ export const PROJECTS: ProjectEntry[] = [
         id: "portfolio-shot-1",
         kind: "image",
         title: "Main landing snapshot",
-        src: "/pixelbook.avif",
+        src: "/Showcase/desktop_home.png",
         alt: "Portfolio website landing page preview",
+        device: "laptop",
       },
 
       
@@ -68,6 +69,7 @@ export const PROJECTS: ProjectEntry[] = [
         title: "Dashboard concept art",
         src: "/hello.png",
         alt: "Planner dashboard mood and UI concept",
+        device: "mobile",
       },
       {
         id: "planner-note",

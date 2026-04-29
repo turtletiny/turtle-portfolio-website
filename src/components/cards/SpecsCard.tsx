@@ -15,7 +15,7 @@ import EarphonesIcon from "@/components/icons/EarphonesIcon";
 
 const EarbudsIcon = ({ size = 18, className = "" }) => (
   <img
-    src="earphones2.svg"
+    src="/earphones2.svg"
     alt="Earbuds"
     width={size}
     height={size}
@@ -55,7 +55,7 @@ export default function SpecsCard() {
         
         {/* Pastel Mode Custom Image (Size increased to w-5 h-5) */}
         <img 
-          src="pcicon.png" 
+          src="/pcicon.png" 
           alt="Specs" 
           className="hidden [.pastel_&]:block w-5 h-5 object-contain" 
         />

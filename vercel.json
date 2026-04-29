@@ -2,7 +2,27 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
-      "source": "/((?!api/|@vite|@react-refresh|src/|node_modules/).*)",
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    },
+    {
+      "source": "/main",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/projects",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/terminal",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/callback",
       "destination": "/index.html"
     }
   ]

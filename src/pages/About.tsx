@@ -164,7 +164,7 @@ export default function About() {
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
             <Gamepad2 size={16} className="block [.pastel_&]:hidden" />
             <img 
-              src="pixelcontroller.png" 
+              src="/pixelcontroller.png" 
               alt="Games" 
               className="hidden [.pastel_&]:block w-6 h-6 object-contain" 
             />
@@ -185,7 +185,7 @@ export default function About() {
                 className="w-24 h-36 sm:w-28 sm:h-40 bg-card rounded flex-shrink-0 shadow-sm border border-border flex items-center justify-center overflow-hidden hover:scale-105 transition-transform duration-150 group"
               >
                 <img
-                  src="ultrakillcover.jpg"
+                  src="/ultrakillcover.jpg"
                   alt="Ultrakill"
                   className="w-full h-full object-cover group-hover:opacity-90 transition-opacity"
                 />
@@ -216,22 +216,22 @@ export default function About() {
               {[
                 {
                   title: "Valorant",
-                  image: "val.jpg",
+                  image: "/val.jpg",
                   url: "https://playvalorant.com/en-us/",
                 },
                 {
                   title: "Pokemon Platinum",
-                  image: "platinum.jpg",
+                  image: "/platinum.jpg",
                   url: "https://www.pokemon.com/us/pokemon-video-games/pokemon-platinum-version",
                 },
                 {
                   title: "Portal",
-                  image: "portal.jpg",
+                  image: "/portal.jpg",
                   url: "https://store.steampowered.com/app/400/Portal/",
                 },
                 {
                   title: "Pokemon Omega Ruby",
-                  image: "omegaruby.jpg",
+                  image: "/omegaruby.jpg",
                   url: "https://www.pokemon.com/us/pokemon-video-games/pokemon-omega-ruby-and-pokemon-alpha-sapphire",
                 },
               ].map((game, i) => (
@@ -263,7 +263,7 @@ export default function About() {
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
             <Headphones size={16} className="block [.pastel_&]:hidden" />
             <img 
-              src="pixelheadphones.png" 
+              src="/pixelheadphones.png" 
               alt="Listening Stats" 
               className="hidden [.pastel_&]:block w-5 h-5 object-contain" 
             />
@@ -275,7 +275,7 @@ export default function About() {
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Headphones size={18} className="block [.pastel_&]:hidden" />
                 <img
-                  src="pixelheadphones.png"
+                  src="/pixelheadphones.png"
                   alt="Last.fm"
                   className="hidden [.pastel_&]:block w-[18px] h-[18px] object-contain"
                 />
@@ -375,7 +375,7 @@ export default function About() {
               className="block [.pastel_&]:hidden w-4 h-4 object-contain"
             />
             <img
-              src="pixelchess.png"
+              src="/pixelchess.png"
               alt="Chess"
               className="hidden [.pastel_&]:block w-5 h-5 object-contain"
             />
@@ -639,7 +639,7 @@ export default function About() {
             <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2">
               <Tv size={16} className="block [.pastel_&]:hidden" />
               <img 
-                src="pixelgojo.png" 
+                src="/pixelgojo.png" 
                 alt="Anime" 
                 className="hidden [.pastel_&]:block w-8 h-8 object-contain" 
               />
@@ -654,7 +654,7 @@ export default function About() {
               className="flex items-center gap-2 text-[10px] uppercase tracking-wider font-bold text-muted-foreground hover:text-primary hover:scale-110 transition-all duration-150 origin-right"
             >
               <img
-                src="anilist.png"
+                src="/anilist.png"
                 alt="AniList Logo"
                 className="w-4 h-4 sm:w-5 sm:h-5 object-contain"
               />
@@ -669,7 +669,7 @@ export default function About() {
             <div className="flex items-start gap-4 p-4 bg-secondary rounded-lg border border-border">
               <div className="w-16 h-24 bg-card rounded flex-shrink-0 shadow-sm border border-border flex items-center justify-center overflow-hidden">
                 <img
-                  src="pochitavibe.gif"
+                  src="/pochitavibe.gif"
                   alt="None currently"
                   className="w-full h-full object-cover"
                 />
@@ -743,7 +743,7 @@ export default function About() {
           <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
             <Palette size={16} className="block [.pastel_&]:hidden" />
             <img 
-              src="mario.png" 
+              src="/mario.png" 
               alt="Hobbies" 
               className="hidden [.pastel_&]:block w-5 h-5 object-contain" 
             />

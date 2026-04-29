@@ -134,7 +134,7 @@ export default function SpotifyCard() {
           {/* 2. Theme-swapping icons for the header */}
           <SpotifyIcon size={16} className="block [.pastel_&]:hidden" />
           <img 
-            src="pixelmusic.png" 
+            src="/pixelmusic.png" 
             alt="Now Playing" 
             className="hidden [.pastel_&]:block w-4 h-4 object-contain" 
           />
@@ -198,7 +198,7 @@ export default function SpotifyCard() {
         <div className="flex flex-1 items-center justify-center gap-3 text-sm text-muted-foreground animate-pulse">
           <SpotifyIcon size={18} className="block [.pastel_&]:hidden" />
           <img
-            src="pixelmusic.png"
+            src="/pixelmusic.png"
             alt="Spotify"
             className="hidden [.pastel_&]:block w-[18px] h-[18px] object-contain"
           />
@@ -210,7 +210,7 @@ export default function SpotifyCard() {
             {/* 3. Theme-swapping icons for the empty state */}
             <SpotifyIcon size={20} className="block [.pastel_&]:hidden" />
             <img 
-              src="pixelmusic.png" 
+              src="/pixelmusic.png" 
               alt="Not Playing" 
               className="hidden [.pastel_&]:block w-5 h-5 object-contain opacity-70" 
             />

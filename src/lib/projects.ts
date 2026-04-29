@@ -40,7 +40,7 @@ export const PROJECTS: ProjectEntry[] = [
         id: "portfolio-shot-2",
         kind: "image",
         title: "Mobile view",
-        src: "/pixelbook.png",
+        src: "/Showcase/mobile_home.png",
         alt: "Portfolio website mobile view",
         device: "mobile",
       },

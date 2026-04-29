@@ -1,4 +1,4 @@
-import { AppWindow, ExternalLink, Gamepad2, Globe } from "lucide-react";
+import { AppWindow, ExternalLink, Gamepad2, Github, Globe } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -39,17 +39,42 @@ export default function ProjectDetailModal({
         {project ? (
           <>
             <DialogHeader className="border-b border-border px-6 py-5 text-left">
-              <div className="flex items-start gap-4 pr-8">
-                <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-secondary/80">
-                  <Icon className="h-5 w-5 text-primary" strokeWidth={1.9} />
+              <div className="flex items-center justify-between gap-4 pr-8">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-secondary/80">
+                    <Icon className="h-5 w-5 text-primary" strokeWidth={1.9} />
+                  </div>
+
+                  <div>
+                    <DialogTitle className="text-xl font-bold text-foreground">{project.name}</DialogTitle>
+                  </div>
                 </div>
 
-                <div>
-                  <DialogTitle className="text-xl font-bold text-foreground">{project.name}</DialogTitle>
-                  <DialogDescription className="mt-1 text-sm text-muted-foreground">
-                    {project.summary}
-                  </DialogDescription>
-                </div>
+                {project.links.length > 0 ? (
+                  <div className="flex items-center gap-3">
+                    {project.links.map((link) => {
+                      const isGithub = link.label.toLowerCase().includes("github");
+                      const LinkIcon = isGithub ? Github : ExternalLink;
+                      return (
+                        <a
+                          key={`${project.id}-${link.label}`}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={link.label}
+                          className={cn(
+                            "group flex h-10 w-10 items-center justify-center rounded-lg border border-border text-muted-foreground",
+                            "transition-all duration-150 hover:border-[hsl(var(--card-hover-border))] hover:[box-shadow:var(--card-hover-shadow)]",
+                            "hover:scale-[1.05] hover:-translate-y-0.5 active:scale-[0.97]",
+                            isGithub ? "group/gh" : "hover:text-foreground",
+                          )}
+                        >
+                          <LinkIcon className="h-[18px] w-[18px]" />
+                        </a>
+                      );
+                    })}
+                  </div>
+                ) : null}
               </div>
             </DialogHeader>
 
@@ -64,19 +89,22 @@ export default function ProjectDetailModal({
                     </div>
 
                     <div className="flex flex-col gap-4">
-                      {imageBlocks.map((block) => (
-                        <article
-                          key={block.id}
-                          className="space-y-3 rounded-2xl border border-border bg-secondary/30 p-4"
-                        >
-                          <div className="space-y-1">
-                            <h3 className="text-sm font-semibold text-foreground">{block.title}</h3>
-                            {block.device ? (
-                              <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-                                {block.device === "mobile" ? "Mobile view" : "Desktop view"}
-                              </p>
-                            ) : null}
-                          </div>
+                      {imageBlocks.map((block) => {
+                        const deviceLabel = block.device === "mobile" ? "Mobile view" : "Desktop view";
+                        const titleText = block.device
+                          ? block.title.toLowerCase().includes(deviceLabel.toLowerCase())
+                            ? block.title
+                            : `${block.title} — ${deviceLabel}`
+                          : block.title;
+
+                        return (
+                          <article
+                            key={block.id}
+                            className="space-y-3 rounded-2xl border border-border bg-secondary/30 p-4"
+                          >
+                            <div className="space-y-1">
+                              <h3 className="text-sm font-semibold text-foreground">{titleText}</h3>
+                            </div>
 
                           {block.src ? (
                             <ProjectDeviceMockup
@@ -89,8 +117,9 @@ export default function ProjectDetailModal({
                           {block.description ? (
                             <p className="text-sm leading-relaxed text-muted-foreground">{block.description}</p>
                           ) : null}
-                        </article>
-                      ))}
+                          </article>
+                        );
+                      })}
                     </div>
                   </section>
                 ) : null}
@@ -150,26 +179,16 @@ export default function ProjectDetailModal({
 
                 <section className="space-y-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                    Tech Stack
+                    Description
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.techStack.map((item) => (
-                      <span
-                        key={item.name}
-                        className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary/60 px-3 py-1 text-xs font-medium text-foreground"
-                      >
-                        <TechIcon name={item.icon || item.name} className="h-4 w-4 text-primary" title={item.name} />
-                        <span className="text-xs font-medium">{item.name}</span>
-                      </span>
-                    ))}
-                  </div>
+                  <p className="text-sm leading-relaxed text-foreground/80">{project.summary}</p>
                 </section>
 
                 <section className="space-y-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                     Features
                   </p>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
+                  <ul className="space-y-2 text-sm text-foreground/80">
                     {project.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-2">
                         <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
@@ -179,33 +198,23 @@ export default function ProjectDetailModal({
                   </ul>
                 </section>
 
-                <section className="space-y-3 pb-2">
+                <section className="space-y-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                    Links
+                    Tech Stack
                   </p>
-
-                  {project.links.length > 0 ? (
-                    <div className="flex flex-wrap gap-2">
-                      {project.links.map((link) => (
-                        <a
-                          key={`${project.id}-${link.label}`}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={cn(
-                            "inline-flex items-center gap-2 rounded-full border border-border bg-secondary/60 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-foreground",
-                            "transition-colors hover:border-primary hover:text-primary",
-                          )}
-                        >
-                          <ExternalLink className="h-3.5 w-3.5" />
-                          {link.label}
-                        </a>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-sm text-muted-foreground"></p>
-                  )}
+                  <div className="flex flex-wrap justify-center gap-6">
+                    {project.techStack.map((item) => (
+                      <div
+                        key={item.name}
+                        className="inline-flex flex-col items-center gap-1 text-xs font-medium text-foreground"
+                      >
+                        <TechIcon name={item.icon || item.name} className="h-9 w-9" title={item.name} />
+                        <span className="text-[11px] font-medium">{item.name}</span>
+                      </div>
+                    ))}
+                  </div>
                 </section>
+
               </div>
             </ScrollArea>
           </>

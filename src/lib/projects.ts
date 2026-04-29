@@ -15,6 +15,7 @@ export const PROJECTS: ProjectEntry[] = [
       { name: "Vite", icon: "vite" },
       { name: "Tailwind", icon: "tailwind" },
       { name: "Vercel", icon: "vercel" },
+      { name: "Neon", icon: "neon" },
     ],
     features: [
       "Interactive terminal with command support",
@@ -58,7 +59,7 @@ export const PROJECTS: ProjectEntry[] = [
       { name: "React", icon: "react" },
       { name: "TypeScript", icon: "typescript" },
       { name: "Node", icon: "node" },
-      { name: "Database", icon: "database" },
+      { name: "Neon", icon: "neon" },
     ],
     features: [
       "Google Calendar read/write integration",

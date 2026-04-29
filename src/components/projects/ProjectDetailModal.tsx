@@ -61,9 +61,6 @@ export default function ProjectDetailModal({
                       <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
                         Screenshots
                       </p>
-                      <p className="text-[11px] text-muted-foreground">
-                        Desktop and mobile views stack on smaller screens.
-                      </p>
                     </div>
 
                     <div className="flex flex-col gap-4">
@@ -72,6 +69,15 @@ export default function ProjectDetailModal({
                           key={block.id}
                           className="space-y-3 rounded-2xl border border-border bg-secondary/30 p-4"
                         >
+                          <div className="space-y-1">
+                            <h3 className="text-sm font-semibold text-foreground">{block.title}</h3>
+                            {block.device ? (
+                              <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                                {block.device === "mobile" ? "Mobile view" : "Desktop view"}
+                              </p>
+                            ) : null}
+                          </div>
+
                           {block.src ? (
                             <ProjectDeviceMockup
                               src={block.src}
@@ -79,15 +85,6 @@ export default function ProjectDetailModal({
                               device={block.device}
                             />
                           ) : null}
-
-                          <div className="space-y-1">
-                            <h3 className="text-sm font-semibold text-foreground">{block.title}</h3>
-                            {block.device ? (
-                              <p className="text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-                                {block.device === "mobile" ? "Mobile view" : "Laptop view"}
-                              </p>
-                            ) : null}
-                          </div>
 
                           {block.description ? (
                             <p className="text-sm leading-relaxed text-muted-foreground">{block.description}</p>

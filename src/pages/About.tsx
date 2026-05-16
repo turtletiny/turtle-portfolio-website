@@ -2,7 +2,6 @@ import DashboardNavbar from "@/components/navigation/DashboardNavbar";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import type { ReactNode } from "react";
 import {
-  Gamepad2,
   ScrollText,
   Code2,
   BookOpen,
@@ -155,105 +154,6 @@ export default function About() {
                 />
               </a>
             ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Games Card */}
-        <div className="card-base flex flex-col gap-4">
-          <div className="text-xs font-bold tracking-wider text-muted-foreground flex items-center gap-2 mb-2">
-            <Gamepad2 size={16} className="block [.pastel_&]:hidden" />
-            <img 
-              src="/pixelcontroller.png" 
-              alt="Games" 
-              className="hidden [.pastel_&]:block w-6 h-6 object-contain" 
-            />
-            GAMES
-          </div>
-
-          {/* Featured Game */}
-          <div className="flex flex-col gap-2">
-            <h3 className="text-sm font-medium text-muted-foreground mb-1">
-              Favourite Game
-            </h3>
-            <div className="flex flex-col sm:flex-row items-start gap-4 p-4 bg-secondary rounded-lg border border-border">
-              {/* Featured Game Cover */}
-              <a
-                href="https://store.steampowered.com/app/1229490/ULTRAKILL/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-24 h-36 sm:w-28 sm:h-40 bg-card rounded flex-shrink-0 shadow-sm border border-border flex items-center justify-center overflow-hidden hover:scale-105 transition-transform duration-150 group"
-              >
-                <img
-                  src="/ultrakillcover.jpg"
-                  alt="Ultrakill"
-                  className="w-full h-full object-cover group-hover:opacity-90 transition-opacity"
-                />
-              </a>
-
-              <div className="flex flex-col justify-start">
-                <a
-                  href="https://store.steampowered.com/app/1229490/ULTRAKILL/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-bold text-xl mb-2 hover:text-primary transition-colors"
-                >
-                  ULTRAKILL
-                </a>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  peak
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* 4 Games Grid */}
-          <div className="flex flex-col gap-2 mt-2">
-            <h3 className="text-sm font-medium text-muted-foreground mb-1">
-              Games I Like
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {[
-                {
-                  title: "Valorant",
-                  image: "/val.jpg",
-                  url: "https://playvalorant.com/en-us/",
-                },
-                {
-                  title: "Pokemon Platinum",
-                  image: "/platinum.jpg",
-                  url: "https://www.pokemon.com/us/pokemon-video-games/pokemon-platinum-version",
-                },
-                {
-                  title: "Portal",
-                  image: "/portal.jpg",
-                  url: "https://store.steampowered.com/app/400/Portal/",
-                },
-                {
-                  title: "Pokemon Omega Ruby",
-                  image: "/omegaruby.jpg",
-                  url: "https://www.pokemon.com/us/pokemon-video-games/pokemon-omega-ruby-and-pokemon-alpha-sapphire",
-                },
-              ].map((game, i) => (
-                <a
-                  key={i}
-                  href={game.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex flex-col gap-2 group transition-transform duration-150 hover:scale-105"
-                >
-                  <div className="aspect-[2/3] rounded-lg overflow-hidden bg-secondary border border-border transition-all group-hover:shadow-xl group-hover:border-primary/20">
-                    <img
-                      src={game.image}
-                      alt={game.title}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <span className="text-sm font-medium truncate text-center transition-colors">
-                    {game.title}
-                  </span>
-                </a>
-              ))}
             </div>
           </div>
         </div>
